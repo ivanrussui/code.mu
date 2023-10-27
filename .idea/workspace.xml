@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14a773ff-c778-4409-97b0-4aaaa6ace739" name="Changes" comment="189 - 190">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/07_ Standard_Methods_184-199/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/07_Standard_Methods_184-199/script.js" afterDir="false" />
+    <list default="true" id="14a773ff-c778-4409-97b0-4aaaa6ace739" name="Changes" comment="191 - 192">
+      <change afterPath="$PROJECT_DIR$/07_Standard_Methods_184-199/194-199/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/07_Standard_Methods_184-199/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/07_Standard_Methods_184-199/184-193/script.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -63,22 +63,24 @@
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/IT/code.mu",
+    "last_opened_file_path": "D:/IT/code.mu/07_Standard_Methods_184-199/194-199",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.sourceCode.JavaScript",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\IT\code.mu\07_Standard_Methods_184-199\194-199" />
       <recent name="D:\IT\code.mu" />
       <recent name="D:\IT\code.mu\06_multidimensional_168-183\176-183" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\IT\code.mu\07_Standard_Methods_184-199\184-193" />
       <recent name="D:\IT\code.mu\06_multidimensional_168-183\168-175" />
       <recent name="D:\IT\code.mu\06_multidimensional_168-183\176-183" />
       <recent name="D:\IT\code.mu\cycles_143-167" />
@@ -88,14 +90,18 @@
     <configuration name="script.js (1)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/05_cycles_143-167/script.js" working-dir="$PROJECT_DIR$/05_cycles_143-167">
       <method v="2" />
     </configuration>
+    <configuration name="script.js (2)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/07_Standard_Methods_184-199/194-199/script.js" working-dir="$PROJECT_DIR$/07_Standard_Methods_184-199/194-199">
+      <method v="2" />
+    </configuration>
     <configuration name="script.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/06_multidimensional_168-183/168-175/script.js" working-dir="$PROJECT_DIR$/06_multidimensional_168-183">
       <method v="2" />
     </configuration>
-    <configuration name="script.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/07_Standard_Methods_184-199/script.js" working-dir="$PROJECT_DIR$/07_Standard_Methods_184-199">
+    <configuration name="script.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/07_Standard_Methods_184-199/184-193/script.js" working-dir="$PROJECT_DIR$/07_Standard_Methods_184-199">
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Node.js.script.js (2)" />
         <item itemvalue="Node.js.script.js (2)" />
         <item itemvalue="Node.js.script.js" />
         <item itemvalue="Node.js.script.js (1)" />
@@ -103,6 +109,9 @@
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\fenom\AppData\Roaming\Subversion</configuration>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="14a773ff-c778-4409-97b0-4aaaa6ace739" name="Changes" comment="" />
@@ -135,7 +144,7 @@
       <workItem from="1698308188411" duration="3488000" />
       <workItem from="1698326405438" duration="5477000" />
       <workItem from="1698338108070" duration="2508000" />
-      <workItem from="1698414700333" duration="4967000" />
+      <workItem from="1698414700333" duration="13809000" />
     </task>
     <task id="LOCAL-00001" summary="189 - 190">
       <option name="closed" value="true" />
@@ -145,7 +154,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698353304904</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="191 - 192">
+      <option name="closed" value="true" />
+      <created>1698419720130</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1698419720130</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -153,6 +170,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="189 - 190" />
-    <option name="LAST_COMMIT_MESSAGE" value="189 - 190" />
+    <MESSAGE value="191 - 192" />
+    <option name="LAST_COMMIT_MESSAGE" value="191 - 192" />
   </component>
 </project>
