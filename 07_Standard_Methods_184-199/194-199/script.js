@@ -7,7 +7,7 @@
 // shift
 // Метод shift удаляет первый элемент из массива. При этом исходный массив изменяется, а результатом метода возвращается
 // удаленный элемент.
-// строка.split([разделитель], [максимальное количество элементов]);
+// строка.shift([разделитель], [максимальное количество элементов]);
 
 // pop
 // Метод pop удаляет последний элемент из массива. При этом исходный массив изменяется, а результатом метода
@@ -199,3 +199,74 @@
 
 
 // 198 Массив ключей объекта в JavaScript
+
+// Теория
+
+// Object.keys
+// Метод Object.keys возвращает массив из свойств объекта в том же порядке, как и при перечислении через цикл.
+//
+// let keys = Object.keys(объект);
+
+// 1 Получите массив его ключей.
+// let obj = {a: 1, b: 2, c: 3};
+// let arr = Object.keys(obj);
+//
+// console.log(arr);
+
+
+// 199 Поиск ошибок в коде со стандартными методами JavaScript
+
+// 1 Код должен найти сумму цифр числа:
+// let num = 12345;
+// let arr = num.toString().split('');
+//
+// let sum = 0;
+// for (let digit of arr) {
+//     sum += +digit;
+// }
+//
+// console.log(sum);
+
+// 2 Код должен найти сумму цифр числа:
+// let num = 12345;
+// let arr = String(num).split('');
+//
+// let sum = 0;
+// for (let digit of arr) {
+//     sum += Number(digit);
+// }
+//
+// console.log(sum);
+
+// 3 Код должен найти сумму цифр числа:
+// let num = 12345;
+// let arr = String(num).split('');
+//
+// let sum = 0;
+// for (let digit of arr) {
+// 	sum += Number(digit);
+// }
+//
+// console.log(sum); // почему-то выводит 5, а не 15
+
+// 4 Код должен найти сумму цифр числа:
+// let num = 12345;
+// let arr = String(num).split('');
+//
+// let sum = 0;
+// for (let digit of arr) {
+// 	sum += Number(digit);
+// }
+//
+// console.log(sum);
+
+// 5 Код должен найти произведение цифр числа:
+// let num = 12345;
+// let arr = String(num).split('');
+//
+// let prod = 1;
+// for (let digit of arr) {
+// 	prod *= digit;
+// }
+//
+// console.log(prod);
