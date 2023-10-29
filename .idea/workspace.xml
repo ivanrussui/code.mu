@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14a773ff-c778-4409-97b0-4aaaa6ace739" name="Changes" comment="200 - 204">
+    <list default="true" id="14a773ff-c778-4409-97b0-4aaaa6ace739" name="Changes" comment="205 - 207">
+      <change afterPath="$PROJECT_DIR$/09_Custom_Functions_200-215/211-215/script.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/09_Custom_Functions_200-215/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/09_Custom_Functions_200-215/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05_cycles_143-167/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/05_cycles_143-167/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/09_Custom_Functions_200-215/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/09_Custom_Functions_200-215/200-210/script.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +35,16 @@
     &quot;assignee&quot;: &quot;ivanrussui&quot;
   }
 }</component>
+  <component name="GitRewordedCommitMessages">
+    <option name="commitMessagesMapping">
+      <RewordedCommitMessageMapping>
+        <option name="originalMessage" value="200 - 204" />
+        <option name="rewordedMessage" value="200 - 207" />
+      </RewordedCommitMessageMapping>
+    </option>
+    <option name="currentCommit" value="1" />
+    <option name="onto" value="b3c757e08bff278931a461e1f5ffd9d07bef8b3c" />
+  </component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
@@ -55,35 +67,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/IT/code.mu",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/IT/code.mu/09_Custom_Functions_200-215&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\IT\code.mu\09_Custom_Functions_200-215" />
       <recent name="D:\IT\code.mu" />
       <recent name="D:\IT\code.mu\07_Standard_Methods_184-199\194-199" />
       <recent name="D:\IT\code.mu\06_multidimensional_168-183\176-183" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\IT\code.mu\09_Custom_Functions_200-215\212-215" />
+      <recent name="D:\IT\code.mu\09_Custom_Functions_200-215\200-211" />
       <recent name="D:\IT\code.mu\09_Custom_Functions_200-215" />
       <recent name="D:\IT\code.mu\07_Standard_Methods_184-199\184-193" />
       <recent name="D:\IT\code.mu\06_multidimensional_168-183\168-175" />
-      <recent name="D:\IT\code.mu\06_multidimensional_168-183\176-183" />
-      <recent name="D:\IT\code.mu\cycles_143-167" />
     </key>
   </component>
   <component name="RunManager" selected="Node.js.script.js (3)">
@@ -93,10 +106,13 @@
     <configuration name="script.js (2)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/07_Standard_Methods_184-199/194-199/script.js" working-dir="$PROJECT_DIR$/07_Standard_Methods_184-199/194-199">
       <method v="2" />
     </configuration>
-    <configuration name="script.js (3)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/09_Custom_Functions_200-215/script.js" working-dir="$PROJECT_DIR$/09_Custom_Functions_200-215">
+    <configuration name="script.js (3)" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/09_Custom_Functions_200-215/211-215/script.js" working-dir="$PROJECT_DIR$/09_Custom_Functions_200-215/211-215">
       <method v="2" />
     </configuration>
     <configuration name="script.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/06_multidimensional_168-183/168-175/script.js" working-dir="$PROJECT_DIR$/06_multidimensional_168-183">
+      <method v="2" />
+    </configuration>
+    <configuration name="script.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/09_Custom_Functions_200-215/200-210/script.js" working-dir="$PROJECT_DIR$/09_Custom_Functions_200-215">
       <method v="2" />
     </configuration>
     <configuration name="script.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/07_Standard_Methods_184-199/184-193/script.js" working-dir="$PROJECT_DIR$/07_Standard_Methods_184-199">
@@ -149,7 +165,9 @@
       <workItem from="1698326405438" duration="5477000" />
       <workItem from="1698338108070" duration="2508000" />
       <workItem from="1698414700333" duration="13977000" />
-      <workItem from="1698477542759" duration="8837000" />
+      <workItem from="1698477542759" duration="13403000" />
+      <workItem from="1698522224671" duration="3957000" />
+      <workItem from="1698561483953" duration="7522000" />
     </task>
     <task id="LOCAL-00001" summary="189 - 190">
       <option name="closed" value="true" />
@@ -191,11 +209,30 @@
       <option name="project" value="LOCAL" />
       <updated>1698484151282</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="205 - 207">
+      <option name="closed" value="true" />
+      <created>1698489837890</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1698489837890</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="189 - 190" />
@@ -203,6 +240,7 @@
     <MESSAGE value="193 - 197" />
     <MESSAGE value="197 - 199" />
     <MESSAGE value="200 - 204" />
-    <option name="LAST_COMMIT_MESSAGE" value="200 - 204" />
+    <MESSAGE value="205 - 207" />
+    <option name="LAST_COMMIT_MESSAGE" value="205 - 207" />
   </component>
 </project>
