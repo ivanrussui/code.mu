@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14a773ff-c778-4409-97b0-4aaaa6ace739" name="Changes" comment="205 - 207">
-      <change afterPath="$PROJECT_DIR$/09_Custom_Functions_200-215/211-215/script.js" afterDir="false" />
+    <list default="true" id="14a773ff-c778-4409-97b0-4aaaa6ace739" name="Changes" comment="207 - 215">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/05_cycles_143-167/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/05_cycles_143-167/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/09_Custom_Functions_200-215/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/09_Custom_Functions_200-215/200-210/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/07_Standard_Methods_184-199/184-193/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/07_Standard_Methods_184-199/184-193/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/09_Custom_Functions_200-215/211-215/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/09_Custom_Functions_200-215/211-215/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,7 +167,9 @@
       <workItem from="1698414700333" duration="13977000" />
       <workItem from="1698477542759" duration="13403000" />
       <workItem from="1698522224671" duration="3957000" />
-      <workItem from="1698561483953" duration="7522000" />
+      <workItem from="1698561483953" duration="8446000" />
+      <workItem from="1698662886560" duration="4827000" />
+      <workItem from="1698679318726" duration="8673000" />
     </task>
     <task id="LOCAL-00001" summary="189 - 190">
       <option name="closed" value="true" />
@@ -217,7 +219,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698489837890</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="207 - 215">
+      <option name="closed" value="true" />
+      <created>1698582327067</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1698582327067</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -241,6 +251,7 @@
     <MESSAGE value="197 - 199" />
     <MESSAGE value="200 - 204" />
     <MESSAGE value="205 - 207" />
-    <option name="LAST_COMMIT_MESSAGE" value="205 - 207" />
+    <MESSAGE value="207 - 215" />
+    <option name="LAST_COMMIT_MESSAGE" value="207 - 215" />
   </component>
 </project>

@@ -402,3 +402,183 @@
 
 // 215 Практика на функции
 
+// 1 Сделайте функцию, которая параметром будет принимать массив и возвращать сумму его элементов.
+// function getSum(arr) {
+//     let res = 0;
+//
+//     for (let el of arr) {
+//         res += el;
+//     }
+//
+//     return res;
+// }
+//
+// let arr = [1, 2, 3, 4, 5];
+//
+// console.log(getSum(arr));
+
+
+// 2 Сделайте функцию, которая параметром будет принимать число и возвращать массив его делителей.
+
+// function getDivisorsArray(num) {
+//     let arr = [];
+//
+//     for (let i = 1; i <= num ; i++) {
+//         if (num % i === 0) {
+//             arr.push(i);
+//         }
+//     }
+//
+//     return arr;
+// }
+//
+// console.log(getDivisorsArray(12));
+
+
+// 3 Сделайте функцию, которая параметром будет принимать строку и возвращать массив ее символов.
+
+// function getCharacterArray(str) {
+//     let arr = [];
+//
+//     for (let el of str) {
+//         arr.push(el)
+//     }
+//
+//     return arr;
+// }
+//
+// console.log(getCharacterArray('spider'));
+
+// 4 Сделайте функцию, которая параметром будет принимать строку и переворачивать ее символы в обратном порядке.
+
+// function getReverseString(str) {
+//     // решение через цикл
+//     // let reverseString = '';
+//     // let arr = str.split('')
+//     //
+//     // for (let i = arr.length - 1; i >= 0; i--) {
+//     //     reverseString += arr[i];
+//     // }
+//     //
+//     // return reverseString
+//
+//     // решение через reverse и join
+//     return str.split('').reverse().join('')
+// }
+//
+// console.log(getReverseString('USSR'));
+
+
+// 5 Сделайте функцию, которая параметром будет принимать строку и делать заглавной первую букву этой строки.
+
+// function changeToCapitalizeFirstLetter(str) {
+//     return str[0].toUpperCase() + str.slice(1);
+// }
+//
+// console.log(changeToCapitalizeFirstLetter('melissa'));
+
+
+// 6 Сделайте функцию, которая параметром будет принимать строку и делать заглавной первую букву каждого слова этой строки.
+
+// function changeToCapitalizeFirstLetterWord(str) {
+//     let arr = str.split(' ');
+//     let newArr = [];
+//
+//     for (let el of arr) {
+//         newArr.push(el[0].toUpperCase() + el.slice(1));
+//     }
+//
+//     return newArr.join(' ');
+// }
+//
+// console.log(changeToCapitalizeFirstLetterWord('anna ivan'));
+
+
+// 7 Сделайте функцию, заполняющую массив целыми числами от 1 до заданного.
+
+// function getIntegerFloorNumber(num) {
+//     return Math.floor(num);
+// }
+//
+// console.log(getIntegerFloorNumber(8,6));
+//
+// function fillArrayWithIntegers(num) {
+//     let arr = [];
+//     console.log(getIntegerFloorNumber(num));
+//
+//     for (let i = 1; i <= num; i++) {
+//             arr.push(i);
+//     }
+//
+//     return arr;
+// }
+//
+// console.log(fillArrayWithIntegers(5.5));
+
+
+// 8 Сделайте функцию, которая параметром будет принимать число и возвращать сумму его цифр.
+
+// function getSumOfDigits(num) {
+//     let str = num.toString();
+//     let res = 0;
+//
+//     for (let el of str) {
+//         res += +el;
+//     }
+//
+//     return res;
+// }
+//
+// console.log(getSumOfDigits(15));
+
+
+// 9 Сделайте функцию, которая параметром будет год и проверять, високосный он или нет.
+
+// function checkLeapYear(year) {
+//     if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
+//         return 'Год високосный'
+//     } else {
+//         return 'Год не високосный'
+//     }
+// }
+//
+// console.log(checkLeapYear(1900));
+
+
+// 10 Сделайте функцию, которая параметром будет принимать секунды, а возвращать количество суток, соответствующих этим секундам.
+
+// function getDaysOfSeconds(seconds) {
+//     return Math.ceil(seconds / 60 / 60 / 24)
+// }
+//
+// console.log(getDaysOfSeconds(1000000));
+
+
+// 11 Сделайте функцию, которая будет возвращать случайный элемент из массива.
+
+// function getRandomElementFromArray(arr) {
+//     let random = Math.floor(Math.random() * arr.length);
+//     return arr[random];
+// }
+//
+// console.log(getRandomElementFromArray([1, 'e', '5', 'x', 8, 'z']));
+
+
+// 12 Сделайте функцию, которая параметром будет принимать число и проверять, простое оно или нет.
+
+// function checkIsPrimeNumber(num) {
+//     if (num < 1) {
+//         return `Число ${num} - не простое`;
+//     }
+//
+//     for (let i = 2; i < num; i++) {
+//         if (num % i === 0) {
+//             return `Число ${num} - не простое`;
+//         }
+//     }
+//
+//     return `Число ${num} - простое`;
+// }
+//
+// console.log(checkIsPrimeNumber(7));
+
