@@ -1,4 +1,4 @@
-// 20_Introduction_to_DOM_337-364
+// 20_Introduction_to_DOM_337-348
 // Введение в DOM
 
 
@@ -651,7 +651,3 @@
 // btn2.addEventListener('click', () => {
 //     img.src = 'javascript.png';
 // });
-
-
-// 349 Работа с текстовыми полями / Работа с текстовыми полями в JavaScript
-//
