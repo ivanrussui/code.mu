@@ -402,3 +402,73 @@
 
 
 // 364 Практикум / Отработка изученного материала на работу с DOM
+
+// 1 Дан инпут и абзац. По потери фокуса в инпуте запишите значение инпута в конец текста абзаца.
+//
+// let input = document.querySelector('input');
+// let paragraph = document.querySelector('p');
+//
+// function func() {
+//     paragraph.textContent += input.value;
+//     input.value = '';
+// }
+//
+// input.addEventListener('blur', func);
+
+
+// 2 Дано несколько инпутов, абзац и кнопка.
+// По нажатию на кнопку получите числа, стоящие в этих инпутах и запишите их сумму в абзац.
+//
+// let inputs = document.querySelectorAll('input');
+// let paragraph = document.querySelector('p');
+// let btn = document.querySelector('button');
+//
+// btn.addEventListener('click', function () {
+//    let sum = 0;
+//
+//     for (let input of inputs) {
+//         sum += +input.value;
+//     }
+//
+//     paragraph.textContent = sum.toString();
+// });
+
+
+// 3 Дан инпут. В него вводится число. По потери фокуса найдите сумму цифр этого числа.
+//
+// let input = document.querySelector('input');
+//
+// function func() {
+//     let sum = 0;
+//     let arr = this.value.split('');
+//
+//     arr.forEach(el => {
+//         sum += +el;
+//     });
+//
+//     console.log(sum);
+// }
+//
+// input.addEventListener('blur', func);
+
+
+// 4 Дан инпут. В него вводятся числа через запятую.
+// По потери фокуса найдите среднее арифметическое этих чисел (сумма делить на количество).
+//
+// let input = document.querySelector('input');
+//
+// input.addEventListener('blur', function () {
+//     let sum = 0;
+//     let arr = this.value.split(',');
+//
+//     for (let el of arr) {
+//         sum += +el;
+//     }
+//
+//     console.log(sum / arr.length);
+// });
+
+
+// 5 Даны 4 инпута. В первый инпут вводится ФИО через пробел.
+// По потери фокуса запишите фамилию, имя и отчество в остальные 3 инпута.
+
