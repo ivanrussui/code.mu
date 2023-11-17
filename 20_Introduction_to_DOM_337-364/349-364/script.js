@@ -541,3 +541,318 @@
 
 // 357 Именованные обработчики в цикле / Добавление обработчиков в цикле в JavaScript
 //
+// Давайте теперь научимся массово добавлять обработчики событий элементам. Пусть, к примеру, у нас есть абзацы:
+//
+// <p>text1</p>
+// <p>text2</p>
+// <p>text3</p>
+// Пусть у нас также есть функция:
+//
+// function func() {
+// 	console.log('!');
+// }
+// Давайте переберем наши абзацы в цикле и каждому абзацу добавим в качестве обработчика клика функцию func:
+//
+// let elems = document.querySelectorAll('p');
+//
+// for (let elem of elems) {
+// 	elem.addEventListener('click', func);
+// }
+// Давайте пойдем дальше и сделаем так, чтобы по клику на любой абзац выводился текст этого абзаца.
+// Есть, однако, проблема: абзацев много, а функция-обработчик одна. Как же нам отличить наши абзацы внутри
+// функции-обработчика?
+//
+// В этом нам поможет объект this - при вызове функции в момент события этот объект будет указывать на тот элемент,
+// где это событие случилось. Переделаем код нашей функции func в соответствии со сказанным:
+//
+// function func() {
+// 	console.log(this.textContent); // выводим текст абзаца
+// }
+
+
+// 1 Дана следующая функция:
+//
+// function func() {
+//     this.value = Number(this.value) + 1;
+// }
+//
+// // Даны также инпуты. Сделайте так, чтобы по потери фокуса в любом из наших инпутов выполнялась приведенная выше функция.
+//
+// let inputs = document.querySelectorAll('.inputs');
+//
+// // for of
+// for (let input of inputs) {
+//     input.addEventListener('blur', func);
+// }
+//
+// // forEach
+// // inputs.forEach(input => {
+// //     input.addEventListener('blur', func);
+// // });
+//
+// // for i
+// // for (let i = 0; i < inputs.length; i++) {
+// //     inputs[i].addEventListener('blur', func);
+// // }
+
+
+// 2 Даны абзацы с числами. Сделайте так, чтобы по клику на любой абзац его число в нем возводилось в квадрат.
+//
+// let paragraphs = document.querySelectorAll('.www');
+//
+// // функция отдельно, перебор отдельно
+// function func() {
+//     this.textContent **= 2;
+// }
+//
+// paragraphs.forEach(paragraph => {
+//     paragraph.addEventListener('click', func);
+// });
+//
+// // функция внутри перебора
+// paragraphs.forEach(paragraph => {
+//     paragraph.addEventListener('click', function () {
+//         this.textContent **= 2;
+//     });
+// });
+
+
+// 358 Анонимные обработчики в цикле / Добавление анонимных обработчиков в цикле в JavaScript
+//
+// В качестве обработчиков, навешиваемых в цикле, можно использовать и анонимные функции.
+// Это делает код более компактным и избавляет нас от придумывания имени для функции,
+// которая используется только в одном месте.
+//
+// Давайте навесим на элементы анонимные обработчики:
+//
+// let elems = document.querySelectorAll('p');
+//
+// for (let elem of elems) {
+// 	elem.addEventListener('click', function() {
+// 		console.log(this.textContent);
+// 	});
+// }
+
+
+// 1 Дан следующий код:
+//
+// <div>1</div>
+// <div>2</div>
+// <div>3</div>
+// <div>4</div>
+// <div>5</div>
+//
+// let divs = document.querySelectorAll('div');
+//
+// // for (let div of divs) {
+// // 	div.addEventListener('click', func);
+// // }
+//
+// // function func() {
+// // 	this.textContent++;
+// // }
+// // Сделайте функцию-обработчик анонимной.
+//
+//
+// for (let div of divs) {
+//     div.addEventListener('click', function () {
+//         this.textContent++;
+//     });
+// }
+
+
+// 359 Отвязывание обработчиков событий / Отвязывание событий в JavaScript
+//
+// В данном уроке мы с вами научимся отвязывать обработчики события, которые ранее были привязаны нами к элементам.
+// Пусть для примера дана следующая кнопка:
+//
+// <input id="button" type="submit">
+// Привяжем к этой кнопке функцию func:
+//
+// let button = document.querySelector('#button');
+// button.addEventListener('click', func);
+//
+// function func() {
+// 	console.log('!!!');
+// }
+// Давайте теперь сделаем так, чтобы обработчик события срабатывал на первый клик, а потом отвязывался от кнопки.
+// Для этого существует специальный метод removeEventListener. Этот метод первым параметром принимает тип события,
+// а вторым - ссылку на функцию, которую нужно отвязать.
+//
+// Как правило, это значит, что обработчик события отвязывается так же, как и привязывался.
+// То есть, если мы привязали его вот так: addEventListener('click', func),
+// то и отвяжем с теми же параметрами, вот так: removeEventListener('click', func).
+//
+// Итак, решим поставленную нами задачу:
+//
+// let button = document.querySelector('#button');
+// button.addEventListener('click', func);
+//
+// function func() {
+// 	console.log('!!!');
+// 	this.removeEventListener('click', func);
+// }
+
+
+// 1 Дана ссылка и кнопка. По нажатию на кнопку добавьте в конец текста ссылки содержимое ее атрибута href в круглых
+// скобках. Сделайте так, чтобы это добавление происходило лишь по первому нажатию.
+//
+// let link = document.querySelector('#link');
+// let btn = document.querySelector('#btn');
+//
+// btn.addEventListener('click', func);
+//
+// function func() {
+//     link.textContent += '(' + link.href + ')';
+//     // link.textContent += `(${link.href})`;
+//
+//     this.removeEventListener('click', func);
+// }
+
+
+// 2 Дана кнопка, значением которой служит число 1. Сделайте так, чтобы по клику на эту кнопку ее значение каждый раз
+// увеличивалось на единицу. После того, как значение кнопки достигнет 10 - отвяжите обработчик события,
+// чтобы кнопка больше не реагировала на нажатие.
+//
+// let btn = document.querySelector('#btn');
+//
+// btn.addEventListener('click', func);
+//
+// function func() {
+//     this.value++;
+//
+//     // if (this.value === '10') {
+//     //     this.removeEventListener('click', func);
+//     // }
+//
+//     this.value === '10' && this.removeEventListener('click', func);
+// }
+
+
+// 360 Отвязывание обработчиков событий в цикле / Отвязывание обработчиков событий в цикле в JavaScript
+//
+// Пусть теперь у нас есть не один элемент, а несколько. Например, несколько абзацев:
+//
+// <p>text1</p>
+// <p>text2</p>
+// <p>text3</p>
+// Давайте к каждому из этих абзацев обработчиком клика привяжем функцию func:
+//
+// let elems = document.querySelectorAll('p');
+//
+// for (let elem of elems) {
+// 	elem.addEventListener('click', func);
+// }
+//
+// function func() {
+// 	console.log(this.textContent);
+// }
+// Давайте теперь переделаем код так, чтобы каждый абзац реагировал только на первое нажатие на него.
+// Для этого при клике на абзац будем отвязывать от него привязанный обработчик.
+// При этом отвязывание будет конкретно от этого абзаца, никак не затрагивая остальных.
+//
+// Как вы уже знаете, элемент, в котором произошло событие, можно получить в функции-обработчике через this.
+// Это значит, что нужно выполнять отвязывание обработчика от this, вот так:
+//
+// let elems = document.querySelectorAll('p');
+//
+// for (let elem of elems) {
+// 	elem.addEventListener('click', func);
+// }
+//
+// function func() {
+// 	console.log(this.textContent);
+// 	this.removeEventListener('click', func); // отвязываем обработчик
+// }
+
+
+// 1 Даны абзацы. По нажатию на любой из абзацев добавьте ему в конец восклицательный знак. Сделайте так,
+// чтобы это добавление происходило лишь по первому нажатию.
+//
+// let elems = document.querySelectorAll('p');
+//
+// for (let elem of elems) {
+//     elem.addEventListener('click', func);
+// }
+//
+// function func() {
+//     this.textContent += '!';
+//     this.removeEventListener('click', func);
+// }
+
+
+// 361 Отвязывание анонимных обработчиков / Отвязывание анонимных функций в JavaScript
+//
+// Пусть теперь к нашим абзацам привязана анонимная функция:
+//
+// let elems = document.querySelectorAll('p');
+//
+// for (let elem of elems) {
+// 	elem.addEventListener('click', function() {
+// 		console.log(this.textContent);
+// 	});
+// }
+// Пусть мы хотим отвязать эту функцию от абзаца после клика по этому абзацу. Нас, однако, ждет проблема:
+// у функции нет имени, а значит мы не сможем обратится к ней по этому имени, чтобы отвязать ее.
+//
+// Для решения проблемы нужно дать имя функции, сделав из нее именованное функциональное выражение. Сделаем это:
+//
+// let elems = document.querySelectorAll('p');
+//
+// for (let elem of elems) {
+// 	elem.addEventListener('click', function func() { // дали имя функции
+// 		console.log(this.textContent);
+// 	});
+// }
+// Теперь эту функцию можно отвязать внутри нее самой:
+//
+// let elems = document.querySelectorAll('p');
+//
+// for (let elem of elems) {
+// 	elem.addEventListener('click', function func() {
+// 		console.log(this.textContent);
+// 		this.removeEventListener('click', func); // отвязываем функцию
+// 	});
+// }
+
+
+// 1 Дан список ul, в каждом пункте которого записано число.
+// Сделайте так, чтобы по клику на любую li ее число увеличивалось на единицу.
+//
+// let lists = document.querySelectorAll('li');
+
+// for (let list of lists) {
+//     list.addEventListener('click', function () {
+//         this.textContent++;
+//     });
+// }
+
+// 2 Модифицируйте предыдущую задачу так, чтобы каждая li увеличивала свое значение только по первому нажатию на нее.
+//
+// for (let list of lists) {
+//     list.addEventListener('click', function func() {
+//         this.textContent++;
+//         this.removeEventListener('click', func);
+//     });
+// }
+
+
+// 3 Модифицируйте предыдущую задачу так, чтобы каждая li увеличивала свое значение только если ее значение меньше 10.
+//
+// for (let list of lists) {
+//     list.addEventListener('click', function func() {
+//         this.textContent++;
+//         if (this.textContent >= 10) {
+//             this.removeEventListener('click', func);
+//         }
+//
+//         // if (this.textContent < 10) {
+//         //     this.textContent++;
+//         // } else {
+//         //     this.removeEventListener('click', func);
+//         // }
+//     });
+// }
+
+
+// 362
