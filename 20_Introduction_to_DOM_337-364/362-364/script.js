@@ -471,4 +471,171 @@
 
 // 5 Даны 4 инпута. В первый инпут вводится ФИО через пробел.
 // По потери фокуса запишите фамилию, имя и отчество в остальные 3 инпута.
+//
+// let input = document.querySelector('#input');
+// let inputs = document.querySelectorAll('.input');
+//
+// input.addEventListener('blur', function () {
+//     // ФИО полностью в 3 инпута
+//     // for (let input of inputs) {
+//     //     input.value = this.value;
+//     // }
+//
+//     // ФИО в разные инпуты
+//     let arr = this.value.split(' ');
+//
+//     // for of
+//     // let index = 0;
+//     //
+//     // for (let input of inputs) {
+//     //     if (this.value) { // проверка на undefined
+//     //         input.value = arr[index];
+//     //     }
+//     //     index++;
+//     // }
+//
+//     // forEach
+//     inputs.forEach((el, index) => {
+//         if (this.value) {
+//             el.value = arr[index];
+//         }
+//     });
+//
+//     this.value = ''; // очистка 1 инпута
+//
+// });
+
+
+// 6 Дан инпут. В него вводится ФИО через пробел. ФИО вводится с маленькой буквы. Сделайте так, чтобы по потери фокуса
+// инпутом, введенные фамилия, имя и отчество автоматически стали записанными с большой буквы (в этом же инпуте).
+//
+// let input = document.querySelector('#input');
+//
+// input.addEventListener('blur', function () {
+//     let arr = this.value.split(' ');
+//     let newArr = [];
+//
+//     for (let el of arr) {
+//         newArr.push(el[0].toUpperCase() + el.slice(1));
+//     }
+//
+//     this.value = newArr.join(' ');
+// });
+
+
+// 7 Дан инпут. В него вводится текст. По потери фокуса узнайте количество слов в этом тексте.
+//
+// let input = document.querySelector('#input');
+//
+// input.addEventListener('blur', function () {
+//     let arr = this.value.split(' ');
+//     let index = arr.length;
+//
+//     // альтернатива
+//     // let index = 0;
+//     //
+//     // for (let arrElement of arr) {
+//     //     index++;
+//     // }
+//
+//     console.log(index);
+// });
+
+
+// 8 Дан инпут. В него вводится дата в формате 31.12.2016.
+// По потери фокуса в этом же инпуте поставьте эту дату в формате 2016-12-31.
+//
+// let input = document.querySelector('#input');
+//
+// function func() {
+//     this.value = this.value.split('.').reverse().join('-');
+// }
+//
+// input.addEventListener('blur', func);
+
+
+// 9 Дан инпут. В него вводится слово.
+// По нажатию на кнопку проверьте то, что это слово читается с начала и с конца одинаково (например, мадам).
+//
+// let input = document.querySelector('#input');
+// let btn = document.querySelector('button');
+//
+// function func() {
+//     let inputReverse = input.value.split('').reverse().join('');
+//
+//     if (inputReverse === input.value) {
+//         console.log('это слово читается с начала и с конца одинаково');
+//     } else {
+//         console.log('это слово не читается с начала и с конца одинаково');
+//     }
+//
+// }
+//
+// btn.addEventListener('click', func);
+
+
+// 10 Дан инпут. В него вводится число. Проверьте по потери фокуса, что это число содержит внутри себя цифру 3.
+//
+// let input = document.querySelector('#input');
+//
+// input.addEventListener('blur', function () {
+//     if (this.value.includes(3)) {
+//         console.log('число содержит внутри себя цифру 3');
+//     }
+// });
+
+
+// 11 Даны несколько абзацев и кнопка. По нажатию на кнопку запишите в конец каждого абзаца его порядковый номер.
+//
+// let btn = document.querySelector('button');
+// let paragraph = document.querySelectorAll('p');
+//
+// btn.addEventListener('click', function () {
+//     paragraph.forEach((item, index) => {
+//         if (!item.textContent.includes(index + 1)) {
+//             item.textContent += ' ' + (index + 1);
+//         }
+//     });
+// });
+
+
+// 12 Даны ссылки. Добавьте в конец каждой ссылки ее href в круглых скобках.
+//
+// let links = document.querySelectorAll('a');
+//
+// links.forEach(item => {
+//     item.textContent +=` (${item.href})`;
+// });
+
+
+// 13 Даны ссылки. Если ссылка начинается с http://, то добавьте ей в конец стрелку → (делается так: &rarr;).
+//
+// let links = document.querySelectorAll('a');
+//
+// links.forEach(item => {
+//     // if (item.href.includes('http://')) {
+//     if (item.href.startsWith('http://')) {
+//         item.innerHTML += '&rarr;';
+//     }
+// });
+
+
+// 14 Даны несколько абзацев с числами.
+// По нажатию на любой абзац запишите в него квадрат числа, которое в нем находится.
+//
+// let paragraphs = document.querySelectorAll('p');
+//
+// paragraphs.forEach(item => {
+//     item.addEventListener('click', function func() {
+//         this.textContent **= 2;
+//         this.removeEventListener('click', func);
+//     });
+// });
+
+
+// 15 Дан инпут. В него вводится дата в формате 31.12.2016.
+// По потери фокуса узнайте день недели (словом), который приходится на эту дату.
+
+
+
 
