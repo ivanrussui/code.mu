@@ -635,7 +635,69 @@
 
 // 15 Дан инпут. В него вводится дата в формате 31.12.2016.
 // По потери фокуса узнайте день недели (словом), который приходится на эту дату.
+//
+// let input = document.querySelector('input');
+// let days = ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'];
+// input.addEventListener('blur', function () {
+//     let arr = this.value.split('.');
+//     let date = new Date(arr[2], arr[1] - 1, arr[0]);
+//     let dayOfWeek = date.getDay();
+//
+//     console.log(`На ${this.value} приходится день недели - ${days[dayOfWeek]}.`);
+// });
 
 
+// 16 Дан инпут. Реализуйте кнопочки +1, -1, которые будут увеличивать или уменьшать на 1 значение инпута.
+// Сделайте так, чтобы это значение не могло стать меньше нуля.
+//
+// let input = document.querySelector('input');
+// let btnPlus = document.querySelector('#plus');
+// let btnMinus = document.querySelector('#minus');
+//
+// function increaseOne() {
+//     input.value = +input.value + 1;
+// }
+//
+// btnPlus.addEventListener('click', increaseOne);
+// btnMinus.addEventListener('click', reduceOne);
+//
+// function reduceOne() {
+//     if (input.value > 0) {
+//         input.value -= 1;
+//     } else {
+//         console.log('Значение инпута не может быть меньше нуля');
+//     }
+// }
+//
+// input.addEventListener('change', () => {
+//     if (input.value < 0) {
+//         input.value = 0;
+//         console.log('Значение инпута не может быть меньше нуля');
+//     }
+// });
 
 
+// 17 Дан инпут. Даны абзацы. Пусть в этот инпут записывается суммарное количество нажатий по этим абзацам.
+// let input = document.querySelector('input');
+// let paragraphs = document.querySelectorAll('p');
+// let counter = 0;
+// input.value = counter;
+//
+// paragraphs.forEach(item => {
+//     item.addEventListener('click', () => {
+//         counter++;
+//         input.value = counter;
+//     });
+// });
+
+
+// 18 На странице есть дивы. В них есть текст. Обойдите все дивы и обрежьте тот текст, который в них стоит так,
+// чтобы он стал длиной 10 символов. И добавьте троеточие в конец обрезанного текста
+//
+// let divs = document.querySelectorAll('div');
+//
+// for (let div of divs) {
+//     if (div.textContent.length > 10) {
+//         div.textContent = div.textContent.slice(0, 10) + '...';
+//     }
+// }
