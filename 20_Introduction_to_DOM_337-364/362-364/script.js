@@ -701,3 +701,25 @@
 //         div.textContent = div.textContent.slice(0, 10) + '...';
 //     }
 // }
+
+
+// 19 Дан инпут и кнопка. По нажатию на кнопку сгенерируйте случайную строку из 8-ми символов и запишите в инпут.
+//
+// let input = document.querySelector('input');
+// let button = document.querySelector('button');
+//
+// function generateRandomString() {
+//     let symbols = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+//     let str = '';
+//
+//     for (let i = 0; i < 8; i++) {
+//         let symbol = Math.floor(Math.random() * symbols.length);
+//         str += symbols[symbol];
+//     }
+//
+//     input.value = str;
+// }
+//
+// button.addEventListener('click', generateRandomString);
+
+
