@@ -723,3 +723,97 @@
 // button.addEventListener('click', generateRandomString);
 
 
+// 20 Дан инпут и кнопка. Пользователь вводит в инпут какую-то строку.
+// По нажатию на кнопку перемешайте введенные символы случайным образом и запишите ее обратно в инпут.
+//
+// let input = document.querySelector('input');
+// let button = document.querySelector('button');
+//
+// function shuffleRandomSymbols() {
+//     let res = '';
+//
+//     for (let i = input.value.length; i > 0 ; i--) {
+//         let randomIndex = Math.floor(Math.random() * input.value.length);
+//
+//         res += input.value[randomIndex];
+//
+//         // код ниже нужен чтобы не было повторных символов, иначе приведет со временем ко всем одинаковым символам
+//         let firstStr = input.value.slice(0, randomIndex); // получаем то что остается до нашего символа
+//         let secondStr = input.value.slice(randomIndex + 1);  // получаем то что остается после нашего символа
+//
+//         input.value = firstStr + secondStr;  // меняем значение инпута в то что осталось
+//
+//     }
+//
+//     input.value = res;
+// }
+//
+// button.addEventListener('click', shuffleRandomSymbols);
+
+
+// 21 Дан инпут, кнопка и абзац. В инпут вводится температура в градусах Фаренгейта.
+// По клику на кнопку выведите в абзац температуру в градусах Цельсия.
+//
+// let input = document.querySelector('input');
+// let button = document.querySelector('button');
+// let p = document.querySelector('p');
+//
+// button.addEventListener('click', () => {
+//     let res = (input.value - 32) / 1.8
+//     // let res = (input.value - 32) * 5 / 9 // альтернативная формула, результат идентичен
+//
+//     Number.isInteger(res) ? p.textContent = res.toString() : p.textContent = res.toFixed(4);
+// });
+
+
+// 22 Дан инпут, кнопка и абзац. В инпут вводится число. По нажатию на кнопку выведите в абзац факториал этого числа.
+//
+// let input = document.querySelector('input');
+// let button = document.querySelector('button');
+// let p = document.querySelector('p');
+//
+// button.addEventListener('click', () => {
+//     let res = 1;
+//
+//     for (let i = 1; i <= +input.value; i++) {
+//         res *= i;
+//     }
+//
+//     p.textContent = 'Факториал введенного числа: ' + res;
+// });
+
+
+// 23 Даны 3 инпута, кнопка и абзац. В инпуты вводятся коэффициенты квадратного уравнения.
+// По нажатию на кнопку найдите корни этого уравнения и выведите их в абзац.
+//
+// let input1 = document.querySelector('#input1');
+// let input2 = document.querySelector('#input2');
+// let input3 = document.querySelector('#input3');
+// let button = document.querySelector('button');
+// let p = document.querySelector('p');
+//
+// function getTheRootsOfTheEquation() {
+//
+//     let a = +input1.value;
+//     let b = +input2.value;
+//     let c = +input3.value;
+//     let d = Math.pow(b, 2) - 4 * a * c;
+//
+//     console.log('Дискрименант равен ' + d);
+//
+//     if (d > 0) {
+//         let x1 = (-b + Math.sqrt(d)) / (2 * a);
+//         let x2 = (-b - Math.sqrt(d)) / (2 * a);
+//         p.textContent = `Корни уровнения x1: ${x1} и x2: ${x2}`;
+//     } else if (d === 0) {
+//         let x = -b / (2 * a);
+//         p.textContent = `Корень уровнения x: ${x}`;
+//     } else if (d < 0) {
+//         p.textContent = 'У уравнения нет действительных корней';
+//     } else {
+//         p.textContent = 'Необходимо вводить только числа';
+//     }
+// }
+//
+// button.addEventListener('click', getTheRootsOfTheEquation);
+
