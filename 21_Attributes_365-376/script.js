@@ -1,4 +1,4 @@
-// 20_Introduction_to_DOM_365-376
+// 21_Attributes_365-376
 // Атрибуты
 
 
@@ -265,6 +265,241 @@
 
 // 370 Имена атрибутов с дефисами / Имена атрибутов с дефисами в JavaScript
 //
+// Пользовательские атрибуты могут содержать дефисы в своем названии, например, вот так:
 //
+// <div id="elem" data-my-test="1000"></div>
+// Для обращения к таким атрибутам следует использовать camelCase:
+//
+// let elem = document.querySelector('#elem');
+// console.log(elem.dataset.myTest);
 
 
+// 1 Дан следующий код:
+//
+// <div id="elem" data-product-price="1000" data-product-amount="5">
+// 	товар яблоки
+// </div>
+// Сделайте так, чтобы по клику на див в конец его текста добавлялась стоимость покупки, равная цене, умноженной на количество.
+//
+// let elem = document.querySelector('#elem');
+//
+// elem.addEventListener('click', function getFinalPrice() {
+//     let finalPrice = elem.dataset.productPrice * elem.dataset.productAmount;
+//     elem.textContent += finalPrice;
+//     elem.removeEventListener('click', getFinalPrice);
+// });
+
+
+// 371 Обращение к атрибутам через методы / Обращение к атрибутам через методы в JavaScript
+//
+// К пользовательским атрибутам можно также обращаться с помощью методов типа getAttribute,
+// в этом случае следует писать полное название атрибута:
+//
+// <div id="elem" data-num="1000" data-my-num="2000"></div>
+// let elem = document.querySelector('#elem');
+//
+// console.log(elem.getAttribute('data-num'));    // выведет 1000
+// console.log(elem.getAttribute('data-my-num')); // выведет 2000
+
+
+// 1 Даны абзацы. Переберите их циклом и каждому абзацу в атрибут data-num запишите порядковый номер этого абзаца.
+// Используйте метод setAttribute.
+//
+// let p = document.querySelectorAll('p');
+//
+// for (let i = 0; i < p.length; i++) {
+//     p[i].setAttribute('data-num', (i + 1).toString());
+// }
+
+
+// 372 Массив CSS классов / Манипулирование массивом CSS классов в JavaScript
+//
+// Теория
+// Свойство classList
+// Свойство classList содержит псевдомассив CSS классов элемента, а также позволяет добавлять и удалять классы элемента,
+// проверять наличие определенного класса среди классов элемента.
+//
+// Речь идет об атрибуте class, внутри которого можно писать несколько классов через пробел, например www ggg zzz.
+// С помощью classList можно удалить, к примеру, класс ggg, не затронув остальные классы.
+//
+// Синтаксис
+// элемент.classList;
+// Пример . Количество классов
+// Узнаем количество классов элемента:
+//
+// <p id="elem" class="www ggg zzz"></p>
+// let elem = document.querySelector('#elem');
+//
+// let length = elem.classList.length;
+// console.log(length);
+// Результат выполнения кода:
+//
+// 3
+// Пример . Перебираем классы
+// Выведем по очереди классы элемента:
+//
+// <p id="elem" class="www ggg zzz"></p>
+// let elem = document.querySelector('#elem');
+// let classNames = elem.classList;
+//
+// for (let className of classNames) {
+// 	console.log(className);
+// }
+// Результат выполнения кода:
+//
+// 'www'
+// 'ggg'
+// 'zzz'
+
+
+// 1 Дан элемент:
+//
+// <p id="elem" class="www ggg zzz"></p>
+// Узнайте количество его классов.
+//
+// let elem = document.querySelector('#elem');
+// let length = elem.classList.length;
+//
+// console.log('Количество классов ' + length);
+
+
+// 2 Дан элемент:
+//
+// <p id="elem" class="www ggg zzz"></p>
+// Переберите в цикле его классы.
+//
+// let elem = document.querySelector('#elem');
+// let classNames = elem.classList;
+//
+// for (let className of classNames) {
+//     console.log(className);
+// }
+
+
+// 373 Добавление CSS классов / Добавление CSS классов в JavaScript
+//
+// Теория
+// Метод add объекта classList
+// Метод add объекта classList позволяет добавлять CSS классы элементу.
+//
+// Синтаксис
+// элемент.classList.add(класс);
+// Пример
+// Добавим элементу класс kkk:
+//
+// <p id="elem" class="www ggg zzz"></p>
+// let elem = document.querySelector('#elem');
+// elem.classList.add('kkk');
+// Результат выполнения кода:
+//
+// <p id="elem" class="www ggg zzz kkk"></p>
+// Пример
+// Добавим элементу класс zzz, который уже есть в элементе - ничего не произойдет, так как дубли классов не добавляются:
+//
+// <p id="elem" class="www ggg zzz"></p>
+// let elem = document.querySelector('#elem');
+// elem.classList.add('zzz');
+// Результат выполнения кода:
+//
+// <p id="elem" class="www ggg zzz"></p>
+
+
+// 1 Дан элемент:
+//
+// <p id="elem" class="www ggg zzz"></p>
+// Добавьте ему класс xxx.
+//
+// let elem = document.querySelector('#elem');
+// elem.classList.add('xxx');
+
+
+// 374 Удаление CSS классов / Удаление CSS классов в JavaScript
+//
+// Теория
+// Метод remove объекта classList
+// Метод remove объекта classList удаляет заданный CSS класс элемента.
+//
+// Синтаксис
+// элемент.classList.remove(класс);
+// Пример
+// Удалим класс ggg:
+//
+// <p id="elem" class="www ggg zzz"></p>
+// let elem = document.querySelector('#elem');
+// elem.classList.remove('ggg');
+// Результат выполнения кода:
+//
+// <p id="elem" class="www zzz"></p>
+
+
+// 1 Дан элемент:
+//
+// <p id="elem" class="www ggg zzz"></p>
+// Удалите у него класс www и класс zzz.
+//
+// let elem = document.querySelector('#elem');
+// elem.classList.remove('www', 'zzz');
+
+
+// 375 Проверка CSS классов / Проверка CSS классов в JavaScript
+//
+// Теория
+// Метод contains объекта classList
+// Метод contains объекта classList проверяет наличие CSS класса элемента.
+//
+// Синтаксис
+// элемент.classList.contains(класс);
+// Пример
+// Проверим, есть ли у элемента класс ggg:
+//
+// <p id="elem" class="www ggg zzz"></p>
+// let elem = document.querySelector('#elem');
+//
+// let contains = elem.classList.contains('ggg');
+// console.log(contains);
+// Результат выполнения кода:
+//
+// true
+
+
+// 1 Дан элемент:
+//
+// <p id="elem" class="www ggg zzz"></p>
+// Проверьте наличие у него класса ggg.
+//
+// let elem = document.querySelector('#elem');
+// console.log(elem.classList.contains('ggg'));
+
+
+// 376 Тогглинг CSS классов / Чередование CSS классов в JavaScript
+//
+// Теория
+// Метод toggle объекта classList
+// Метод toggle объекта classList чередует заданный CSS класс элемента: добавляет класс, если его нет и удаляет, если есть.
+//
+// Синтаксис
+// элемент.classList.toggle(класс);
+// Пример
+// В данном примере при использовании метода toggle класс zzz удалится, так как он уже есть в элементе:
+//
+// <p id="elem" class="www ggg zzz"></p>
+// let elem = document.querySelector('#elem');
+// elem.classList.toggle('zzz');
+// Результат выполнения кода:
+//
+// <p id="elem" class="www ggg"></p>
+// Пример
+// В данном примере при использовании метода toggle класс zzz добавится, так как его нету в элементе:
+//
+// <p id="elem" class="www ggg"></p>
+// let elem = document.querySelector('#elem');
+// elem.classList.toggle('zzz');
+// Результат выполнения кода:
+//
+// <p id="elem" class="www ggg zzz"></p>
+
+
+// 1 Дан элемент. Добавьте ему класс www, если его нет и удалите - если есть.
+//
+// let elem = document.querySelector('#elem');
+// elem.classList.toggle('www');
