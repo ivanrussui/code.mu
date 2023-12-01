@@ -27,7 +27,7 @@
 // 		this.textContent = this.textContent + '!';
 // 	});
 // }
-// Давайте теперь сделаем так, чтобы по нажатию на кнопку в конец списка добавлялся новая li:
+// Давайте теперь сделаем так, чтобы по нажатию на кнопку в конец списка добавлялась новая li:
 //
 // button.addEventListener('click', function() {
 // 	let item = document.createElement('li');
