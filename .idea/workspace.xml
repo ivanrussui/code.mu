@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14a773ff-c778-4409-97b0-4aaaa6ace739" name="Changes" comment="453 - 462">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/30_Manipulating_Elements_453-463/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/30_Manipulating_Elements_453-463/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/30_Manipulating_Elements_453-463/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/30_Manipulating_Elements_453-463/script.js" afterDir="false" />
+    <list default="true" id="14a773ff-c778-4409-97b0-4aaaa6ace739" name="Changes" comment="464 - 468">
+      <change beforePath="$PROJECT_DIR$/31_Practice_464-484/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/31_Practice_464-484/script.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,8 +35,8 @@
   <component name="GitRewordedCommitMessages">
     <option name="commitMessagesMapping">
       <RewordedCommitMessageMapping>
-        <option name="originalMessage" value="453 - 457" />
-        <option name="rewordedMessage" value="453 - 462" />
+        <option name="originalMessage" value="453 - 462" />
+        <option name="rewordedMessage" value="453 - 463" />
       </RewordedCommitMessageMapping>
     </option>
     <option name="currentCommit" value="1" />
@@ -205,23 +203,9 @@
       <workItem from="1701241421971" duration="15802000" />
       <workItem from="1701339529985" duration="17725000" />
       <workItem from="1701594780435" duration="3322000" />
-      <workItem from="1701611705271" duration="14158000" />
-    </task>
-    <task id="LOCAL-00016" summary="246 - 256">
-      <option name="closed" value="true" />
-      <created>1698916176633</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1698916176633</updated>
-    </task>
-    <task id="LOCAL-00017" summary="264 - 272">
-      <option name="closed" value="true" />
-      <created>1698931686424</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1698931686424</updated>
+      <workItem from="1701611705271" duration="14443000" />
+      <workItem from="1701672423303" duration="9821000" />
+      <workItem from="1701695714703" duration="2290000" />
     </task>
     <task id="LOCAL-00018" summary="273 - 275">
       <option name="closed" value="true" />
@@ -599,7 +583,23 @@
       <option name="project" value="LOCAL" />
       <updated>1701636588386</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="453 - 463">
+      <option name="closed" value="true" />
+      <created>1701637954425</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1701637954425</updated>
+    </task>
+    <task id="LOCAL-00066" summary="464 - 468">
+      <option name="closed" value="true" />
+      <created>1701697509300</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1701697509300</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -617,8 +617,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="337 - 345" />
-    <MESSAGE value="337 - 348" />
     <MESSAGE value="349 - 351" />
     <MESSAGE value="349 - 354" />
     <MESSAGE value="349 - 356" />
@@ -642,6 +640,8 @@
     <MESSAGE value="420 - 430" />
     <MESSAGE value="453 - 457" />
     <MESSAGE value="453 - 462" />
-    <option name="LAST_COMMIT_MESSAGE" value="453 - 462" />
+    <MESSAGE value="453 - 463" />
+    <MESSAGE value="464 - 468" />
+    <option name="LAST_COMMIT_MESSAGE" value="464 - 468" />
   </component>
 </project>
