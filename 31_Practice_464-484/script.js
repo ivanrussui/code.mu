@@ -507,8 +507,241 @@
 // // 3 Модифицируйте предыдущую задачу так, чтобы по клику на любую ячейку с зарплатой ее содержимое увеличивалось на 10%.
 //
 // function increasePercent() {
-//     this.textContent = +this.textContent + this.textContent / 10;
+//     // this.textContent = +this.textContent + this.textContent / 10;
 //     // this.textContent = Math.round(+this.textContent + this.textContent / 10);
 //     // this.textContent = ((+this.textContent) + (this.textContent / 10)).toFixed(2);
+//
+//     let res = +this.textContent + this.textContent / 10;
+//     Number.isInteger(res) ? this.textContent = res : this.textContent = res.toFixed(2);
 // }
+
+
+// 470 Добавление рядов и колонок в таблицу / Добавление рядов и колонок в HTML таблицу
+//
+// Пусть у нас есть некоторая HTML таблица #table. Давайте научимся добавлять в нее новые ряды и колонки.
+
+
+// Добавление рядов
+// Добавление рядов не составляет труда: нужно создать tr, а затем запустить цикл,
+// который добавит нужное количество ячеек в этот ряд (пусть 3):
+//
+// let table = document.querySelector('#table');
+//
+// let tr = document.createElement('tr');
+//
+// for (let i = 1; i <= 3; i++) {
+//     let td = document.createElement('td');
+//     tr.appendChild(td);
+// }
+//
+// table.appendChild(tr);
+
+
+// 1 Сделайте кнопку, по нажатию на которую в таблицу будет добавляться новый ряд.
+//
+// let btn = document.createElement('button');
+//
+// btn.textContent = 'Add row';
+//
+// btn.style.cssText = `
+//     border: 1px solid indigo;
+//     padding: 2px 5px;
+// `;
+//
+// table.insertAdjacentElement('afterend', btn);
+// btn.addEventListener('click', addRow);
+//
+// function addRow() {
+// 	tr = document.createElement('tr');
+// 	table.append(tr);
+// }
+
+
+// Добавление колонок
+// А вот с добавлением колонок чуть посложнее: нужно запустить цикл,
+// который переберет все ряды таблицы и в каждый ряд добавит новую ячейку:
+//
+// let trs = document.querySelectorAll('#table tr');
+//
+// for (let tr of trs) {
+// 	let td = document.createElement('td');
+// 	tr.appendChild(td);
+// }
+
+
+// 2 Дана таблица размером 2 на 2:
+//
+// <table id="table">
+// 	<tr>
+// 		<td></td>
+// 		<td></td>
+// 	</tr>
+// 	<tr>
+// 		<td></td>
+// 		<td></td>
+// 	</tr>
+// </table>
+// td {
+// 	width: 50px;
+// 	height: 50px;
+// 	border: 1px solid black;
+// }
+// Дана также кнопка. Сделайте так, чтобы по нажатию на кнопку таблица увеличивалась на один ряд и на одну колонку.
+//
+// let table = document.querySelector('#table');
+// let tbody = document.querySelector('#table > tbody');
+// let btn = document.createElement('button');
+//
+// btn.textContent = 'Click Me';
+// btn.classList.add('btn');
+// table.insertAdjacentElement('afterend', btn);
+
+// 2 вариант реализации вынес функциональность в отдельные функции
+// btn.addEventListener('click', addRows);
+//
+// function addRows() {
+//     let tr = document.createElement('tr');
+//     let trs = document.querySelectorAll('#table tr');
+//     tbody.append(tr);
+//
+//     addColumnsForNewRows(trs, tr);
+//     addColumn(trs);
+// }
+//
+// function addColumnsForNewRows(trs, tr) {
+//     for (let i = 0; i <= trs.length; i++) {
+//         addNewColumn(tr);
+//     }
+// }
+//
+// function addColumn(trs) {
+//     for (let tr of trs) {
+//         addNewColumn(tr);
+//     }
+// }
+//
+// function addNewColumn(tr) {
+//     let td = document.createElement('td');
+//     tr.append(td);
+// }
+
+// // 1 вариант реализации
+// btn.addEventListener('click', function () {
+//     let trs = document.querySelectorAll('#table tr');
+//     let tr = document.createElement('tr');
+//     tbody.append(tr);
+//
+//     for (let i = 0; i <= trs.length; i++) {
+//         let td = document.createElement('td');
+//         tr.append(td);
+//     }
+//
+//     for (let tr of trs) {
+//         let td = document.createElement('td');
+//         tr.append(td);
+//     }
+// });
+
+
+// 471 Изменение ячеек таблицы / Изменение ячеек HTML таблицы на JavaScript
+//
+// Пусть дана некоторая HTML таблица #table. Пусть перед нами стоит задача что-то сделать с каждой ячейкой таблицы,
+// например, записать в каждую из них текст '!'.
+//
+// Давайте обсудим нюансы решения подобной задачи.
+//
+// Как вы знаете, HTML таблица имеет двухмерную структуру: есть ряды, а в них ячейки. Можно решить нашу задачу следующим
+// образом: перебрать циклом ряды и в каждом ряду перебрать циклом ячейки и сделать с ними нужное нам действие.
+// То есть приведенная схема решения подобна тому, как бы мы создавали такую таблицу, заполняя ее рядами и ячейками.
+//
+// Однако, в данном случае, два вложенных цикла будут лишними: можно просто получить все td и перебрать их циклом,
+// выполняя нужную операцию. Сделаем это:
+//
+// let tds = document.querySelectorAll('#table td');
+//
+// for (let td of tds) {
+// 	td.textContent = '!';
+// }
+
+
+// 1 Пусть дана некоторая HTML таблица с числами и кнопка.
+// По нажатию на кнопку увеличьте число в каждой ячейки таблицы в два раза.
+//
+// let tds = document.querySelectorAll('#table td');
+// let btn = document.querySelector('.btn');
+//
+// btn.addEventListener('click', function () {
+//     for (let td of tds) {
+//         td.textContent = String(+td.textContent + +td.textContent);
+//         // td.textContent = String(+td.textContent * 2);
+//     }
+// });
+
+
+// 472 Удаление новых элементов / Самоудаление новых элементов на JavaScript
+//
+// В предыдущем уроке мы в вами научились делать так, чтобы элементы удаляли сами себя по клику. // 457 наверное
+//
+// Пусть теперь элементов в родителе изначально нет:
+//
+// <div id="parent"></div>
+// Давайте в цикле создадим 9 новых абзацев, при этом сделаем так, чтобы любой абзац удалялся по клику на нем:
+//
+// let parent = document.querySelector('#parent');
+//
+// for (let i = 1; i <= 9; i++) {
+// 	let p = document.createElement('p');
+// 	p.textContent = i;
+//
+// 	p.addEventListener('click', function() {
+// 		this.remove();
+// 	});
+//
+// 	parent.appendChild(p);
+// }
+
+
+// 1 Дан следующий код:
+//
+// <ul id="parent">
+// 	<li>1</li>
+// 	<li>2</li>
+// 	<li>3</li>
+// </ul>
+//
+// <input type="submit" id="button">
+// Сделайте так, чтобы по клику на кнопку в список добавлялся новый элемент.
+// Сделайте так, чтобы любая li удалялась по клику на нее.
+// Речь идет как о тех li, которые уже есть в списке, так о новых, созданных после нажатия на кнопку.
+
+let parent = document.querySelector('#parent');
+let button = document.querySelector('#button');
+let lis = document.querySelectorAll('li');
+
+function addElement() {
+    let li = document.createElement('li');
+    let lastElement = parent.lastElementChild;
+
+    !lastElement ? li.textContent = '1' : li.textContent = String(Number(lastElement.textContent) + 1);
+
+    // if (!lastElement) {
+    //     li.textContent = '1';
+    // } else {
+    //     li.textContent = String(Number(lastElement.textContent) + 1);
+    // }
+
+    parent.append(li);
+
+    li.addEventListener('click', deleteElement);
+}
+
+function deleteElement() {
+    this.remove();
+}
+
+button.addEventListener('click', addElement);
+
+for (let li of lis) {
+    li.addEventListener('click', deleteElement);
+}
 
