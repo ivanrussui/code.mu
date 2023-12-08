@@ -1,4 +1,4 @@
-// 31_Practice_464-484
+// 31_Practice_464-471
 // Практика
 
 
@@ -676,72 +676,3 @@
 //         // td.textContent = String(+td.textContent * 2);
 //     }
 // });
-
-
-// 472 Удаление новых элементов / Самоудаление новых элементов на JavaScript
-//
-// В предыдущем уроке мы в вами научились делать так, чтобы элементы удаляли сами себя по клику. // 457 наверное
-//
-// Пусть теперь элементов в родителе изначально нет:
-//
-// <div id="parent"></div>
-// Давайте в цикле создадим 9 новых абзацев, при этом сделаем так, чтобы любой абзац удалялся по клику на нем:
-//
-// let parent = document.querySelector('#parent');
-//
-// for (let i = 1; i <= 9; i++) {
-// 	let p = document.createElement('p');
-// 	p.textContent = i;
-//
-// 	p.addEventListener('click', function() {
-// 		this.remove();
-// 	});
-//
-// 	parent.appendChild(p);
-// }
-
-
-// 1 Дан следующий код:
-//
-// <ul id="parent">
-// 	<li>1</li>
-// 	<li>2</li>
-// 	<li>3</li>
-// </ul>
-//
-// <input type="submit" id="button">
-// Сделайте так, чтобы по клику на кнопку в список добавлялся новый элемент.
-// Сделайте так, чтобы любая li удалялась по клику на нее.
-// Речь идет как о тех li, которые уже есть в списке, так о новых, созданных после нажатия на кнопку.
-
-let parent = document.querySelector('#parent');
-let button = document.querySelector('#button');
-let lis = document.querySelectorAll('li');
-
-function addElement() {
-    let li = document.createElement('li');
-    let lastElement = parent.lastElementChild;
-
-    !lastElement ? li.textContent = '1' : li.textContent = String(Number(lastElement.textContent) + 1);
-
-    // if (!lastElement) {
-    //     li.textContent = '1';
-    // } else {
-    //     li.textContent = String(Number(lastElement.textContent) + 1);
-    // }
-
-    parent.append(li);
-
-    li.addEventListener('click', deleteElement);
-}
-
-function deleteElement() {
-    this.remove();
-}
-
-button.addEventListener('click', addElement);
-
-for (let li of lis) {
-    li.addEventListener('click', deleteElement);
-}
-

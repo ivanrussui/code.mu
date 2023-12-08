@@ -397,9 +397,14 @@
 // решение через родителя, объект событие и остановка всплытия
 // let ul = document.querySelector('ul');
 //
+// // тут есть косяк, можем кликнуть на ul (его паддинг) и тогда на нем сработает удаление
+// // решаем проверкой tagName === 'LI' или closest('li')
 // ul.addEventListener('click', function (event) {
-//     event.target.remove();
-//     event.stopPropagation();
+//     if (event.target.tagName === 'LI') {
+//     // if (event.target.closest('li')) {
+//         event.target.remove();
+//         event.stopPropagation();
+//     }
 // });
 
 
