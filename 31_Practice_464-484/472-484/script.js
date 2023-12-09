@@ -738,9 +738,578 @@
 //
 //     linkForRemove.addEventListener('click', function (event) {
 //         event.preventDefault();
-//        paragraph.remove();
+//         paragraph.remove();
 //     });
 // }
 
 
 // 479 Стилизация элементов / Стилизация элементов на JavaScript
+//
+// Пусть у нас есть несколько абзацев:
+//
+// <p>text1</p>
+// <p>text2</p>
+// <p>text3</p>
+// Давайте переберем эти абзацы циклом и в конец каждого абзаца добавим ссылку, по нажатию на которую тексту абзаца
+// будет добавляться некоторая стилизация. К примеру, текст абзаца будет становится перечеркнутым
+// (это делает CSS свойство text-decoration).
+//
+// Давайте обсудим два нюанса такой задачи.
+//
+// Во-первых, как уже обсуждалось в предыдущих уроках, не следует менять стили абзацы напрямую через JavaScript -
+// гораздо удобнее будет навешивать какие-нибудь CSS классы.
+//
+// Во-вторых, при реализации такой задачи вас ожидает некоторый сюрприз. Чтобы понять его суть,
+// давайте посмотрим на HTML код абзацев после добавления ссылок:
+//
+// <p>text1<a href="">link</a></p>
+// <p>text2<a href="">link</a></p>
+// <p>text3<a href="">link</a></p>
+// Представим теперь, что по нажатию на ссылку текст абзаца перечеркнется. Однако, ссылка в данном случае также
+// является частью абзаца и тоже перечеркнется! Скорее всего такой эффект нам не нужен. Мы хотим, чтобы текст
+// перечеркивался, но ссылка - нет.
+//
+// Для решения проблемы нужно просто обернуть текст абзаца в тег span, вот так:
+//
+// <p><span>text1</span><a href="">link</a></p>
+// <p><span>text2</span><a href="">link</a></p>
+// <p><span>text3</span><a href="">link</a></p>
+
+
+// 1 Дан следующий HTML код:
+//
+// <p>text1</p>
+// <p>text2</p>
+// <p>text3</p>
+// Добавьте в конец каждого абзаца ссылку, по клику на которую текст абзаца будет перечеркиваться (а ссылка - нет).
+//
+// let paragraphs = document.querySelectorAll('p');
+//
+// for (let paragraph of paragraphs) {
+//     let span = document.createElement('span');
+//     span.textContent = paragraph.textContent;
+//     paragraph.textContent = '';
+//
+//     let link = document.createElement('a');
+//     link.href = '#';
+//     link.textContent = 'crossed out';
+//
+//     link.addEventListener('click', () => span.classList.add('crossed-out'));
+//
+//     paragraph.append(span, ' ', link);
+// }
+
+// 2 Модифицируйте предыдущую задачу так, чтобы после нажатия на ссылку эта ссылка удалялась из абзаца
+// (а текст абзаца становился перечеркнутым).
+//
+// let paragraphs = document.querySelectorAll('p');
+//
+// for (let paragraph of paragraphs) {
+//     let span = document.createElement('span');
+//     span.textContent = paragraph.textContent;
+//     paragraph.textContent = '';
+//
+//     let link = document.createElement('a');
+//     link.href = '#';
+//     link.textContent = 'crossed out';
+//
+//     link.addEventListener('click', function () {
+//         span.classList.add('crossed-out');
+//         this.remove();
+//     });
+//
+//     paragraph.append(span, ' ', link);
+// }
+
+
+// 3 Дана некоторая HTML таблица. Добавьте в эту таблицу еще одну колонку со ссылкой.
+// По нажатию на эту ссылку ряд с этой ссылкой должен стать зеленого фона.
+//
+// let trs = document.querySelectorAll('tr');
+//
+// for (let tr of trs) {
+//     let td = document.createElement('td');
+//     let link = document.createElement('a');
+//     link.href = '';
+//     link.textContent = 'green row';
+//
+//     tr.append(td);
+//     td.append(link);
+//
+//     link.addEventListener('click', function (event) {
+//         event.preventDefault();
+//         tr.classList.add('green');
+//     });
+// }
+
+
+// 4 Модифицируйте предыдущую задачу так, чтобы первое нажатие по ссылке красило ряд в зеленый фон,
+// а второе нажатие отменяло это действие.
+//
+// let trs = document.querySelectorAll('tr');
+//
+// for (let tr of trs) {
+//     let td = document.createElement('td');
+//     let link = document.createElement('a');
+//     link.href = '';
+//     link.textContent = 'green row';
+//
+//     tr.append(td);
+//     td.append(link);
+//
+//     link.addEventListener('click', function (event) {
+//         event.preventDefault();
+//         tr.classList.toggle('green');
+//     });
+// }
+
+
+// 480 Кнопки для скрытия и показа элемента / Кнопки для скрытия и показа элемента на JavaScript
+//
+// В данном разделе мы с вами научимся скрывать и показывать элементы страницы.
+// Как обычно, начнем с чего-то простого, и будем постепенно усложнять.
+//
+// Пусть для разминки у нас есть абзац и две кнопки:
+//
+// <p id="elem">text</p>
+// <input type="submit" id="show" value="show">
+// <input type="submit" id="hide" value="hide">
+// Получим ссылки на наши элементы в переменные:
+//
+// let elem = document.querySelector('#elem');
+// let show = document.querySelector('#show');
+// let hide = document.querySelector('#hide');
+// Давайте теперь сделаем так, чтобы по клику на одну кнопку наш абзац скрывался, а на другую - показывался.
+// Будем для этого давать или убирать элементу соответствующий CSS класс:
+//
+// .hidden {
+// 	display: none;
+// }
+// Решим нашу задачу:
+//
+// hide.addEventListener('click', function() {
+// 	elem.classList.add('hidden');
+// });
+//
+// show.addEventListener('click', function() {
+// 	elem.classList.remove('hidden');
+// });
+
+
+// 1 Модифицируйте мой код так, чтобы была только одна кнопка.
+// Пусть по первому клику на эту кнопку элемент показывается, а по второму - скрывается.
+//
+// let elem = document.querySelector('#elem');
+// let btn = document.querySelector('#btn');
+//
+// elem.classList.add('hidden');
+//
+// btn.addEventListener('click', function () {
+//     elem.classList.toggle('hidden');
+//     this.value = this.value !== 'show' ? 'show' : 'hide';
+// });
+
+
+// 481 Много элементов с кнопками показа / Много элементов с кнопками показа на JavaScript
+//
+// Пусть теперь у нас есть много абзацев и у каждого своя кнопка для сокрытия:
+//
+// <p>1</p><button>toggle</button>
+// <p>2</p><button>toggle</button>
+// <p>3</p><button>toggle</button>
+// Сделаем так, чтобы по клику на кнопку скрывался или показывался соответствующий ей абзац.
+//
+// Для этого нам каким-то образом нужно связать кнопки с нашими абзацами. Для этого существует несколько способов.
+
+
+// Первый способ
+// Свяжем кнопки и абзацы следующим образом:
+//
+// <p id="elem1">1</p><button data-elem="elem1">toggle</button>
+// <p id="elem2">2</p><button data-elem="elem2">toggle</button>
+// <p id="elem3">3</p><button data-elem="elem3">toggle</button>
+// Теперь по клику на любую кнопку мы будем читать содержимое ее атрибута data-elem и искать абзац с таким id.
+// Его и будем тоглить. Реализуем описанное:
+//
+// let buttons = document.querySelectorAll('button');
+//
+// for (let button of buttons) {
+// 	button.addEventListener('click', function() {
+// 		let elem = document.querySelector('#' + this.dataset.elem);
+// 		elem.classList.toggle('hidden');
+// 	});
+// }
+
+
+// 1 Изучите мое решение, а затем самостоятельно, не подсматривая в мой код, решите эту задачу.
+//
+// let buttons = document.querySelectorAll('button');
+//
+// for (let button of buttons) {
+//     button.addEventListener('click', function () {
+//         console.log(this.dataset.elem);
+//         let paragraph = document.querySelector('#' + this.dataset.elem);
+//         paragraph.classList.toggle('hidden');
+//     });
+// }
+
+
+// Второй способ
+// Расставлять id и data-атрибуты не очень удобно. Давайте сделаем так, чтобы связь была по порядковому номеру:
+// пусть первая кнопка скрывает первый абзац, вторая кнопка - второй и так далее.
+//
+// Реализуем описанное:
+//
+// let buttons = document.querySelectorAll('button');
+// let elems   = document.querySelectorAll('p');
+//
+// for (let i = 0; i < buttons.length; i++) {
+// 	buttons[i].addEventListener('click', function() {
+// 		elems[i].classList.toggle('hidden');
+// 	});
+// }
+
+
+// 2 Изучите мое решение, а затем самостоятельно, не подсматривая в мой код, решите эту задачу.
+//
+// let button = document.querySelectorAll('button');
+// let paragraph = document.querySelectorAll('p');
+//
+// for (let i = 0; i < button.length; i++) {
+//     button[i].addEventListener('click', () => paragraph[i].classList.toggle('hidden'));
+// }
+
+
+// Третий способ
+// Как можно увидеть, абзац, связанный с кнопкой, является ее соседом слева. Можно это использовать в качестве связи:
+//
+// let buttons = document.querySelectorAll('button');
+//
+// for (let button of buttons) {
+// 	button.addEventListener('click', function() {
+// 		this.previousElementSibling.classList.toggle('hidden');
+// 	});
+// }
+
+
+// 3 Изучите мое решение, а затем самостоятельно, не подсматривая в мой код, решите эту задачу.
+//
+// let button = document.querySelectorAll('button');
+//
+// for (let i = 0; i < button.length; i++) {
+//     button[i].addEventListener('click', function () {
+//         this.previousElementSibling.classList.toggle('hidden');
+//     });
+// }
+
+
+// 482 Активация элементов / Активация элементов на JavaScript
+//
+// Пусть у нас есть некоторая HTML таблица #table с пустыми ячейками.
+//
+// Давайте сделаем так, чтобы по нажатию на любую ячейку она каким-то образом активировалась, например,
+// становилась красного фона. Для этого активированным ячейкам будем давать какой-нибудь CSS класс:
+//
+// .active {
+// 	background: red;
+// }
+// Реализуем активацию:
+//
+// let tds = document.querySelectorAll('#table td');
+//
+// for (let td of tds) {
+// 	td.addEventListener('click', function() {
+// 		this.classList.add('active');
+// 	});
+// }
+
+
+// 1 Дана HTML список ul. Сделайте так, чтобы по нажатию на любой пункт списка он активировался красным фоном.
+//
+// let lis = document.querySelectorAll('li');
+//
+// lis.forEach(li => {
+//     li.addEventListener('click', function () {
+//         this.classList.add('active');
+//     });
+// });
+
+
+// 2 Модифицируйте предыдущую задачу так, чтобы по нажатию на активированный пункт списка активация с него снималась.
+//
+// let lis = document.querySelectorAll('li');
+//
+// lis.forEach(li => {
+//     li.addEventListener('click', function () {
+//         this.classList.toggle('active');
+//     });
+// });
+
+
+// 483 Чередование стилей активации / Чередование стилей активации на JavaScript
+//
+// В предыдущем уроке мы с вами научились активировать ячейки по клику на них. Давайте теперь сделаем так,
+// чтобы происходило чередование цветов: пусть первая ячейка красится в красный, вторая - в зеленый,
+// третья - опять в красный и так далее.
+//
+// Для решения этой задачи нам понадобится уже два CSS класса:
+//
+// .color1 {
+// 	background: red;
+// }
+// .color2 {
+// 	background: green;
+// }
+// Реализуем описанное чередование:
+//
+// let tds = document.querySelectorAll('#table td');
+//
+// let color = 'color1';
+// for (let td of tds) {
+// 	td.addEventListener('click', function() {
+// 		if (color == 'color1') {
+// 			color = 'color2'
+// 		} else {
+// 			color = 'color1'
+// 		}
+//
+// 		this.classList.add(color);
+// 	});
+// }
+
+
+// 1 Разберите мой код, а затем самостоятельно повторите решение этой задачи.
+//
+// let tds = document.querySelectorAll('td');
+//
+// let color = 'color1';
+//
+// for (let td of tds) {
+//     td.addEventListener('click', function () {
+//         color !== 'color1' ? color = 'color1' : color = 'color2';
+//         this.classList.add(color);
+//     });
+// }
+
+
+// Чередование многих цветов из массива
+// Пусть теперь мы хотим чередовать не два цвета, а произвольное количество.
+// Давайте для этого будем хранить массив CSS классов:
+//
+// let colors = ['color1', 'color2', 'color3'];
+// Напишем цвета наших классов:
+//
+// .color1 {
+// 	background: red;
+// }
+// .color2 {
+// 	background: green;
+// }
+// .color3 {
+// 	background: yellow;
+// }
+// А теперь реализуем чередование:
+//
+// let tds = document.querySelectorAll('#table td');
+//
+// let i = 0;
+// let colors = ['color1', 'color2', 'color3'];
+//
+// for (let td of tds) {
+// 	td.addEventListener('click', function() {
+// 		this.classList.add(colors[i]);
+//
+// 		i++;
+// 		if (i == colors.length) {
+// 			i = 0;
+// 		}
+// 	});
+// }
+
+
+// 2 Расскажите, как работает приведенный мною код.
+//
+// снаружи цикла инициализируется счетчик с значение 0
+// в цикле идет перебор td, далее событие клик и обработчик
+// к текущему td на котором сработал клик добавляется класс из массива по индексу счетчика
+// счетчик увеличивается
+// условие если счетчик равен длине массива то бишь последнему элементу
+// то счетчик обнуляется
+// таким образом идет присваивание 1, затем 2, затем 3 классов
+// далее срабатывает условие и 4 элементу присваивается 1 класс и т.д.
+
+
+// 484 Практика на изменение элементов / Практика на изменение элементов на JavaScript
+
+
+// 1 Дан массив. Выведите его элементы в виде списка ul.
+//
+// let arr = ['one', 'two', 'three', 'four', 'five'];
+//
+// let body = document.querySelector('body');
+// let ul = document.createElement('ul');
+// body.prepend(ul);
+
+// for (let el of arr) {
+//     let li = document.createElement('li');
+//     li.textContent = el;
+//     ul.append(li);
+// }
+
+
+// 2 Модифицируйте предыдущую задачу так, чтобы по клику на любую li в ней появлялся инпут,
+// с помощью которого ее можно будет поредактировать.
+//
+// for (let el of arr) {
+//     let li = document.createElement('li');
+//     li.textContent = el;
+//     ul.append(li);
+//
+//     li.addEventListener('click', function func() {
+//         let input = document.createElement('input');
+//         input.value = this.textContent;
+//         this.textContent = '';
+//         this.append(input);
+//
+//         this.removeEventListener('click', func);
+//
+//         input.addEventListener('blur', function () {
+//             li.textContent = this.value;
+//             this.value = '';
+//
+//             li.addEventListener('click', func);
+//         });
+//     });
+// }
+
+
+// 3 Модифицируйте предыдущую задачу так, чтобы под списком был инпут, с помощью которого можно будет
+// добавить новый элемент в конец списка ul. Сделайте так, чтобы новые li также можно было редактировать.
+//
+// for (let el of arr) {
+//     let li = createLi(el);
+//     changeText(li);
+// }
+//
+// function createLi(el) {
+//     let li = document.createElement('li');
+//     li.textContent = el;
+//     ul.append(li);
+//
+//     return li;
+// }
+//
+// function changeText(li) {
+//     li.addEventListener('click', function func() {
+//         let input = document.createElement('input');
+//         input.value = this.textContent;
+//         this.textContent = '';
+//         this.append(input);
+//
+//         this.removeEventListener('click', func);
+//
+//         input.addEventListener('blur', function () {
+//             li.textContent = this.value;
+//             this.value = '';
+//
+//             li.addEventListener('click', func);
+//         });
+//     });
+// }
+//
+// let input = document.createElement('input');
+// ul.insertAdjacentElement('afterend', input);
+//
+// function createNewLi() {
+//     // так будет дублирование кода
+//     // let li = document.createElement('li');
+//     // li.textContent = input.value;
+//     // ul.append(li);
+//     // this.value = '';
+//
+//     // передаешь input.value чтобы не дублировать код, а в createLi он воспринимается как el
+//     let li = createLi(input.value);
+//     changeText(li);
+//     this.value = '';
+// }
+//
+// input.addEventListener('blur', createNewLi);
+
+
+// 4 Модифицируйте предыдущую задачу так, чтобы в конце каждой li стояла ссылка 'удалить',
+// с помощью которой можно будет удалить эту li из ul.
+
+let arr = ['one', 'two', 'three', 'four', 'five'];
+
+let body = document.querySelector('body');
+let ul = document.createElement('ul');
+body.prepend(ul);
+
+
+for (let el of arr) {
+    let li = createLi();
+    let span = createSpan(el, li);
+
+    changeText(span);
+    createLink(li);
+
+}
+
+function createSpan(el, li) {
+    let span = document.createElement('span');
+    span.textContent = el;
+    li.prepend(span);
+
+    return span;
+}
+
+function createLi() {
+    let li = document.createElement('li');
+    ul.append(li)
+
+    return li;
+}
+
+function changeText(span) {
+    span.addEventListener('click', function func() {
+        let input = document.createElement('input');
+        input.value = this.textContent;
+        this.textContent = '';
+        this.append(input);
+
+        this.removeEventListener('click', func);
+
+        input.addEventListener('blur', function () {
+            span.textContent = this.value;
+            this.value = '';
+
+            span.addEventListener('click', func);
+        });
+    });
+}
+
+let input = document.createElement('input');
+ul.insertAdjacentElement('afterend', input);
+
+function createNewLi() {
+    let li = createLi();
+    let span = createSpan(input.value, li);
+    this.value = '';
+
+    changeText(span);
+    createLink(li);
+}
+
+input.addEventListener('blur', createNewLi);
+
+function createLink(li) {
+    let link = document.createElement('a');
+    link.href = '';
+    link.textContent = 'удалить';
+    li.append(' ', link);
+
+    link.addEventListener('click', function (event) {
+        event.preventDefault();
+        li.remove();
+    });
+}
