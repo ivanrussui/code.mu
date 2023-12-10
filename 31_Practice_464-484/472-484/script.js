@@ -1238,78 +1238,316 @@
 
 // 4 Модифицируйте предыдущую задачу так, чтобы в конце каждой li стояла ссылка 'удалить',
 // с помощью которой можно будет удалить эту li из ul.
+//
+// let arr = ['one', 'two', 'three', 'four', 'five'];
+//
+// let body = document.querySelector('body');
+// let ul = document.createElement('ul');
+// let input = document.createElement('input');
+//
+// body.prepend(ul);
+// ul.insertAdjacentElement('afterend', input);
+//
+// input.addEventListener('blur', createNewLi);
+//
+// for (let el of arr) {
+//     let li = createLi();
+//     let span = createSpan(el, li);
+//
+//     changeText(span);
+//     createLink(li);
+// }
+//
+// function createSpan(el, li) {
+//     let span = document.createElement('span');
+//     span.textContent = el;
+//     li.prepend(span);
+//
+//     return span;
+// }
+//
+// function createLi() {
+//     let li = document.createElement('li');
+//     ul.append(li);
+//
+//     return li;
+// }
+//
+// function changeText(span) {
+//     span.addEventListener('click', function func() {
+//         let input = document.createElement('input');
+//         input.value = this.textContent;
+//         this.textContent = '';
+//         this.append(input);
+//
+//         this.removeEventListener('click', func);
+//
+//         input.addEventListener('blur', function () {
+//             span.textContent = this.value;
+//             this.value = '';
+//
+//             span.addEventListener('click', func);
+//         });
+//     });
+// }
+//
+// function createNewLi() {
+//     let li = createLi();
+//     let span = createSpan(input.value, li);
+//     this.value = '';
+//
+//     changeText(span);
+//     createLink(li);
+// }
+//
+//
+// function createLink(li) {
+//     let link = document.createElement('a');
+//     link.href = '';
+//     link.textContent = 'удалить';
+//     li.append(' ', link);
+//
+//     link.addEventListener('click', function (event) {
+//         event.preventDefault();
+//         li.remove();
+//     });
+// }
 
-let arr = ['one', 'two', 'three', 'four', 'five'];
+
+// 5 Модифицируйте предыдущую задачу так, чтобы в конце каждой li также стояла ссылка 'перечеркнуть',
+// с помощью которой можно будет перечеркнуть текст данного тега li.
+//
+// let arr = ['one', 'two', 'three', 'four', 'five'];
+//
+// let body = document.querySelector('body');
+// let ul = document.createElement('ul');
+// let input = document.createElement('input');
+//
+// body.prepend(ul);
+// ul.insertAdjacentElement('afterend', input);
+//
+// input.addEventListener('blur', createNewLi);
+//
+// for (let el of arr) {
+//     let li = createLi();
+//     let span = createSpan(el, li);
+//
+//     changeText(span);
+//     createRemoveLink(li);
+//     createCrossOutLink(li, span);
+// }
+//
+// function createSpan(el, li) {
+//     let span = document.createElement('span');
+//     span.textContent = el;
+//     li.prepend(span);
+//
+//     return span;
+// }
+//
+// function createLi() {
+//     let li = document.createElement('li');
+//     ul.append(li);
+//
+//     return li;
+// }
+//
+// function changeText(span) {
+//     span.addEventListener('click', function addNewText() {
+//         let input = document.createElement('input');
+//         input.value = this.textContent;
+//         this.textContent = '';
+//         this.append(input);
+//
+//         this.removeEventListener('click', addNewText);
+//
+//         setTimeout(function () {
+//             input.focus();
+//             input.select();
+//         }, 0);
+//
+//         input.addEventListener('blur', function () {
+//             span.textContent = this.value;
+//             this.value = '';
+//
+//             span.addEventListener('click', addNewText);
+//         });
+//     });
+// }
+//
+// function createNewLi() {
+//     if (this.value && this.value !== '') {
+//         let li = createLi();
+//         let span = createSpan(input.value, li);
+//         this.value = '';
+//
+//         changeText(span);
+//         createRemoveLink(li);
+//         createCrossOutLink(li, span);
+//     } else {
+//         alert('Enter value in input');
+//     }
+// }
+//
+// function createLink(li) {
+//     let link = document.createElement('a');
+//     link.href = '';
+//     li.append(' ', link);
+//     return link;
+// }
+//
+// function createRemoveLink(li) {
+//     let link = createLink(li);
+//     link.textContent = 'удалить';
+//     link.addEventListener('click', function (event) {
+//         event.preventDefault();
+//         li.remove();
+//     });
+// }
+//
+// function createCrossOutLink(li, span) {
+//     let link = createLink(li);
+//     link.textContent = 'перечеркнуть';
+//     link.addEventListener('click', function (event) {
+//         event.preventDefault();
+//         span.classList.toggle('crossed-out');
+//     });
+// }
+
+
+// Массив объектов и таблица
+
+// 6 Дан следующий массив с работниками:
+//
+let employees = [
+    {name: 'employee1', age: 30, salary: 400},
+    {name: 'employee2', age: 31, salary: 500},
+    {name: 'employee3', age: 32, salary: 600},
+];
+// Выведите этих работников в HTML таблице.
 
 let body = document.querySelector('body');
-let ul = document.createElement('ul');
-body.prepend(ul);
+let table = document.createElement('table');
 
+body.prepend(table);
 
-for (let el of arr) {
-    let li = createLi();
-    let span = createSpan(el, li);
+for (let employee of employees) {
+    let tr = document.createElement('tr');
+    table.append(tr);
 
-    changeText(span);
-    createLink(li);
+    let td1 = document.createElement('td');
+    let td2 = document.createElement('td');
+    let td3 = document.createElement('td');
 
+    td1.textContent = employee.name;
+    td2.textContent = employee.age;
+    td3.textContent = employee.salary;
+
+    tr.append(td1, td2, td3);
 }
 
-function createSpan(el, li) {
-    let span = document.createElement('span');
-    span.textContent = el;
-    li.prepend(span);
 
+// 7 Добавьте ячейкам созданной таблицы возможность редактирования.
+
+let tds = document.querySelectorAll('td');
+
+// разделил на функции
+
+for (let td of tds) {
+    let span = createSpan(td);
+    changeText(span);
+}
+
+function createSpan(td) {
+    let span = document.createElement('span');
+    span.textContent = td.textContent;
+    td.textContent = '';
+    td.prepend(span);
     return span;
 }
 
-function createLi() {
-    let li = document.createElement('li');
-    ul.append(li)
-
-    return li;
-}
-
 function changeText(span) {
-    span.addEventListener('click', function func() {
+    span.addEventListener('click', function changeSpan() {
         let input = document.createElement('input');
         input.value = this.textContent;
         this.textContent = '';
         this.append(input);
 
-        this.removeEventListener('click', func);
+        this.removeEventListener('click', changeSpan);
 
         input.addEventListener('blur', function () {
             span.textContent = this.value;
             this.value = '';
 
-            span.addEventListener('click', func);
+            span.addEventListener('click', changeSpan);
         });
     });
 }
 
-let input = document.createElement('input');
-ul.insertAdjacentElement('afterend', input);
+// не разделяя на функции
+//
+// for (let td of tds) {
+//     let span = document.createElement('span');
+//
+//     span.textContent = td.textContent;
+//     td.textContent = '';
+//
+//     td.prepend(span);
+//
+//     span.addEventListener('click', function func() {
+//         let input = document.createElement('input');
+//         input.value = this.textContent;
+//         this.textContent = '';
+//         this.append(input);
+//
+//         this.removeEventListener('click', func);
+//
+//         input.addEventListener('blur', function () {
+//             span.textContent = this.value;
+//             this.value = '';
+//
+//             span.addEventListener('click', func);
+//         });
+//     });
+// }
 
-function createNewLi() {
-    let li = createLi();
-    let span = createSpan(input.value, li);
-    this.value = '';
 
-    changeText(span);
-    createLink(li);
+// 8 Добавьте в вашу таблицу новую колонку со ссылкой на удаления ряда из таблицы.
+
+let trs = document.querySelectorAll('tr');
+
+for (let tr of trs) {
+    let td = document.createElement('td');
+    tr.append(td);
+    addLink(td);
 }
 
-input.addEventListener('blur', createNewLi);
-
-function createLink(li) {
+function addLink(td) {
     let link = document.createElement('a');
-    link.href = '';
-    link.textContent = 'удалить';
-    li.append(' ', link);
+    link.href = '#';
+    link.textContent = 'Delete row';
+    td.append(link);
 
-    link.addEventListener('click', function (event) {
-        event.preventDefault();
-        li.remove();
-    });
+    link.addEventListener('click', deleteRow);
+}
+
+function deleteRow() {
+    this.parentElement.parentElement.remove();
+}
+
+
+// 9 Сделайте под таблицей 3 инпута и кнопку для добавление нового работника.
+// Пусть в инпуты вводятся имя, возраст и зарплата, и по нажатию на кнопку новый работник добавляется в таблицу.
+// Реализуйте редактирование ячеек для вновь добавленных работников.
+
+let btn = document.createElement('button');
+btn.textContent = 'Add new Employees';
+table.insertAdjacentElement('afterend', btn);
+
+let inputPlaceholders = ['name', 'age', 'salary'].reverse();
+
+for (let i = 0; i < 3; i++) {
+    let input = document.createElement('input');
+    input.placeholder = `Enter ${inputPlaceholders[i]}`
+    table.insertAdjacentElement('afterend', input);
 }
