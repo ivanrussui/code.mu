@@ -1449,6 +1449,7 @@ for (let employee of employees) {
 
 // 7 Добавьте ячейкам созданной таблицы возможность редактирования.
 
+
 let tds = document.querySelectorAll('td');
 
 // разделил на функции
@@ -1457,7 +1458,15 @@ for (let td of tds) {
     let span = createSpan(td);
     changeText(span);
 }
-
+// todo удали это уже не надо из-за 9 задачи выношу в функцию
+// function getTds() {
+//     let tds = document.querySelectorAll('td');
+//     for (let td of tds) {
+//         let span = createSpan(td);
+//         changeText(span);
+//     }
+// }
+// getTds();
 function createSpan(td) {
     let span = document.createElement('span');
     span.textContent = td.textContent;
@@ -1548,6 +1557,98 @@ let inputPlaceholders = ['name', 'age', 'salary'].reverse();
 
 for (let i = 0; i < 3; i++) {
     let input = document.createElement('input');
-    input.placeholder = `Enter ${inputPlaceholders[i]}`
+    input.placeholder = `Enter ${inputPlaceholders[i]}`;
     table.insertAdjacentElement('afterend', input);
+
+    // console.log(input.value[2]);
+    // console.log(employees);
+    // console.log(input.value);
 }
+
+function addNewEmployees() {
+    let tr = document.createElement('tr');
+    table.append(tr);
+
+    // todo это решение готовое, удали другой код, добавь очистку инпутов и проверку на пустые инпуты
+    //  решение добавления с циклом
+    let inputs = document.querySelectorAll('input');
+    for (let i = 0; i < 3; i++) {
+        let td = document.createElement('td');
+        td.textContent = inputs[i].value;
+        tr.append(td);
+
+        let span = createSpan(td);
+        changeText(span);
+        inputs[i].value = '';
+    }
+
+
+    // let td1 = document.createElement('td');
+    // let td2 = document.createElement('td');
+    // let td3 = document.createElement('td');
+    let td4 = document.createElement('td');
+    tr.append(td4);
+    addLink(td4);
+    // tr.append(td1, td2, td3);
+    // tr.append(td1, td2, td3, td4);
+    // addLink(td4);
+
+    // решение добавления без цикла
+    // let input1 = document.querySelectorAll('input')[0];
+    // let input2 = document.querySelectorAll('input')[1];
+    // let input3 = document.querySelectorAll('input')[2];
+    // td1.textContent = input1.value;
+    // td2.textContent = input2.value;
+    // td3.textContent = input3.value;
+
+    // как вариант условие чтобюы к каждому 4му td не применялась функциональность
+    // let tds = document.querySelectorAll('td');
+    // console.log(tds);
+    // let inputs = document.querySelectorAll('input');
+    // for (let i = 0; i < inputs.length; i++) {
+    //     ids.textContent = inputs
+    // }
+    // inputs.forEach((item, index) => {
+    //     td1.textContent = item.placeholder;
+    //     td2.textContent = item.placeholder;
+    // })
+    // for (let input of inputs) {
+    //     // td1.textContent = input.placeholder;
+    //     // td2.textContent = input.placeholder;
+    //     td3.textContent = input.placeholder;
+    // }
+    // let tds = document.querySelectorAll('td');
+    // for (let td of tds) {
+    //     let span = createSpan(td);
+    //     changeText(span);
+    // }
+
+}
+
+// addNewEmployees()
+btn.addEventListener('click', addNewEmployees);
+
+// let input1 = document.querySelectorAll('input')[0];
+// let input2 = document.querySelectorAll('input')[1];
+// let input3 = document.querySelectorAll('input')[2];
+// console.log(input1.placeholder);
+
+// let newEmployees = {name: input1.value, age: +input2.value, salary: +input3.value};
+
+// console.log(newEmployees);
+
+// function f() {
+//     employees.push(newEmployees);
+// }
+
+// function addNewEmployees() {
+//     // console.log(input);
+//     for (let input of inputs) {
+//         let newEmployees = {name: input.value, age: input.value, salary: input.value};
+//         console.log(newEmployees);
+//     }
+// }
+// addNewEmployees()
+// btn.addEventListener('click', addNewEmployees);
+
+
