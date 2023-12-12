@@ -1419,168 +1419,255 @@
 
 // 6 Дан следующий массив с работниками:
 //
-let employees = [
-    {name: 'employee1', age: 30, salary: 400},
-    {name: 'employee2', age: 31, salary: 500},
-    {name: 'employee3', age: 32, salary: 600},
-];
-// Выведите этих работников в HTML таблице.
-
-let body = document.querySelector('body');
-let table = document.createElement('table');
-
-body.prepend(table);
-
-for (let employee of employees) {
-    let tr = document.createElement('tr');
-    table.append(tr);
-
-    let td1 = document.createElement('td');
-    let td2 = document.createElement('td');
-    let td3 = document.createElement('td');
-
-    td1.textContent = employee.name;
-    td2.textContent = employee.age;
-    td3.textContent = employee.salary;
-
-    tr.append(td1, td2, td3);
-}
-
-
-// 7 Добавьте ячейкам созданной таблицы возможность редактирования.
-
-
-let tds = document.querySelectorAll('td');
-
-// разделил на функции
-
-for (let td of tds) {
-    let span = createSpan(td);
-    changeText(span);
-}
-
-function createSpan(td) {
-    let span = document.createElement('span');
-    span.textContent = td.textContent;
-    td.textContent = '';
-    td.prepend(span);
-    return span;
-}
-
-function changeText(span) {
-    span.addEventListener('click', function changeSpan() {
-        let input = document.createElement('input');
-        input.value = this.textContent;
-        this.textContent = '';
-        this.append(input);
-
-        this.removeEventListener('click', changeSpan);
-
-        input.addEventListener('blur', function () {
-            span.textContent = this.value;
-            this.value = '';
-
-            span.addEventListener('click', changeSpan);
-        });
-    });
-}
-
-// не разделяя на функции
+// let employees = [
+//     {name: 'employee1', age: 30, salary: 400},
+//     {name: 'employee2', age: 31, salary: 500},
+//     {name: 'employee3', age: 32, salary: 600},
+// ];
+// // Выведите этих работников в HTML таблице.
+//
+// let body = document.querySelector('body');
+// let table = document.createElement('table');
+//
+// body.prepend(table);
+//
+// for (let employee of employees) {
+//     let tr = document.createElement('tr');
+//     table.append(tr);
+//
+//     let td1 = document.createElement('td');
+//     let td2 = document.createElement('td');
+//     let td3 = document.createElement('td');
+//
+//     td1.textContent = employee.name;
+//     td2.textContent = employee.age;
+//     td3.textContent = employee.salary;
+//
+//     tr.append(td1, td2, td3);
+// }
+//
+//
+// // 7 Добавьте ячейкам созданной таблицы возможность редактирования.
+//
+// let tds = document.querySelectorAll('td');
+//
+// // разделил на функции
 //
 // for (let td of tds) {
-//     let span = document.createElement('span');
+//     let span = createSpan(td);
+//     changeText(span);
+// }
 //
+// function createSpan(td) {
+//     let span = document.createElement('span');
 //     span.textContent = td.textContent;
 //     td.textContent = '';
-//
 //     td.prepend(span);
+//     return span;
+// }
 //
-//     span.addEventListener('click', function func() {
+// function changeText(span) {
+//     span.addEventListener('click', function changeSpan() {
 //         let input = document.createElement('input');
 //         input.value = this.textContent;
 //         this.textContent = '';
 //         this.append(input);
 //
-//         this.removeEventListener('click', func);
+//         this.removeEventListener('click', changeSpan);
 //
 //         input.addEventListener('blur', function () {
 //             span.textContent = this.value;
 //             this.value = '';
 //
-//             span.addEventListener('click', func);
+//             span.addEventListener('click', changeSpan);
 //         });
 //     });
 // }
+//
+// // не разделяя на функции
+// //
+// // for (let td of tds) {
+// //     let span = document.createElement('span');
+// //
+// //     span.textContent = td.textContent;
+// //     td.textContent = '';
+// //
+// //     td.prepend(span);
+// //
+// //     span.addEventListener('click', function func() {
+// //         let input = document.createElement('input');
+// //         input.value = this.textContent;
+// //         this.textContent = '';
+// //         this.append(input);
+// //
+// //         this.removeEventListener('click', func);
+// //
+// //         input.addEventListener('blur', function () {
+// //             span.textContent = this.value;
+// //             this.value = '';
+// //
+// //             span.addEventListener('click', func);
+// //         });
+// //     });
+// // }
+//
+//
+// // 8 Добавьте в вашу таблицу новую колонку со ссылкой на удаления ряда из таблицы.
+//
+// let trs = document.querySelectorAll('tr');
+//
+// for (let tr of trs) {
+//     let td = document.createElement('td');
+//     tr.append(td);
+//     addLink(td);
+// }
+//
+// function addLink(td) {
+//     let link = document.createElement('a');
+//     link.href = '#';
+//     link.textContent = 'Delete row';
+//     td.append(link);
+//
+//     link.addEventListener('click', deleteRow);
+// }
+//
+// function deleteRow() {
+//     this.parentElement.parentElement.remove();
+// }
+//
+//
+// // 9 Сделайте под таблицей 3 инпута и кнопку для добавление нового работника.
+// // Пусть в инпуты вводятся имя, возраст и зарплата, и по нажатию на кнопку новый работник добавляется в таблицу.
+// // Реализуйте редактирование ячеек для вновь добавленных работников.
+//
+// let btn = document.createElement('button');
+// btn.textContent = 'Add new Employees';
+// table.insertAdjacentElement('afterend', btn);
+//
+// let inputPlaceholders = ['name', 'age', 'salary'].reverse();
+//
+// for (let i = 0; i < 3; i++) {
+//     let input = document.createElement('input');
+//     input.placeholder = `Enter ${inputPlaceholders[i]}`;
+//     table.insertAdjacentElement('afterend', input);
+// }
+//
+// function addNewEmployees() {
+//     let tr = document.createElement('tr');
+//     table.append(tr);
+//
+//     let inputs = document.querySelectorAll('input');
+//     for (let i = 0; i < 3; i++) {
+//         let td = document.createElement('td');
+//         td.textContent = inputs[i].value;
+//         inputs[i].value = '';
+//         tr.append(td);
+//
+//         let span = createSpan(td);
+//         changeText(span);
+//     }
+//
+//     let td4 = document.createElement('td');
+//     tr.append(td4);
+//     addLink(td4);
+// }
+//
+// btn.addEventListener('click', function () {
+//     let inputs = document.querySelectorAll('input');
+//     let check = inputs[0].value !== '' && inputs[1].value !== '' && inputs[2].value !== '';
+//
+//     if (check) {
+//         addNewEmployees();
+//     } else {
+//         alert('Enter values in all inputs, please');
+//     }
+// });
 
 
-// 8 Добавьте в вашу таблицу новую колонку со ссылкой на удаления ряда из таблицы.
+// Массив объектов и список
 
-let trs = document.querySelectorAll('tr');
+// 10 Дан следующий массив с работниками:
 
-for (let tr of trs) {
-    let td = document.createElement('td');
-    tr.append(td);
-    addLink(td);
+let employees = [
+    {name: 'employee1', age: 30, salary: 400},
+    {name: 'employee2', age: 31, salary: 500},
+    {name: 'employee3', age: 32, salary: 600},
+];
+// Выведите на экран каждого работника в своем теге li тега ul.
+
+let ul = document.createElement('ul');
+let body = document.querySelector('body');
+body.prepend(ul);
+
+for (let employee of employees) {
+    let li = document.createElement('li');
+    li.textContent = `name: ${employee.name}, age: ${employee.age}, salary: ${employee.salary}$`;
+    ul.append(li);
 }
 
-function addLink(td) {
-    let link = document.createElement('a');
-    link.href = '#';
-    link.textContent = 'Delete row';
-    td.append(link);
 
-    link.addEventListener('click', deleteRow);
-}
+// 11 Сделайте так, чтобы по клику на имя, возраст или зарплату работника появлялся инпут для редактирования этого поля.
 
-function deleteRow() {
-    this.parentElement.parentElement.remove();
-}
+let lis = document.querySelectorAll('li');
 
-
-// 9 Сделайте под таблицей 3 инпута и кнопку для добавление нового работника.
-// Пусть в инпуты вводятся имя, возраст и зарплата, и по нажатию на кнопку новый работник добавляется в таблицу.
-// Реализуйте редактирование ячеек для вновь добавленных работников.
-
-let btn = document.createElement('button');
-btn.textContent = 'Add new Employees';
-table.insertAdjacentElement('afterend', btn);
-
-let inputPlaceholders = ['name', 'age', 'salary'].reverse();
-
-for (let i = 0; i < 3; i++) {
-    let input = document.createElement('input');
-    input.placeholder = `Enter ${inputPlaceholders[i]}`;
-    table.insertAdjacentElement('afterend', input);
-}
-
-function addNewEmployees() {
-    let tr = document.createElement('tr');
-    table.append(tr);
-
-    let inputs = document.querySelectorAll('input');
-    for (let i = 0; i < 3; i++) {
-        let td = document.createElement('td');
-        td.textContent = inputs[i].value;
-        inputs[i].value = '';
-        tr.append(td);
-
-        let span = createSpan(td);
-        changeText(span);
+function createSpan() {
+    for (let i = 0; i < lis.length; i++) {
+        lis[i].textContent = '';
+        lis[i].insertAdjacentHTML('afterbegin', `<div>
+            name: <span>${employees[i].name}</span>,
+            age: <span>${employees[i].age}</span>,
+            salary: <span>${employees[i].salary}</span>$</div>
+        `);
     }
-
-    let td4 = document.createElement('td');
-    tr.append(td4);
-    addLink(td4);
 }
 
-btn.addEventListener('click', function () {
-    let inputs = document.querySelectorAll('input');
-    let check = inputs[0].value !== '' && inputs[1].value !== '' && inputs[2].value !== '';
+createSpan();
 
-    if (check) {
-        addNewEmployees();
-    } else {
-        alert('Enter values in all inputs, please');
+let spans = document.querySelectorAll('span');
+
+function changeText() {
+    for (let span of spans) {
+        span.addEventListener('click', function addNewText() {
+            let input = document.createElement('input');
+            input.value = this.textContent;
+            this.textContent = '';
+            this.append(input);
+
+            this.removeEventListener('click', addNewText);
+
+            input.addEventListener('blur', function () {
+                span.textContent = this.value;
+                this.value = '';
+
+                span.addEventListener('click', addNewText);
+            });
+        });
     }
-});
+}
 
+changeText();
+
+
+// 12 Добавьте в конец каждого тега li ссылку на удаление этого li из списка.
+
+let divs = ul.querySelectorAll('div');
+for (let div of divs) {
+    div.classList.add('inlined');
+}
+
+function addLink() {
+    for (let li of lis) {
+        let a = document.createElement('a');
+        a.href = '#';
+        a.textContent = 'Delete employee';
+        li.append(a);
+
+        deleteEmployee(a, li);
+    }
+}
+
+addLink();
+
+function deleteEmployee(a, li) {
+    a.addEventListener('click', () => li.remove());
+}
