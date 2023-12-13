@@ -1623,9 +1623,9 @@ function createSpan() {
 
 createSpan();
 
-let spans = document.querySelectorAll('span');
-
 function changeText() {
+    let spans = document.querySelectorAll('span');
+
     for (let span of spans) {
         span.addEventListener('click', function addNewText() {
             let input = document.createElement('input');
@@ -1634,6 +1634,11 @@ function changeText() {
             this.append(input);
 
             this.removeEventListener('click', addNewText);
+
+            setTimeout(function () {
+                input.focus();
+                input.select();
+            }, 0);
 
             input.addEventListener('blur', function () {
                 span.textContent = this.value;
@@ -1650,24 +1655,91 @@ changeText();
 
 // 12 Добавьте в конец каждого тега li ссылку на удаление этого li из списка.
 
-let divs = ul.querySelectorAll('div');
-for (let div of divs) {
-    div.classList.add('inlined');
-}
-
-function addLink() {
-    for (let li of lis) {
-        let a = document.createElement('a');
-        a.href = '#';
-        a.textContent = 'Delete employee';
-        li.append(a);
-
-        deleteEmployee(a, li);
+function addClassForDiv() {
+    let divs = ul.querySelectorAll('div');
+    for (let div of divs) {
+        div.classList.add('inlined');
     }
 }
 
-addLink();
+addClassForDiv();
+
+for (let li of lis) {
+    addLink(li);
+}
+
+function addLink(li) {
+    let a = document.createElement('a');
+    a.href = '#';
+    a.textContent = 'Delete employee';
+    li.append(a);
+    deleteEmployee(a, li);
+}
 
 function deleteEmployee(a, li) {
     a.addEventListener('click', () => li.remove());
 }
+
+
+// 13 Под списком сделайте форму для добавления нового работника.
+
+let inputsPlaceholders = ['Enter name', 'Enter age', 'Enter salary'].reverse();
+
+function createForm() {
+    let form = document.createElement('form');
+    ul.insertAdjacentElement('afterend', form);
+
+    createInputs(form);
+
+    let button = document.createElement('button');
+    button.textContent = 'Click for add Employee';
+    form.append(button);
+}
+
+createForm();
+
+function createInputs(form) {
+    for (let i = 0; i < 3; i++) {
+        let input = document.createElement('input');
+        input.placeholder = inputsPlaceholders[i];
+        form.prepend(input);
+    }
+}
+
+function addNewEmployee() {
+    let inputs = document.querySelectorAll('input');
+    let button = document.querySelector('button');
+
+    button.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        let check = inputs[0].value.trim() !== '' && inputs[1].value.trim() !== '' && inputs[2].value.trim() !== '';
+
+        if (check) {
+            let li = document.createElement('li');
+            let ul = document.querySelector('ul');
+            ul.append(li);
+
+            let inputsValues = [];
+
+            for (let input of inputs) {
+                inputsValues.push(input.value);
+                input.value = '';
+            }
+
+            li.insertAdjacentHTML('afterbegin', `<div>
+                name: <span>${inputsValues[0]}</span>
+                age: <span>${inputsValues[1]}</span>
+                salary: <span>${inputsValues[2]}</span>$</div>
+            `);
+
+            addClassForDiv();
+            addLink(li);
+            changeText();
+        } else {
+            alert('Enter values in all inputs, please');
+        }
+    });
+}
+
+addNewEmployee();
