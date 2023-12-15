@@ -727,29 +727,192 @@
 // }
 // Оформите этот код в виде модуля. Эспортируйте наружу все функции, кроме вспомогательной.
 
+// ;(function () {
+//     function avg1(arr) {
+//         return sum(arr, 1) / arr.length;
+//     }
+//
+//     function avg2(arr) {
+//         return sum(arr, 2) / arr.length;
+//     }
+//
+//     function avg3(arr) {
+//         return sum(arr, 3) / arr.length;
+//     }
+//
+// // вспомогательная функция
+//     function sum(arr, pow) {
+//         let res = 0;
+//
+//         for (let elem of arr) {
+//             res += elem ** pow;
+//         }
+//
+//         return res;
+//     }
+//
+//     window.model = {avg1, avg2, avg3};
+// })();
+//
+// console.log(model.avg1([1, 2, 3]));
+// console.log(+model.avg2([1, 2, 3]).toFixed(3));
+// console.log(model.avg3([1, 2, 3]));
+
+
+// 2 Изучите библиотеку underscore.
+// Сделайте свою аналогичную библиотеку, повторив в ней 5-10 функций оригинальной библиотеки.
+
+// // underscore
+// let result = _.map([1, 2, 3], function (num) {
+//     return num * 3;
+// });
+// console.log('underscore', result);
+//
+// // без underscore
+// let arr = [1, 2, 3];
+// let resultMy = arr.map(function (el) {
+//     return el * 3;
+// });
+// console.log('без underscore', resultMy);
+
+
+// myPrototype
+// прототип где я написал наподобие того что у меня было
+// ;(function () {
+//     function map(arr) {
+//         return callback(arr, 3);
+//     }
+//
+//     // вспомогательная функция
+//     function callback(arr, num) {
+//         let newArr = [];
+//
+//         for (let el of arr) {
+//             newArr.push(el * num);
+//         }
+//
+//         return newArr;
+//     }
+//
+//     window.myPrototype = {map};
+// })();
+//
+// console.log(myPrototype.map([1, 2, 3]));
+
+
+// myLibrary
+// Тут уже логика задается извне callback функцией, за основу underscore
 ;(function () {
-    function avg1(arr) {
-        return sum(arr, 1) / arr.length;
+    function each(list, callback) {
+        if (Array.isArray(list)) {
+            // это рабочий вариант
+            for (let i = 0; i < list.length; i++) {
+                callback(list[i], i, list);
+            }
+
+            // это упрощенный вариант, можно удалить
+            // for (let listElement of list) {
+            //     callback(listElement);
+            // }
+        } else {
+            // это рабочий вариант
+            let entries = Object.entries(list);
+
+            // for of
+            for (let el in entries) {
+                callback(entries[el][1], entries[el][0], list);
+            }
+
+            // for i
+            // for (let i = 0; i < entries.length; i++) {
+            //     callback(entries[i][1], entries[i][0], list);
+            // }
+
+            // это упрощенный вариант, можно удалить
+            // let values = Object.values(list);
+            // for (let value in values) {
+            //     callback(values[value]);
+            // }
+        }
     }
 
-    function avg2(arr) {
-        return sum(arr, 2) / arr.length;
-    }
+    function map(list, callback) {
+        let newArr = [];
 
-    function avg3(arr) {
-        return sum(arr, 3) / arr.length;
-    }
-
-// вспомогательная функция
-    function sum(arr, pow) {
-        let res = 0;
-
-        for (let elem of arr) {
-            res += elem ** pow;
+        // логика обработки есть/нет callback
+        if (callback) { // сделай для each такую же проверку
+            // for (let i = 0; i < list.length; i++) {
+            //     newArr.push(callback(list[i], i)); // попробуй тут протестить 3й параметр list
+            // }
+            if (Array.isArray(list)) {
+                // рабочий вариант на 2 аргумента num и key!
+                for (let i = 0; i < list.length; i++) {
+                    newArr.push(callback(list[i], i)); // попробуй тут протестить 3й параметр list
+                }
+                // вариант на 1 аргумент num, можно удалить
+                // for (let num of list) {
+                //     newArr.push(callback(num));
+                // }
+            } else {
+                // рабочий вариант сразу на 1 или 2 аргумента num и key!
+                let entries = Object.entries(list);
+                for (let el in entries) {
+                    newArr.push(callback(entries[el][1], entries[el][0]));  // попробуй тут протестить 3й параметр list
+                }
+                // ниже код с переборами можно удалить, верний покрывает всю логику
+                // этот перебор подходит если аргумент num
+                // let values = Object.values(list);
+                // for (let value in values) {
+                //     newArr.push(callback(values[value]));
+                // }
+                // если аргумент key
+                // let keys = Object.keys(list);
+                // for (let key in keys) {
+                //     newArr.push(callback(keys[key]));
+                // }
+            }
+        } else {
+            newArr.push(...list);
         }
 
-        return res;
+        return newArr;
     }
-
-    window.model = {avg1, avg2, avg3};
+    // потом вынеси методы переборов для объектов в отдельные вспомогательные функции
+    window.myLibrary = {each, map,};
 })();
+
+// _.each([1, 2, 3], console.log)
+// myLibrary.each([1, 2, 3], console.log);
+
+// _.each([1, 2, 3], function (num, key) {
+//     console.log(num * 3 + key);
+// });
+// myLibrary.each([1, 2, 3], function (num, key) {
+//     console.log(num * 3 + key);
+// });
+
+// _.each({one: 1, two: 2, three: 3}, function (num, key) {
+//     console.log(num * 3 + key);
+// });
+// myLibrary.each({one: 1, two: 2, three: 3}, function (num, key) {
+//     console.log(num * 3 + key);
+// });
+
+
+console.log(_.map([1, 2, 3], function (num, key) {
+    return num * 3 + key;
+}));
+console.log(myLibrary.map([1, 2, 3], function (num, key) {
+    return num * 3 + key;
+}));
+
+console.log(_.map([[1, 2], [3, 4]]));
+console.log(myLibrary.map([[1, 2], [3, 4]]));
+
+/*console.log(_.map({one: 1, two: 2, three: 3}, function (num, key) {
+    return num * 3 + key;
+}));
+console.log(myLibrary.map({one: 1, two: 2, three: 3}, function (num, key) {
+    return num * 3 + key;
+}));*/
+
