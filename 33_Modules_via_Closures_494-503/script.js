@@ -1,6 +1,10 @@
 // 33_Modules_via_Closures_494-503
 // Модули через замыкания
 
+// файл script лучше подключай в конце body. можно и в head, но тогда скрипты будут до тегов и не будут работать.
+// Это можно обойти добавив при подколючении скрипта type="module", но тогда в последней задаче код не будет работать.
+// Вывод: подключай скипт в конце body!
+
 
 // 494 Конфликты переменных / Конфликты переменных в JavaScript
 //
@@ -117,8 +121,6 @@
 // Если бы модулей здесь не было, пришлось бы вводить разные переменные для хранения наши элементов.
 // А с модулями мы можем спокойно использовать нашу переменную, не боясь того,
 // что кто-то захочет также использовать эту переменную.
-
-// Чтобы код из этой задачи работал, файл надо подключать с атрибутом type="module"
 
 
 // 497 Передача параметров / Передача параметров в модуль через замыкания в JavaScript
@@ -574,3 +576,180 @@
 // module.func5();
 // window.module.func1();
 
+
+// 503 Библиотеки через замыкания / Библиотеки через замыкания в JavaScript
+//
+// Часто в JavaScript создаются библиотеки, представляющие собой наборы функций для пользования другими программистами.
+//
+// Такие библиотеки обычно оборачиваются в модули через замыкания.
+// Это делается для того, чтобы при подключении библиотеки во внешнем мире появлялось как можно меньше функций.
+//
+// Как правило каждая библиотека старается создавать во внешнем мире только одну переменную - объект с функциями
+// библиотеки. При этом внутри в коде библиотеки часть функций являются основными, а часть - вспомогательными.
+// Очевидно, что во внешний мир мы хотим экспортировать только нужные функции,
+// не захламляя экпортируемый объект вспомогательными функциями.
+//
+// Давайте посмотрим на примере. Пусть у нас есть следующий набор функций, которые мы хотели бы превратить в библиотеку:
+//
+// function square(num) {
+// 	return num ** 2;
+// }
+// function cube(num) {
+// 	return num ** 3;
+// }
+// function avg(arr) {
+// 	return sum(arr, 1) / arr.length;
+// }
+// function digitsSum(num) {
+// 	return sum(String(num).split(''));
+// }
+//
+// // вспомогательная функция
+// function sum(arr) {
+// 	let res = 0;
+//
+// 	for (let elem of arr) {
+// 		res += +elem;
+// 	}
+//
+// 	return res;
+// }
+// Давайте оформим наши функции в виде модуля:
+//
+// ;(function() {
+// 	function square(num) {
+// 		return num ** 2;
+// 	}
+// 	function cube(num) {
+// 		return num ** 3;
+// 	}
+// 	function avg(arr) {
+// 		return sum(arr, 1) / arr.length;
+// 	}
+// 	function digitsSum(num) {
+// 		return sum(String(num).split(''));
+// 	}
+//
+// 	// вспомогательная функция
+// 	function sum(arr) {
+// 		let res = 0;
+//
+// 		for (let elem of arr) {
+// 			res += +elem;
+// 		}
+//
+// 		return res;
+// 	}
+// })();
+// А теперь экспортируем все функции, кроме вспомогательной:
+//
+// ;(function() {
+// 	function square(num) {
+// 		return num ** 2;
+// 	}
+// 	function cube(num) {
+// 		return num ** 3;
+// 	}
+// 	function avg(arr) {
+// 		return sum(arr, 1) / arr.length;
+// 	}
+// 	function digitsSum(num) {
+// 		return sum(String(num).split(''));
+// 	}
+//
+// 	// вспомогательная функция
+// 	function sum(arr) {
+// 		let res = 0;
+//
+// 		for (let elem of arr) {
+// 			res += +elem;
+// 		}
+//
+// 		return res;
+// 	}
+//
+// 	window.math = {square, cube, avg, digitsSum};
+// })();
+// Пусть у нас есть HTML страница index.html:
+//
+// <html>
+// 	<head>
+// 		<script>
+//
+// 		</script>
+// 	</head>
+// </html>
+// Подключим к ней нашу библиотеку:
+//
+// <html>
+// 	<head>
+// 		<script src="math.js"></script>
+// 		<script>
+//
+// 		</script>
+// 	</head>
+// </html>
+// Воспользуемся функциями из нашей библиотеки:
+//
+// <html>
+// 	<head>
+// 		<script src="math.js"></script>
+// 		<script>
+// 			alert(math.avg([1, 2, 3]) + math.square());
+// 		</script>
+// 	</head>
+// </html>
+
+
+// 1 Дан следующий код:
+//
+// function avg1(arr) {
+// 	return sum(arr, 1) / arr.length;
+// }
+//
+// function avg2(arr) {
+// 	return sum(arr, 2) / arr.length;
+// }
+//
+// function avg3(arr) {
+// 	return sum(arr, 3) / arr.length;
+// }
+//
+// // вспомогательная функция
+// function sum(arr, pow) {
+// 	let res = 0;
+//
+// 	for (let elem of arr) {
+// 		res += elem ** pow;
+// 	}
+//
+// 	return res;
+// }
+// Оформите этот код в виде модуля. Эспортируйте наружу все функции, кроме вспомогательной.
+
+;(function () {
+    function avg1(arr) {
+        return sum(arr, 1) / arr.length;
+    }
+
+    function avg2(arr) {
+        return sum(arr, 2) / arr.length;
+    }
+
+    function avg3(arr) {
+        return sum(arr, 3) / arr.length;
+    }
+
+// вспомогательная функция
+    function sum(arr, pow) {
+        let res = 0;
+
+        for (let elem of arr) {
+            res += elem ** pow;
+        }
+
+        return res;
+    }
+
+    window.model = {avg1, avg2, avg3};
+})();
