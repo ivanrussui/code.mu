@@ -2,7 +2,7 @@
 // важно, я тут не открываю исходный код underscore и переписываю.
 // я обращаюсь к библиотеке и пытаюсь реализовать логику так, чтобы на выходе получать те же данные
 
-import _, {each, first, map} from "./underscore-esm.js";
+import _, {each, first, map, reduce, reduceRight} from "./underscore-esm.js";
 
 ;(function () {
     function each(list, callBack) {
@@ -36,7 +36,25 @@ import _, {each, first, map} from "./underscore-esm.js";
         return array.slice(0, n);
     }
 
+    function reduce(list, callBack, memo) { // а вот редьюс работает с многомерными структурами так же как из underscore
+        // for (let el of list) { // for of
+        //     memo = callBack(memo, el);
+        // }
+        for (let i = 0; i < list.length; i++) { // for i
+            memo = callBack(memo, list[i]);
+        }
+        return memo;
+    }
+
+    function reduceRight(list, callBack, memo) {
+        for (let i = list.length - 1; i >= 0; i--) {
+            memo = callBack(memo, list[i]);
+        }
+        return memo;
+    }
+
     // вспомогательные функции
+
     function callBackForArray(list, callBack, newArr) {
         for (let i = 0; i < list.length; i++) {
             let logic = callBack(list[i], i, list);
@@ -60,8 +78,29 @@ import _, {each, first, map} from "./underscore-esm.js";
         // }
     }
 
-    window.myLibrary = {each, map, first};
+    window.myLibrary = {each, map, first, reduce, reduceRight};
 })();
+//
+// let list = [[0, 1], [2, 3], [4, 5]];
+// let flat = reduceRight(list, function (a, b) {
+//     return a.concat(b);
+// }, []);
+// console.log(flat);
+//
+// let flat2 = myLibrary.reduceRight(list, function (a, b) {
+//     return a.concat(b);
+// }, []);
+// console.log(flat2);
+
+// let sum = reduce([[1, 2], [3, 4]], function (memo, num) {
+//     return memo + num;
+// }, 10);
+// console.log(sum);
+//
+// let sum2 = myLibrary.reduce([[1, 2], [3, 4]], function (memo, num) {
+//     return memo + num;
+// }, 10);
+// console.log(sum2);
 
 // console.log(map([[1, 2], [3, 4]], first));
 // // // тут еще не реализовал внтури map first
@@ -123,5 +162,4 @@ import _, {each, first, map} from "./underscore-esm.js";
 // console.log(myLibrary.map({one: 1, two: 2, three: 3}, function (num, key) {
 //     return num * 3 + key;
 // }));
-
 
