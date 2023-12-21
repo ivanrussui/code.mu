@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Практика JavaScript 1-14</title>
+    <link rel="stylesheet" href="style.css">
+    <script async src="script.js"></script>
 </head>
 <body>
 <div id="wrapper">
@@ -37,14 +39,28 @@
     </div>
     <div id="triangle">
         <h2>Калькулятор, находит площадь треугольника по трем сторонам</h2>
-        <label for="triangleBase">Введите основание треугольника</label>
-        <input id="triangleBase" value="44">
-        <label for="triangleHeight">Введите высоту треугольника</label>
-        <input id="triangleHeight" value="5">
+        <label for="triangleSelect">Выберите способ нахождения площади треугольника</label>
+        <select id="triangleSelect">
+            <option value="one" selected>По трем сторонам (формула Герона)</option>
+            <option value="two">Через основание и высоту</option>
+        </select>
+        <div id="threeSides">
+            <label for="triangleSideOne">Сторона A</label>
+            <input id="triangleSideOne" value="3">
+            <label for="triangleSideTwo">Сторона B</label>
+            <input id="triangleSideTwo" value="4">
+            <label for="triangleSideThree">Сторона C</label>
+            <input id="triangleSideThree" value="5">
+        </div>
+        <div id="baseAndHeight">
+            <label for="triangleBase">Введите основание треугольника</label>
+            <input id="triangleBase" value="44">
+            <label for="triangleHeight">Введите высоту треугольника</label>
+            <input id="triangleHeight" value="5">
+        </div>
         <button>Click</button>
         <p></p>
     </div>
 </div>
-<script src="script.js"></script>
 </body>
 </html>

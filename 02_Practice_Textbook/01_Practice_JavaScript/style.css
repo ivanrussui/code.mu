@@ -1,0 +1,15 @@
+#baseAndHeight {
+    display: none;
+}
+
+#baseAndHeight.active {
+    display: inline-block;
+}
+
+#threeSides {
+    display: none;
+}
+
+#threeSides.active {
+    display: inline-block;
+}
