@@ -4,15 +4,39 @@
 
 // 2 Математические калькуляторы / Математические калькуляторы на JavaScript
 
-// функции переиспользуется в калькуляторах // оберни эти 2 функ в модуль и как объект экспортируй в window!
+
+// функции переиспользуется в калькуляторах
+// оберни эти функ в модуль и как объект экспортируй в window, если надо в др файле юзать!
+
+// функция сравнивает значения инпутов с нулем
+function compareNumbersWithZero(root, res, getHelperFunction, defaultValues, paragraph) {
+    let inputs = document.querySelectorAll(`${root} input`);
+    for (let input of inputs) {
+        if (input.value > 0) {
+            for (let i = 0; i <= input.value; i++) {
+                getHelperFunction(res, i);
+            }
+        } else if (input.value < 0) {
+            for (let i = +input.value; i <= 0; i++) {
+                getHelperFunction(res, i);
+            }
+        }
+        if (+input.value === 0) {
+            alert('Введите больше или меньше 0');
+            setDefaultValues(root, ...defaultValues);
+            return clearText(paragraph); // если инпута 2 нужен return
+        }
+    }
+}
 
 // функция проверяет инпуты на корректность введенных данных
-// работает независимо от количества элементов в defaultValues так а тут похоже и вовсе параметры по умолчанию не надо передавать, удалил везде при вызове убралд кажись все топ
+// работает независимо от количества элементов
 function checkIsNaN(root, ...rest) {
     let inputs = document.querySelectorAll(`${root} input`);
     let [clearText, setDefaultValues] = rest;
     for (let input of inputs) {
-        if (isNaN(input.value) || input.value === '') { // как вариант попробуй тут еще trim
+        let str = input.value.trim();
+        if (isNaN(str) || str === '') {
             alert('Вы ввели некорректное значение');
             clearText();
             setDefaultValues();
@@ -35,7 +59,6 @@ function clearText(paragraph) {
 
 // 1 Напишите скрипт, который будет находить корни квадратного уравнения.
 // Для этого сделайте 3 инпута, в которые будут вводиться коэффициенты уравнения.
-
 
 ;(function (root) {
     let parent = document.querySelector(root);
@@ -112,13 +135,13 @@ function clearText(paragraph) {
         }, function () {
             setDefaultValues(root, ...defaultValues);
         });
-
-        // вспомогательная функция проверяет числа на тройку Пифагора
-        function checkPythagoreanTriple(pythagoreanTriple) {
-            paragraph.textContent = pythagoreanTriple ?
-                'Числа являются тройкой Пифагора' : 'Числа НЕ являются тройкой Пифагора';
-        }
     });
+
+    // вспомогательная функция проверяет числа на тройку Пифагора
+    function checkPythagoreanTriple(pythagoreanTriple) {
+        paragraph.textContent = pythagoreanTriple ?
+            'Числа являются тройкой Пифагора' : 'Числа НЕ являются тройкой Пифагора';
+    }
 })('#pythagoreanTriple');
 
 
@@ -133,21 +156,8 @@ function clearText(paragraph) {
 
     btn.addEventListener('click', function () {
         let res = [];
-        if (numberFactor.value > 0) {
-            for (let i = 0; i <= numberFactor.value; i++) {
-                getAListOfDivisors(res, i);
-            }
-        } else if (numberFactor.value < 0) {
-            for (let i = +numberFactor.value; i <= 0; i++) {
-                getAListOfDivisors(res, i);
-            }
-        }
 
-        if (+numberFactor.value === 0) {
-            alert('Введите больше или меньше 0');
-            setDefaultValues(root, ...defaultValues);
-            clearText(paragraph);
-        }
+        compareNumbersWithZero(root, res, getAListOfDivisors, defaultValues, paragraph);
 
         checkIsNaN(root, function () {
             clearText(paragraph);
@@ -156,12 +166,12 @@ function clearText(paragraph) {
         });
     });
 
-    // вспомогательная функция: получить спискок делителей + выношу повторяющийся функционал
+    // вспомогательная функция: получить спискок делителей числа
     function getAListOfDivisors(res, i) {
         if (numberFactor.value % i === 0) {
-            res.push(` ${i}`);
+            res.push(i);
         }
-        paragraph.textContent = `Список делителей этого числа ${res}`;
+        paragraph.textContent = `Список делителей этого числа ${res.join(', ')}`;
     }
 })('#listOfNumberFactors');
 
@@ -178,53 +188,9 @@ function clearText(paragraph) {
     let defaultValues = [numberFactorOne.value, numberFactorTwo.value];
 
     btn.addEventListener('click', function () {
-
         let res = [];
-        let resOne = [];
-        let resTwo = [];
 
-        if (numberFactorOne.value > 0) {
-            for (let i = 0; i <= numberFactorOne.value; i++) {
-                getAListsOfDivisors(resOne, i);
-            }
-        } else if (numberFactorOne.value < 0) {
-            for (let i = +numberFactorOne.value; i <= 0; i++) {
-                getAListsOfDivisors(resOne, i);
-            }
-        }
-
-        if (numberFactorTwo.value > 0) {
-            for (let i = 0; i <= numberFactorTwo.value; i++) {
-                getAListsOfDivisors(resTwo, i);
-            }
-        } else if (numberFactorTwo.value < 0) {
-            for (let i = +numberFactorTwo.value; i <= 0; i++) {
-                getAListsOfDivisors(resTwo, i);
-            }
-        }
-        // крч выношу этот код в функцию и получаю результат 2 раза пока не придумал как это пофиксить
-        // function compareNumbersWithZero(inputs, res) {
-        //     // console.log(inputs);
-        //     for (let input of inputs) {
-        //         console.log(input);
-        //         if (input > 0) {
-        //             for (let i = 0; i <= input; i++) {
-        //                 getAListsOfDivisors(res, i);
-        //             }
-        //         } else if (input < 0) {
-        //             for (let i = +input; i <= 0; i++) {
-        //                 getAListsOfDivisors(res, i);
-        //             }
-        //         }
-        //     }
-        // }
-        // compareNumbersWithZero(defaultValues, res);
-
-        if (+numberFactorOne.value === 0 || +numberFactorTwo.value === 0) {
-            alert('Введите больше или меньше 0');
-            setDefaultValues(root, ...defaultValues);
-            clearText(paragraph);
-        }
+        compareNumbersWithZero(root, res, getAListOfCommonDivisors, defaultValues, paragraph);
 
         checkIsNaN(root, function () {
             clearText(paragraph);
@@ -233,14 +199,108 @@ function clearText(paragraph) {
         });
     });
 
-
-    // вспомогательная функция
-    function getAListsOfDivisors(res, i) {
+    // вспомогательная функция: получить спискок общих делителей чисел
+    function getAListOfCommonDivisors(res, i) {
+        // вынести отсюда в 1 функцию
         if (numberFactorOne.value % i === 0 && numberFactorTwo.value % i === 0) {
-            res.push(` ${i}`);
+            res.push(i);
         }
-        paragraph.textContent = `Список делителей этих чисел ${res}`;
+        let uniqueArr = res.filter(function (item, index) {
+            return res.indexOf(item) === index;
+        });
+        // let uniqueArr = res.filter((item, index) => res.indexOf(item) === index); // синтаксический сахар
+        // вынести досюда в 1 функцию
+
+        paragraph.textContent = `Список делителей этих чисел ${uniqueArr.join(', ')}`;
     }
-
-
 })('#listsOfNumberFactors');
+
+
+// 5 Даны 2 инпута и кнопка. В инпуты вводятся числа.
+// По нажатию на кнопку выведите наибольший общий делитель этих двух чисел.
+
+;(function (root) {
+    let parent = document.querySelector(root);
+    let greatestNumberOne = parent.querySelector('#greatestNumberOne');
+    let greatestNumberTwo = parent.querySelector('#greatestNumberTwo');
+    let btn = parent.querySelector('button');
+    let paragraph = parent.querySelector('p');
+    let defaultValues = [greatestNumberOne.value, greatestNumberTwo.value];
+
+    btn.addEventListener('click', function () {
+        let res = [];
+
+        compareNumbersWithZero(root, res, getGreatestCommonDivisor, defaultValues, paragraph);
+
+        checkIsNaN(root, function () {
+            clearText(paragraph);
+        }, function () {
+            setDefaultValues(root, ...defaultValues);
+        });
+    });
+
+    // вспомогательная функция: наибольший общий делитель чисел
+    function getGreatestCommonDivisor(res, i) {
+        // вынести отсюда в 1 функцию
+        if (greatestNumberOne.value % i === 0 && greatestNumberTwo.value % i === 0) {
+            res.push(i);
+        }
+        let uniqueArr = res.filter((item, index) => res.indexOf(item) === index);
+        // вынести досюда в 1 функцию
+
+        // вынести отсюда в 2 функцию
+        let max = Math.max(...uniqueArr);
+        // если число отрицательное надо сделать min
+        max < 0 && (max = Math.min(...uniqueArr));
+        // вынести досюда в 2 функцию
+
+        paragraph.textContent = `Наибольший общий делитель ${max}`;
+    }
+})('#greatestCommonDivisorOfNumbers');
+
+
+// 6 Даны 2 инпута и кнопка. В инпуты вводятся числа.
+// По нажатию на кнопку выведите наименьшее число, которое делится и на одно, и на второе из введенных чисел.
+
+;(function (root) {
+    let parent = document.querySelector(root);
+    let smallestNumberOne = parent.querySelector('#smallestNumberOne');
+    let smallestNumberTwo = parent.querySelector('#smallestNumberTwo');
+    let btn = parent.querySelector('button');
+    let paragraph = parent.querySelector('p');
+    let defaultValues = [smallestNumberOne.value, smallestNumberTwo.value];
+
+    btn.addEventListener('click', function () {
+        let res = [];
+
+        compareNumbersWithZero(root, res, getTheSmallestNumberThatIsDivisible, defaultValues, paragraph);
+
+        checkIsNaN(root, function () {
+            clearText(paragraph);
+        }, function () {
+            setDefaultValues(root, ...defaultValues);
+        });
+    });
+
+    // вспомогательная функция: наименьшее число, которое делится на введенные числа
+    function getTheSmallestNumberThatIsDivisible(res, i) {
+        // вынести отсюда в 1 функцию
+        if (smallestNumberOne.value % i === 0 && smallestNumberTwo.value % i === 0) {
+            res.push(i);
+        }
+        let uniqueArr = res.filter((item, index) => res.indexOf(item) === index);
+        // вынести досюда в 1 функцию
+
+        // вынести отсюда в 2 функцию
+        let max = Math.max(...uniqueArr);
+        // если число отрицательное надо сделать min
+        max < 0 && (max = Math.min(...uniqueArr));
+        // вынести досюда в 2 функцию
+
+        // возможно вынести досюда в 3 функцию
+        let smallestNumber = (smallestNumberOne.value * smallestNumberTwo.value) / max;
+        // возможно вынести досюда в 2 функцию
+
+        paragraph.textContent = `Наименьшее число, которое делится на введенные числа ${smallestNumber}`;
+    }
+})('#smallestNumberThatIsDivisible');
