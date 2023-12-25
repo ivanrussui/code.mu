@@ -8,6 +8,34 @@
 // функции переиспользуется в калькуляторах
 // оберни эти функ в модуль и как объект экспортируй в window, если надо в др файле юзать!
 
+// получить наименьшее число, которое делится на введенные числа
+function getTheSmallestNumberThatIsDivisible(max, root) {
+    let inputs = document.querySelectorAll(`${root} input`);
+    let [numberOne, numberTwo] = inputs;
+    return (numberOne.value * numberTwo.value) / max;
+}
+
+// получить наибольший общий делитель чисел
+function getGreatestCommonDivisor(uniqueArr) {
+    let max = Math.max(...uniqueArr);
+    // если число отрицательное надо сделать min
+    max < 0 && (max = Math.min(...uniqueArr));
+    return max;
+}
+
+// получить спискок общих делителей чисел
+function getAListOfCommonDivisors(res, i, root) {
+    let inputs = document.querySelectorAll(`${root} input`);
+    let [numberOne, numberTwo] = inputs;
+    if (numberOne.value % i === 0 && numberTwo.value % i === 0) {
+        res.push(i);
+    }
+    return res.filter(function (item, index) {
+        return res.indexOf(item) === index;
+    });
+    // return res.filter((item, index) => res.indexOf(item) === index); // синтаксический сахар
+}
+
 // функция сравнивает значения инпутов с нулем
 function compareNumbersWithZero(root, res, getHelperFunction, defaultValues, paragraph) {
     let inputs = document.querySelectorAll(`${root} input`);
@@ -190,7 +218,7 @@ function clearText(paragraph) {
     btn.addEventListener('click', function () {
         let res = [];
 
-        compareNumbersWithZero(root, res, getAListOfCommonDivisors, defaultValues, paragraph);
+        compareNumbersWithZero(root, res, showResultInAParagraph, defaultValues, paragraph);
 
         checkIsNaN(root, function () {
             clearText(paragraph);
@@ -199,18 +227,9 @@ function clearText(paragraph) {
         });
     });
 
-    // вспомогательная функция: получить спискок общих делителей чисел
-    function getAListOfCommonDivisors(res, i) {
-        // вынести отсюда в 1 функцию
-        if (numberFactorOne.value % i === 0 && numberFactorTwo.value % i === 0) {
-            res.push(i);
-        }
-        let uniqueArr = res.filter(function (item, index) {
-            return res.indexOf(item) === index;
-        });
-        // let uniqueArr = res.filter((item, index) => res.indexOf(item) === index); // синтаксический сахар
-        // вынести досюда в 1 функцию
-
+    // вспомогательная функция: показать результат в параграфе
+    function showResultInAParagraph(res, i) {
+        let uniqueArr = getAListOfCommonDivisors(res, i, root);
         paragraph.textContent = `Список делителей этих чисел ${uniqueArr.join(', ')}`;
     }
 })('#listsOfNumberFactors');
@@ -230,7 +249,7 @@ function clearText(paragraph) {
     btn.addEventListener('click', function () {
         let res = [];
 
-        compareNumbersWithZero(root, res, getGreatestCommonDivisor, defaultValues, paragraph);
+        compareNumbersWithZero(root, res, showResultInAParagraph, defaultValues, paragraph);
 
         checkIsNaN(root, function () {
             clearText(paragraph);
@@ -239,20 +258,10 @@ function clearText(paragraph) {
         });
     });
 
-    // вспомогательная функция: наибольший общий делитель чисел
-    function getGreatestCommonDivisor(res, i) {
-        // вынести отсюда в 1 функцию
-        if (greatestNumberOne.value % i === 0 && greatestNumberTwo.value % i === 0) {
-            res.push(i);
-        }
-        let uniqueArr = res.filter((item, index) => res.indexOf(item) === index);
-        // вынести досюда в 1 функцию
-
-        // вынести отсюда в 2 функцию
-        let max = Math.max(...uniqueArr);
-        // если число отрицательное надо сделать min
-        max < 0 && (max = Math.min(...uniqueArr));
-        // вынести досюда в 2 функцию
+    // вспомогательная функция: показать результат в параграфе
+    function showResultInAParagraph(res, i) {
+        let uniqueArr = getAListOfCommonDivisors(res, i, root);
+        let max = getGreatestCommonDivisor(uniqueArr);
 
         paragraph.textContent = `Наибольший общий делитель ${max}`;
     }
@@ -273,7 +282,7 @@ function clearText(paragraph) {
     btn.addEventListener('click', function () {
         let res = [];
 
-        compareNumbersWithZero(root, res, getTheSmallestNumberThatIsDivisible, defaultValues, paragraph);
+        compareNumbersWithZero(root, res, showResultInAParagraph, defaultValues, paragraph);
 
         checkIsNaN(root, function () {
             clearText(paragraph);
@@ -282,24 +291,11 @@ function clearText(paragraph) {
         });
     });
 
-    // вспомогательная функция: наименьшее число, которое делится на введенные числа
-    function getTheSmallestNumberThatIsDivisible(res, i) {
-        // вынести отсюда в 1 функцию
-        if (smallestNumberOne.value % i === 0 && smallestNumberTwo.value % i === 0) {
-            res.push(i);
-        }
-        let uniqueArr = res.filter((item, index) => res.indexOf(item) === index);
-        // вынести досюда в 1 функцию
-
-        // вынести отсюда в 2 функцию
-        let max = Math.max(...uniqueArr);
-        // если число отрицательное надо сделать min
-        max < 0 && (max = Math.min(...uniqueArr));
-        // вынести досюда в 2 функцию
-
-        // возможно вынести досюда в 3 функцию
-        let smallestNumber = (smallestNumberOne.value * smallestNumberTwo.value) / max;
-        // возможно вынести досюда в 2 функцию
+    // вспомогательная функция: показать результат в параграфе
+    function showResultInAParagraph(res, i) {
+        let uniqueArr = getAListOfCommonDivisors(res, i, root);
+        let max = getGreatestCommonDivisor(uniqueArr);
+        let smallestNumber = getTheSmallestNumberThatIsDivisible(max, root);
 
         paragraph.textContent = `Наименьшее число, которое делится на введенные числа ${smallestNumber}`;
     }
