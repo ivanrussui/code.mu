@@ -10,25 +10,60 @@
 
 // 1 Реализуйте описанную игру.
 
+let body = document.querySelector('body');
+let paragraph = document.querySelector('p');
+let table = document.createElement('table');
+
+body.insertBefore(table, paragraph);
+
+let k = 1;  // счетчик
+
+for (let i = 0; i < 10; i++) {
+    let tr = document.createElement('tr');
+    table.append(tr);
+    for (let j = 0; j < 10; j++) {
+        let td = document.createElement('td');
+        tr.append(td);
+
+        td.textContent = k.toString();
+        k++;
+    }
+}
 
 let tds = document.querySelectorAll('td');
-console.log(tds);
-let paragraph = document.querySelector('p');
 
+// это если не делать счетчик
+// for (let i = 0; i < tds.length; i++) {
+//     tds[i].textContent = (i + 1).toString();
+// }
 
 function getRandomsTds(tds) {
     let randoms = [];
-    for (let i = 0; i < tds.length; i++) {
-        randoms.push(Math.floor(Math.random() * (tds[100] - tds[0] + 1)) + tds[0]);
+
+    for (let i = 0; i < 10; i++) {
+        randoms.push(Math.floor(Math.random() * (+tds[99].textContent - +tds[0].textContent + 1)) + +tds[0].textContent);
     }
-    console.log(randoms);
+
+    paragraph.textContent = `Отгадайте ${randoms.length} случайных ячеек`;
     return randoms;
-    // return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-let res = getRandomsTds(tds)
-console.log(res);
-//
-// let min = 1,
-//     max = 100;
-// let random = getRandomInt(tds);
-// console.log(random);
+
+let res = getRandomsTds(tds);
+console.log('res', res);
+
+for (let i = 0; i < tds.length; i++) {
+    tds[i].addEventListener('click', function (e) {
+
+        let deleteEL = res.indexOf(+e.target.textContent);
+
+        if (deleteEL >= 0) {
+            res.splice(deleteEL, 1);
+            paragraph.textContent = `Осталось отгадать ${res.length}`;
+        }
+
+        res.length === 0 && (paragraph.textContent = 'Вы выйграли!');
+
+        console.log('res', res);
+
+    });
+}
