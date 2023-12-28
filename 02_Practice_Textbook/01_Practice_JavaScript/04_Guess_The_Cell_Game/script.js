@@ -10,11 +10,13 @@
 
 // 1 Реализуйте описанную игру.
 
-let body = document.querySelector('body');
+// let body = document.querySelector('body');
+let title = document.querySelector('h1');
 let paragraph = document.querySelector('p');
 let table = document.createElement('table');
 
-body.insertBefore(table, paragraph);
+// body.insertBefore(table, paragraph);
+title.parentElement.append(table)
 
 let k = 1;  // счетчик
 
@@ -61,9 +63,57 @@ for (let i = 0; i < tds.length; i++) {
             paragraph.textContent = `Осталось отгадать ${res.length}`;
         }
 
-        res.length === 0 && (paragraph.textContent = 'Вы выйграли!');
+        if (res.length === 0) {
+            paragraph.textContent = 'Вы выйграли!';
+            paragraph.classList.add('green');
+            clearInterval(timerId);
+            timer.textContent = `У вас в запасе ${seconds} секунд!`;
+            timer.classList.add('indigo');
+        }
 
         console.log('res', res);
-
     });
 }
+
+
+// 2 Модифицируйте предыдущую задачу, добавив таймер обратного отсчета.
+// Если игрок не успеет угадать числа за отведенное время - он проиграл.
+
+let timer = document.querySelector('h4');
+let btn = document.querySelector('button');
+// let time = 11000;
+let time = 300000;
+
+let timerId
+let timerId2
+
+function runSetTimeout() {
+    timerId2 = setTimeout(() => {
+        paragraph.textContent = 'Вы проиграли!';
+        paragraph.classList.add('red');
+    }, time);
+}
+
+runSetTimeout();
+// console.log(timerId);
+
+let seconds = time / 1000;
+function runSetInterval() {
+    timerId = setInterval(() => {
+        // console.log(seconds--);
+        timer.textContent = `У вас осталось ${--seconds} секунд`;
+        if (seconds <= 0) {
+            clearInterval(timerId);
+        }
+    }, 1000);
+}
+runSetInterval();
+
+// btn.addEventListener('click', function func() {
+//
+//     clearTimeout(timerId2)
+//     clearInterval(timerId)
+//     runSetTimeout();
+//     runSetInterval();
+//     this.removeEventListener('click', func);
+// });
