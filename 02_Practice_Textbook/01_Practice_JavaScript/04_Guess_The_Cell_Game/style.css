@@ -4,6 +4,12 @@ td {
     padding: 5px;
     border: 1px solid indigo;
     text-align: center;
+    cursor: pointer;
+}
+
+.disable {
+    pointer-events: none;
+    opacity: .5;
 }
 
 .red {
@@ -16,4 +22,14 @@ td {
 
 .indigo {
     color: indigo;
+}
+
+.right {
+    background-color: green;
+    color: white;
+}
+
+.wrong {
+    background-color: red;
+    color: white;
 }
