@@ -64,7 +64,7 @@ console.log('res', res);
 
 function clickOnCells() {
     for (let i = 0; i < tds.length; i++) {
-        tds[i].addEventListener('click', function (e) {
+        tds[i].addEventListener('click', function func(e) {
             let deleteEL = res.indexOf(+e.target.textContent);
 
             if (deleteEL >= 0) {
@@ -78,14 +78,17 @@ function clickOnCells() {
             if (res.length === 0) {
                 paragraph.textContent = 'Вы выйграли!';
                 paragraph.classList.add('green');
-                clearInterval(timerId);
                 timer.textContent = `Поздравляем у вас оставалось ${seconds} секунд!`;
                 timer.classList.add('indigo');
                 start.disabled = true;
                 stop.disabled = true;
+
+                clearInterval(timerId);
             }
 
             console.log('res', res);
+
+            tds[i].removeEventListener('click', func);
         });
     }
 }
@@ -112,6 +115,9 @@ function startTimer() {
             clearInterval(timerId);
             paragraph.textContent = 'Вы проиграли!';
             paragraph.classList.add('red');
+            table.classList.add('disable');
+            start.disabled = true;
+            stop.disabled = true;
         }
     }, 1000);
 
