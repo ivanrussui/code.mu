@@ -11,10 +11,10 @@ let ul = document.createElement('ul');
 title.insertAdjacentElement("afterend", ul);
 
 let now = new Date();
-// получаю последний день текущего месяца и текущего года
-let date = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+let date = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+let lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
 
-for (let i = 1; i <= date.getDate(); i++) {
+for (let i = 1; i <= lastDay.getDate(); i++) {
     let li = document.createElement('li');
     li.textContent = i.toString();
     ul.append(li);
