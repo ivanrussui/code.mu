@@ -1,0 +1,33 @@
+.list {
+    padding-left: 0;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(calc(20px + 20px + 2px), 1fr)); /* 20px на паддинг 2px на границу */
+    list-style-type: none;
+}
+
+.list-item {
+    border: 1px solid darkslateblue;
+    color: indigo;
+    padding: 10px;
+    display: grid;
+    place-items: center;
+}
+
+.active {
+    background-color: blueviolet;
+    color: white;
+}
+
+.block {
+    display: inline-grid;
+    gap: 10px;
+    grid-auto-flow: column;
+}
+
+.btn {
+    padding: 10px;
+    background-color: rebeccapurple;
+    color: white;
+    cursor: pointer;
+}
