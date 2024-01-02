@@ -64,8 +64,11 @@ subtitle.textContent = `Текущий месяц: ${currentMonth}, текущи
 // Месяц и год, выводимые над календарем, должны соответствовать отображаемому месяцу.
 
 let div = document.createElement('div');
-let btnPrevious = document.createElement('button');
-let btnNext = document.createElement('button');
+let btnPrevious = document.createElement('a');
+let btnNext = document.createElement('a');
+
+btnPrevious.setAttribute('href',  '');
+btnNext.setAttribute('href',  '');
 
 subtitle.insertAdjacentElement('afterend', div);
 div.append(btnPrevious, btnNext);
@@ -77,7 +80,8 @@ div.classList.add('block');
 btnPrevious.classList.add('btn');
 btnNext.classList.add('btn');
 
-btnNext.addEventListener('click', function () {
+btnNext.addEventListener('click', function (event) {
+    event.preventDefault();
     currentMonth = months[++month];
 
     if (month === months.length) {
@@ -88,7 +92,8 @@ btnNext.addEventListener('click', function () {
     subtitle.textContent = `Текущий месяц: ${currentMonth}, текущий год: ${year}`;
 });
 
-btnPrevious.addEventListener('click', function () {
+btnPrevious.addEventListener('click', function (event) {
+    event.preventDefault();
     currentMonth = months[--month];
 
     if (month < 0) {
