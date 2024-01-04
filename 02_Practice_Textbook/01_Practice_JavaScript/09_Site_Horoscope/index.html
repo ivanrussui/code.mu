@@ -9,14 +9,25 @@
 <body>
 <h1>Гороскоп на JavaScript</h1>
 <div id="parent">
-<!--    <label for="input"></label>-->
+    <label for="input"></label>
     <input id="input" placeholder="введите дату рождения и нажмите Enter">
 
-<!--    <label></label>-->
-    <input type="radio" value="1" name="elem" checked>
-    <input type="radio" value="2" name="elem">
-    <input type="radio" value="3" name="elem">
-    <table id="table"></table>
+    <div>
+        <input id="radio1" type="radio" value="сегодня" name="elem" checked>
+        <label for="radio1">Сегодня</label>
+    </div>
+    <div>
+        <input id="radio2" type="radio" value="завтра" name="elem">
+        <label for="radio2">Завтра</label>
+    </div>
+    <div>
+        <input id="radio3" type="radio" value="послезавтра" name="elem">
+        <label for="radio3">Послезавтра</label>
+    </div>
+
+    <p></p>
 </div>
 </body>
 </html>
+
+
