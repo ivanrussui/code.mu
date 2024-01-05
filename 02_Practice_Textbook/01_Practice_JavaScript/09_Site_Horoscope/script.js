@@ -18,90 +18,78 @@
 // 3 А теперь реализуйте работу радиокнопок, позволяющих выбрать день, за который нужно показать гороскоп.
 
 let databaseHoroscope = {
-    'Овен': [
+    'Овен':
         {
             'сегодня': 'Овен сегодня вас ожидает отличный день',
             'завтра': 'Овен завтра вас ожидает лучший день в текущем месяце',
             'послезавтра': 'Овен послезавтра вас ожидает лучший день в этом году'
         },
-    ],
-    'Телец': [
+    'Телец':
         {
             'сегодня': 'Телец сегодня вас ожидает отличный день',
             'завтра': 'Телец завтра вас ожидает лучший день в текущем месяце',
             'послезавтра': 'Телец послезавтра вас ожидает лучший день в этом году'
         },
-    ],
-    'Близнецы': [
+    'Близнецы':
         {
             'сегодня': 'Близнецы сегодня вас ожидает отличный день',
             'завтра': 'Близнецы завтра вас ожидает лучший день в текущем месяце',
             'послезавтра': 'Близнецы послезавтра вас ожидает лучший день в этом году'
         },
-    ],
-    'Рак': [
+    'Рак':
         {
             'сегодня': 'Рак сегодня вас ожидает отличный день',
             'завтра': 'Рак завтра вас ожидает лучший день в текущем месяце',
             'послезавтра': 'Рак послезавтра вас ожидает лучший день в этом году'
         },
-    ],
-    'Лев': [
+    'Лев':
         {
             'сегодня': 'Лев сегодня вас ожидает отличный день',
             'завтра': 'Лев завтра вас ожидает лучший день в текущем месяце',
             'послезавтра': 'Лев послезавтра вас ожидает лучший день в этом году'
         },
-    ],
-    'Дева': [
+    'Дева':
         {
             'сегодня': 'Дева сегодня вас ожидает отличный день',
             'завтра': 'Дева завтра вас ожидает лучший день в текущем месяце',
             'послезавтра': 'Дева послезавтра вас ожидает лучший день в этом году'
         },
-    ],
-    'Весы': [
+    'Весы':
         {
             'сегодня': 'Весы сегодня вас ожидает отличный день',
             'завтра': 'Весы завтра вас ожидает лучший день в текущем месяце',
             'послезавтра': 'Весы послезавтра вас ожидает лучший день в этом году'
         },
-    ],
-    'Скорпион': [
+    'Скорпион':
         {
             'сегодня': 'Скорпион сегодня вас ожидает отличный день',
             'завтра': 'Скорпион завтра вас ожидает лучший день в текущем месяце',
             'послезавтра': 'Скорпион послезавтра вас ожидает лучший день в этом году'
         },
-    ],
-    'Стрелец': [
+    'Стрелец':
         {
             'сегодня': 'Стрелец сегодня вас ожидает отличный день',
             'завтра': 'Стрелец завтра вас ожидает лучший день в текущем месяце',
             'послезавтра': 'Стрелец послезавтра вас ожидает лучший день в этом году'
         },
-    ],
-    'Козерог': [
+    'Козерог':
         {
             'сегодня': 'Козерог сегодня вас ожидает отличный день',
             'завтра': 'Козерог завтра вас ожидает лучший день в текущем месяце',
             'послезавтра': 'Козерог послезавтра вас ожидает лучший день в этом году'
         },
-    ],
-    'Водолей': [
+    'Водолей':
         {
             'сегодня': 'Водолей сегодня вас ожидает отличный день',
             'завтра': 'Водолей завтра вас ожидает лучший день в текущем месяце',
             'послезавтра': 'Водолей послезавтра вас ожидает лучший день в этом году'
         },
-    ],
-    'Рыбы': [
+    'Рыбы':
         {
             'сегодня': 'Рыбы сегодня вас ожидает отличный день',
             'завтра': 'Рыбы завтра вас ожидает лучший день в текущем месяце',
             'послезавтра': 'Рыбы послезавтра вас ожидает лучший день в этом году'
-        },
-    ],
+        }
 };
 
 let datesHoroscope = [
@@ -125,129 +113,185 @@ let input = document.querySelector('#input');
 let paragraph = document.querySelector('p');
 let radios = document.querySelectorAll('input[type="radio"]');
 
-// console.log(radios);
+let flag = false;
 
 input.addEventListener('keydown', compareEventKey);
 
 function compareEventKey(event) {
-    if (event.key === 'Enter') {
-        let str = input.value.substring(5);
-        // console.log(str);
-        if (str >= '03.21' && str <= '04.20') {
-            // console.log('овен');
-            let zodiac = 'Овен';
-            for (let radio of radios) {
-                // console.log(radio);
-                // if (radio.checked) {
-                //     paragraph.textContent = databaseHoroscope["овен"][0][radio.value];
-                // }
-                goThroughTheRadios(radio, zodiac);
-                radio.addEventListener('change', () => goThroughTheRadios(radio, zodiac));
-            }
-        } else if (str >= '04.21' && str <= '05.20') {
-            // console.log('телец');
-            let zodiac = 'Телец';
-            for (let radio of radios) {
-                goThroughTheRadios(radio, zodiac);
-                radio.addEventListener('change', () => goThroughTheRadios(radio, zodiac));
-                // if (radio.checked) {
-                //     paragraph.textContent = databaseHoroscope["телец"][0][radio.value];
-                // }
-            }
-        } else if (str >= '05.21' && str <= '06.21') {
-            let zodiac = 'Близнецы';
-            for (let radio of radios) {
-                goThroughTheRadios(radio, zodiac);
-                radio.addEventListener('change', () => goThroughTheRadios(radio, zodiac));
-            }
-        } else if (str >= '06.22' && str <= '07.22') {
-            let zodiac = 'Рак';
-            for (let radio of radios) {
-                goThroughTheRadios(radio, zodiac);
-                radio.addEventListener('change', () => goThroughTheRadios(radio, zodiac));
-            }
-        } else if (str >= '07.23' && str <= '08.23') {
-            let zodiac = 'Лев';
-            for (let radio of radios) {
-                goThroughTheRadios(radio, zodiac);
-                radio.addEventListener('change', () => goThroughTheRadios(radio, zodiac));
-            }
-        } else if (str >= '08.24' && str <= '09.23') {
-            let zodiac = 'Дева';
-            for (let radio of radios) {
-                goThroughTheRadios(radio, zodiac);
-                radio.addEventListener('change', () => goThroughTheRadios(radio, zodiac));
-            }
-        } else if (str >= '09.24' && str <= '10.23') {
-            let zodiac = 'Весы';
-            for (let radio of radios) {
-                goThroughTheRadios(radio, zodiac);
-                radio.addEventListener('change', () => goThroughTheRadios(radio, zodiac));
-            }
-        } else if (str >= '10.24' && str <= '11.22') {
-            let zodiac = 'Скорпион';
-            for (let radio of radios) {
-                goThroughTheRadios(radio, zodiac);
-                radio.addEventListener('change', () => goThroughTheRadios(radio, zodiac));
-            }
-        } else if (str >= '11.23' && str <= '12.21') {
-            let zodiac = 'Стрелец';
-            for (let radio of radios) {
-                goThroughTheRadios(radio, zodiac);
-                radio.addEventListener('change', () => goThroughTheRadios(radio, zodiac));
-            }
-        } else if (str >= '12.22' && str <= '01.20') {
-            let zodiac = 'Козерог';
-            for (let radio of radios) {
-                goThroughTheRadios(radio, zodiac);
-                radio.addEventListener('change', () => goThroughTheRadios(radio, zodiac));
-            }
-        } else if (str >= '01.21' && str <= '02.20') {
-            let zodiac = 'Водолей';
-            for (let radio of radios) {
-                goThroughTheRadios(radio, zodiac);
-                radio.addEventListener('change', () => goThroughTheRadios(radio, zodiac));
-            }
-        } else if (str >= '02.21' && str <= '03.20') {
-            let zodiac = 'Рыбы';
-            for (let radio of radios) {
-                goThroughTheRadios(radio, zodiac);
-                radio.addEventListener('change', () => goThroughTheRadios(radio, zodiac));
-            }
-        } else {
-            alert('Введите дату рождения в формате год.месяц.число например: 1989.07.31')
+    let zodiac = '';
+
+    if (flag === false) {
+        if (event.key === 'Enter') {
+            updateZodiacAndSetRadioHandlers(zodiac)
+            console.log('flag', flag);
+            flag = true;
+            console.log('flag', flag);
+            return flag;
         }
-
-
-        // for (let key in databaseHoroscope) {
-        //     // console.log(databaseHoroscope[key]);
-        // }
+    } else {
+        input.addEventListener('change', function () {
+            updateZodiacAndSetRadioHandlers(zodiac)
+        })
     }
-
 }
 
-function goThroughTheRadios(radio, zodiac) {
+function updateZodiacAndSetRadioHandlers(zodiac) {
+    let newStr = changeValue(input.value);
+
+    if (newStr) {
+        zodiac = compareZodiacDates(newStr);
+
+        for (let radio of radios) {
+            radio.addEventListener('change', () => goThroughTheRadio(radio, zodiac));
+            goThroughTheRadio(radio, zodiac);
+        }
+    }
+}
+
+// else if
+// function compareZodiacDates(newStr) {
+//     if (newStr >= '03.21' && newStr <= '04.20') {
+//         // console.log('sssss');
+//         return 'Овен';
+//     } else if (newStr >= '04.21' && newStr <= '05.20') {
+//         return 'Телец';
+//     } else if (newStr >= '05.21' && newStr <= '06.21') {
+//         return 'Близнецы';
+//     } else if (newStr >= '06.22' && newStr <= '07.22') {
+//         return 'Рак';
+//     } else if (newStr >= '07.23' && newStr <= '08.23') {
+//         return 'Лев';
+//     } else if (newStr >= '08.24' && newStr <= '09.23') {
+//         return 'Дева';
+//     } else if (newStr >= '09.24' && newStr <= '10.23') {
+//         return 'Весы';
+//     } else if (newStr >= '10.24' && newStr <= '11.22') {
+//         return 'Скорпион';
+//     } else if (newStr >= '11.23' && newStr <= '12.21') {
+//         return 'Стрелец';
+//     } else if (newStr >= '12.22' && newStr <= '01.20') {
+//         return 'Козерог';
+//     } else if (newStr >= '01.21' && newStr <= '02.20') {
+//         return 'Водолей';
+//     } else if (newStr >= '02.21' && newStr <= '03.20') {
+//         return 'Рыбы';
+//     }
+// }
+
+// switch case
+function compareZodiacDates(newStr) {
+    switch (true) {
+        case (newStr >= '03.21' && newStr <= '04.20'):
+            return 'Овен';
+        case (newStr >= '04.21' && newStr <= '05.20'):
+            return 'Телец';
+        case (newStr >= '05.21' && newStr <= '06.21'):
+            return 'Близнецы';
+        case (newStr >= '06.22' && newStr <= '07.22'):
+            return 'Рак';
+        case (newStr >= '07.23' && newStr <= '08.23'):
+            return 'Лев';
+        case (newStr >= '08.24' && newStr <= '09.23'):
+            return 'Дева';
+        case (newStr >= '09.24' && newStr <= '10.23'):
+            return 'Весы';
+        case (newStr >= '10.24' && newStr <= '11.22'):
+            return 'Скорпион';
+        case (newStr >= '11.23' && newStr <= '12.21'):
+            return 'Стрелец';
+        case (newStr >= '12.22' && newStr <= '01.20'):
+            return 'Козерог';
+        case (newStr >= '01.21' && newStr <= '02.20'):
+            return 'Водолей';
+        case (newStr >= '02.21' && newStr <= '03.20'):
+            return 'Рыбы';
+        default:
+            return alert('Неверная дата');
+    }
+}
+
+
+function showAMessageAboutDataIncorrectness() {
+    alert('Введите дату рождения в формате год месяц число или число месяц год. ' +
+        'С любым из разделителей между числами: пробел - . , : ; / | \\ ');
+}
+
+
+function changeValue(value) {
+    // console.log('input.value', value);
+
+    let arr = value.split(/[-.\/\\|,;: ]/); // немного регулярок :)
+
+    // console.log(arr);
+    if (arr[0].length < 4) {
+        // console.log('ooo');
+        arr.reverse();
+    }
+
+
+    arr.shift();
+    // console.log('arr after', arr);
+
+    // let str = arr.substring(5);
+    // console.log(arr.shift());
+
+    if (arr.length < 2) {
+        return showAMessageAboutDataIncorrectness();
+    }
+
+    addZero(arr);
+    // console.log('before', arr);
+
+    // console.log('after', arr);
+    return arr.join('.');
+}
+
+function addZero(arr) {
+    // по сути addZero эти 2 перебора и все
+    for (let i = 0; i < arr.length; i++) {
+        arr[i] = +arr[i];
+    }
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] >= 0 && arr[i] <= 9) {
+            arr[i] = '0' + arr[i];
+        }
+    }
+}
+
+function goThroughTheRadio(radio, zodiac) {
     if (radio.checked) {
-        paragraph.textContent = databaseHoroscope[zodiac][0][radio.value];
+        // console.log('radio.checked', radio.checked);
+        paragraph.textContent = databaseHoroscope[zodiac][radio.value];
     }
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// function addZero(str) {
+//     console.log('input.value', str);
+//     let arr = str.split('.');
+//
+//     if (arr[0].length < 4) {
+//         console.log('ooo');
+//         arr.reverse();
+//     }
+//
+//     console.log('arr after', arr);
+//
+//     if (arr.length < 2) {
+//         return showAMessageAboutDataIncorrectness();
+//     }
+//
+//     // console.log('before', arr);
+//     for (let i = 0; i < arr.length; i++) {
+//         arr[i] = +arr[i];
+//         // console.log('d',arr[i]);
+//     }
+//     for (let i = 0; i < arr.length; i++) {
+//         if (arr[i] >= 0 && arr[i] <= 9) {
+//             // console.log('a', arr[i]);
+//             arr[i] = '0' + arr[i];
+//         }
+//     }
+//     // console.log('after', arr);
+//     return arr.join('.');
+// }
