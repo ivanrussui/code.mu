@@ -92,23 +92,6 @@ let databaseHoroscope = {
         }
 };
 
-let datesHoroscope = [
-    '03.21 - 04.20',
-    '04.21 - 05.20',
-    '05.21 - 06.21',
-    '06.22 - 07.22',
-    '07.23 - 08.23',
-    '08.24 - 09.23',
-    '09.24 - 10.23',
-    '10.24 - 11.22',
-    '11.23 - 12.21',
-    '12.22 - 01.20',
-    '01.21 - 02.20',
-    '02.21 - 03.20',
-];
-
-// console.log(databaseHoroscope);
-
 let input = document.querySelector('#input');
 let paragraph = document.querySelector('p');
 let radios = document.querySelectorAll('input[type="radio"]');
@@ -122,176 +105,129 @@ function compareEventKey(event) {
 
     if (flag === false) {
         if (event.key === 'Enter') {
-            updateZodiacAndSetRadioHandlers(zodiac)
-            console.log('flag', flag);
-            flag = true;
-            console.log('flag', flag);
-            return flag;
+            updateZodiacAndSetRadioHandlers(zodiac);
+            return flag = true;
         }
     } else {
-        input.addEventListener('change', function () {
-            updateZodiacAndSetRadioHandlers(zodiac)
-        })
+        this.addEventListener('change', function () {
+            updateZodiacAndSetRadioHandlers(zodiac);
+        });
     }
 }
 
 function updateZodiacAndSetRadioHandlers(zodiac) {
-    let newStr = changeValue(input.value);
+    let arr = changeValue(input.value);
 
-    if (newStr) {
-        zodiac = compareZodiacDates(newStr);
+    if (arr) {
+        zodiac = compareZodiacDates(arr);
 
-        for (let radio of radios) {
-            radio.addEventListener('change', () => goThroughTheRadio(radio, zodiac));
-            goThroughTheRadio(radio, zodiac);
+        if (zodiac) {
+            for (let radio of radios) {
+                goThroughTheRadio(radio, zodiac);
+                radio.addEventListener('change', () => goThroughTheRadio(radio, zodiac));
+            }
+        } else {
+            alert('Неверная дата');
+            input.value = '';
         }
     }
 }
 
-// else if
-// function compareZodiacDates(newStr) {
-//     if (newStr >= '03.21' && newStr <= '04.20') {
-//         // console.log('sssss');
-//         return 'Овен';
-//     } else if (newStr >= '04.21' && newStr <= '05.20') {
-//         return 'Телец';
-//     } else if (newStr >= '05.21' && newStr <= '06.21') {
-//         return 'Близнецы';
-//     } else if (newStr >= '06.22' && newStr <= '07.22') {
-//         return 'Рак';
-//     } else if (newStr >= '07.23' && newStr <= '08.23') {
-//         return 'Лев';
-//     } else if (newStr >= '08.24' && newStr <= '09.23') {
-//         return 'Дева';
-//     } else if (newStr >= '09.24' && newStr <= '10.23') {
-//         return 'Весы';
-//     } else if (newStr >= '10.24' && newStr <= '11.22') {
-//         return 'Скорпион';
-//     } else if (newStr >= '11.23' && newStr <= '12.21') {
-//         return 'Стрелец';
-//     } else if (newStr >= '12.22' && newStr <= '01.20') {
-//         return 'Козерог';
-//     } else if (newStr >= '01.21' && newStr <= '02.20') {
-//         return 'Водолей';
-//     } else if (newStr >= '02.21' && newStr <= '03.20') {
-//         return 'Рыбы';
-//     }
-// }
-
-// switch case
-function compareZodiacDates(newStr) {
-    switch (true) {
-        case (newStr >= '03.21' && newStr <= '04.20'):
-            return 'Овен';
-        case (newStr >= '04.21' && newStr <= '05.20'):
-            return 'Телец';
-        case (newStr >= '05.21' && newStr <= '06.21'):
-            return 'Близнецы';
-        case (newStr >= '06.22' && newStr <= '07.22'):
-            return 'Рак';
-        case (newStr >= '07.23' && newStr <= '08.23'):
-            return 'Лев';
-        case (newStr >= '08.24' && newStr <= '09.23'):
-            return 'Дева';
-        case (newStr >= '09.24' && newStr <= '10.23'):
-            return 'Весы';
-        case (newStr >= '10.24' && newStr <= '11.22'):
-            return 'Скорпион';
-        case (newStr >= '11.23' && newStr <= '12.21'):
-            return 'Стрелец';
-        case (newStr >= '12.22' && newStr <= '01.20'):
-            return 'Козерог';
-        case (newStr >= '01.21' && newStr <= '02.20'):
-            return 'Водолей';
-        case (newStr >= '02.21' && newStr <= '03.20'):
-            return 'Рыбы';
-        default:
-            return alert('Неверная дата');
-    }
+function goThroughTheRadio(radio, zodiac) {
+    radio.checked && (paragraph.textContent = databaseHoroscope[zodiac][radio.value]);
 }
-
-
-function showAMessageAboutDataIncorrectness() {
-    alert('Введите дату рождения в формате год месяц число или число месяц год. ' +
-        'С любым из разделителей между числами: пробел - . , : ; / | \\ ');
-}
-
 
 function changeValue(value) {
-    // console.log('input.value', value);
-
     let arr = value.split(/[-.\/\\|,;: ]/); // немного регулярок :)
 
-    // console.log(arr);
-    if (arr[0].length < 4) {
-        // console.log('ooo');
-        arr.reverse();
-    }
-
-
+    arr[0].length < 4 && arr.reverse();
     arr.shift();
-    // console.log('arr after', arr);
 
-    // let str = arr.substring(5);
-    // console.log(arr.shift());
-
-    if (arr.length < 2) {
-        return showAMessageAboutDataIncorrectness();
-    }
-
+    arr.length < 2 && showAMessageAboutDataIncorrectness();
     addZero(arr);
-    // console.log('before', arr);
 
-    // console.log('after', arr);
-    return arr.join('.');
+    return arr;
 }
 
 function addZero(arr) {
-    // по сути addZero эти 2 перебора и все
     for (let i = 0; i < arr.length; i++) {
         arr[i] = +arr[i];
-    }
-    for (let i = 0; i < arr.length; i++) {
         if (arr[i] >= 0 && arr[i] <= 9) {
             arr[i] = '0' + arr[i];
         }
     }
 }
 
-function goThroughTheRadio(radio, zodiac) {
-    if (radio.checked) {
-        // console.log('radio.checked', radio.checked);
-        paragraph.textContent = databaseHoroscope[zodiac][radio.value];
+function showAMessageAboutDataIncorrectness() {
+    alert('Введите дату рождения в формате год месяц число или число месяц год. ' +
+        'С любым из данных разделителей между числами: пробел - . , : ; / | \\ ');
+}
+
+// switch case
+function compareZodiacDates(arr) {
+    let month = parseInt(arr[0]);
+    let day = parseInt(arr[1]);
+
+    switch (true) {
+        case ((month === 3 && day >= 21) || (month === 4 && day <= 20)):
+            return 'Овен';
+        case ((month === 4 && day >= 21) || (month === 5 && day <= 20)):
+            return 'Телец';
+        case ((month === 5 && day >= 21) || (month === 6 && day <= 21)):
+            return 'Близнецы';
+        case ((month === 6 && day >= 22) || (month === 7 && day <= 22)):
+            return 'Рак';
+        case ((month === 7 && day >= 23) || (month === 8 && day <= 23)):
+            return 'Лев';
+        case ((month === 8 && day >= 24) || (month === 9 && day <= 23)):
+            return 'Дева';
+        case ((month === 9 && day >= 24) || (month === 10 && day <= 23)):
+            return 'Весы';
+        case ((month === 10 && day >= 24) || (month === 11 && day <= 22)):
+            return 'Скорпион';
+        case ((month === 11 && day >= 23) || (month === 12 && day <= 21)):
+            return 'Стрелец';
+        case ((month === 12 && day >= 22) || (month === 1 && day <= 20)):
+            return 'Козерог';
+        case ((month === 1 && day >= 21) || (month === 2 && day <= 20)):
+            return 'Водолей';
+        case ((month === 2 && day >= 21) || (month === 3 && day <= 20)):
+            return 'Рыбы';
+        default:
+            return null;
     }
 }
 
-
-// function addZero(str) {
-//     console.log('input.value', str);
-//     let arr = str.split('.');
+// if else
+// function compareZodiacDates(arr) {
+//     let month = parseInt(arr[0]);
+//     let day = parseInt(arr[1]);
 //
-//     if (arr[0].length < 4) {
-//         console.log('ooo');
-//         arr.reverse();
+//     if ((month === 3 && day >= 21) || (month === 4 && day <= 20)) {
+//         return 'Овен';
+//     } else if ((month === 4 && day >= 21) || (month === 5 && day <= 20)) {
+//         return 'Телец';
+//     } else if ((month === 5 && day >= 21) || (month === 6 && day <= 21)) {
+//         return 'Близнецы';
+//     } else if ((month === 6 && day >= 22) || (month === 7 && day <= 22)) {
+//         return 'Рак';
+//     } else if ((month === 7 && day >= 23) || (month === 8 && day <= 23)) {
+//         return 'Лев';
+//     } else if ((month === 8 && day >= 24) || (month === 9 && day <= 23)) {
+//         return 'Дева';
+//     } else if ((month === 9 && day >= 24) || (month === 10 && day <= 23)) {
+//         return 'Весы';
+//     } else if ((month === 10 && day >= 24) || (month === 11 && day <= 22)) {
+//         return 'Скорпион';
+//     } else if ((month === 11 && day >= 23) || (month === 12 && day <= 21)) {
+//         return 'Стрелец';
+//     } else if ((month === 12 && day >= 22) || (month === 1 && day <= 20)) {
+//         return 'Козерог';
+//     } else if ((month === 1 && day >= 21) || (month === 2 && day <= 20)) {
+//         return 'Водолей';
+//     } else if ((month === 2 && day >= 21) || (month === 3 && day <= 20)) {
+//         return 'Рыбы';
+//     } else {
+//         return null;
 //     }
-//
-//     console.log('arr after', arr);
-//
-//     if (arr.length < 2) {
-//         return showAMessageAboutDataIncorrectness();
-//     }
-//
-//     // console.log('before', arr);
-//     for (let i = 0; i < arr.length; i++) {
-//         arr[i] = +arr[i];
-//         // console.log('d',arr[i]);
-//     }
-//     for (let i = 0; i < arr.length; i++) {
-//         if (arr[i] >= 0 && arr[i] <= 9) {
-//             // console.log('a', arr[i]);
-//             arr[i] = '0' + arr[i];
-//         }
-//     }
-//     // console.log('after', arr);
-//     return arr.join('.');
 // }
