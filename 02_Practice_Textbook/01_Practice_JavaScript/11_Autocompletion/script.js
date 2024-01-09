@@ -1,0 +1,93 @@
+// 01_Practice_JavaScript
+// Практика JavaScript
+
+
+// 10 Автодополнение / Автодополнение на JavaScript
+
+// Сейчас мы реализуем автодополнение. Под этим термином понимается выпадающая подсказка при вводе текста в инпут.
+// Давайте посмотрим на примере. Ниже я сделал инпут, в который можно ввести название страны.
+// При этом, если ввести какие-то буквы, то под инпутом появится список стран, которые начинаются на введенную строку.
+//
+// При желании можно, чтобы не вводить целиком имя страны, кликнуть мышкой на любую страну и она появится в инпуте.
+// Для этого, в общем-то, автодополнение и нужно. В примере для простоты я сделал только три страны: Belarus, Belgium
+// и Bulgaria. Введите в приведенный ниже инпут сначала символ 'В' английское, а потом 'e' и посмотрите, что будет:
+
+
+// Обсуждение
+
+// Давайте обсудим, как решать задачу. Нужно сделать массив с названиями стран. У меня он вот такой:
+//
+// let arr  = ['Belarus', 'Belgium', 'Bulgaria'];
+// При вводе текста в инпут нужно по вводу каждого символа перебирать массив со странами и получать страны,
+// которые начинаются на введенную строку. Это удобно делать с помощью методов filter и startsWith.
+//
+// С помощью filter можно получить массив стран, начинающихся с введенной строки.
+// Затем нужно перебрать этот массив циклом и заполнить список ul лишками со странами.
+// И так нужно делать на каждый ввод символа, предварительно удаляя из улки ранее созданные лишки.
+//
+// Для вашего удобства привожу готовую верстку:
+
+
+// 1 Скопируйте себе приведенный HTML и CSS коды. Реализуйте автодополнение согласно описанному алгоритму.
+
+let arr = ['belarus', 'belgium', 'bulgaria'];
+// let arr = ['b', 'b', 'b'];
+
+let input = document.querySelector('#elem');
+let ul = document.querySelector('#list');
+
+
+input.addEventListener('input', function () {
+    // let i;
+    let i = 0;
+    let lis = document.querySelectorAll('li');
+    for (const li of lis) {
+        li.remove();
+    }
+    // console.log(lis);
+
+    // let res = arr.filter((elem, index, arr) => {
+    //     i = 0;
+    //     // console.log('input.value[i]', input.value[i]);
+    //     // if (elem[i] === input.value[i]) {
+    //     if (input.value.startsWith(elem[i])) {
+    //         console.log('i', i);
+    //         // console.log('i', i);
+    //         // console.log('yes');
+    //         return true;
+    //     } else {
+    //         // console.log('no');
+    //         return false;
+    //     }
+    //         // i++;
+    // });
+
+
+    let res = arr.filter((elem, index, arr) => {
+        // console.log('arr', );
+        // return elem[i] === input.value[i]
+        return input.value.startsWith(elem[i])
+    });
+
+    // for (i = 0; i < res.length; i++) {
+    //     let li = document.createElement('li');
+    //     li.textContent = res[i];
+    //     ul.append(li);
+    // }
+    // i = i + 1;
+    // console.log('i', i);
+
+    // for (i = 0; i < res.length; i++) {
+    //     let li = document.createElement('li');
+    //     li.textContent = res[i];
+    //     ul.append(li);
+    // }
+
+    for (let el of res) {
+        let li = document.createElement('li');
+        li.textContent = el;
+        ul.append(li);
+    }
+
+    console.log(res);
+});
