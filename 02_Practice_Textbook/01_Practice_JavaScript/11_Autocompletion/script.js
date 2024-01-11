@@ -2,7 +2,7 @@
 // Практика JavaScript
 
 
-// 10 Автодополнение / Автодополнение на JavaScript
+// 11 Автодополнение / Автодополнение на JavaScript
 
 // Сейчас мы реализуем автодополнение. Под этим термином понимается выпадающая подсказка при вводе текста в инпут.
 // Давайте посмотрим на примере. Ниже я сделал инпут, в который можно ввести название страны.
@@ -30,64 +30,61 @@
 
 // 1 Скопируйте себе приведенный HTML и CSS коды. Реализуйте автодополнение согласно описанному алгоритму.
 
-let arr = ['belarus', 'belgium', 'bulgaria'];
-// let arr = ['b', 'b', 'b'];
+let arr = [
+    'Argentina', 'Armenia', 'Australia', 'Austria', 'Azerbaijan',
+    'Belarus', 'Belgium', 'Brazil', 'Bulgaria',
+    'Canada', 'China', 'Colombia', 'Cuba', 'Cyprus', 'Czech',
+    'Denmark', 'Dominican',
+    'Egypt', 'Estonia',
+    'Finland', 'France',
+    'Georgia', 'Germany', 'Greece',
+    'Haiti', 'Hungary',
+    'Iceland', 'India', 'Ireland', 'Italy',
+    'Jamaica', 'Japan',
+    'Kazakhstan',
+    'Latvia', 'Lithuania',
+    'Mexico', 'Moldova', 'Monaco',
+    'Netherlands', 'Norway',
+    'Oman',
+    'Poland', 'Portugal',
+    'Qatar',
+    'Romania', 'Russia',
+];
 
 let input = document.querySelector('#elem');
 let ul = document.querySelector('#list');
 
-
 input.addEventListener('input', function () {
-    // let i;
-    let i = 0;
-    let lis = document.querySelectorAll('li');
-    for (const li of lis) {
-        li.remove();
+    // через функцию удаления li
+    deleteList();
+
+    function deleteList() {
+        let lis = document.querySelectorAll('li');
+        for (const li of lis) {
+            li.remove();
+        }
     }
-    // console.log(lis);
 
-    // let res = arr.filter((elem, index, arr) => {
-    //     i = 0;
-    //     // console.log('input.value[i]', input.value[i]);
-    //     // if (elem[i] === input.value[i]) {
-    //     if (input.value.startsWith(elem[i])) {
-    //         console.log('i', i);
-    //         // console.log('i', i);
-    //         // console.log('yes');
-    //         return true;
-    //     } else {
-    //         // console.log('no');
-    //         return false;
-    //     }
-    //         // i++;
-    // });
+    // вместо функции deleteList, можно просто присваивать пустую строку)
+    // ul.textContent = '';
 
+    let res;
+    if (input.value) {
+        let str = input.value[0].toUpperCase() + input.value.substring(1);
+        res = arr.filter(elem => elem.startsWith(str));
+    }
 
-    let res = arr.filter((elem, index, arr) => {
-        // console.log('arr', );
-        // return elem[i] === input.value[i]
-        return input.value.startsWith(elem[i])
-    });
-
-    // for (i = 0; i < res.length; i++) {
-    //     let li = document.createElement('li');
-    //     li.textContent = res[i];
-    //     ul.append(li);
-    // }
-    // i = i + 1;
-    // console.log('i', i);
-
-    // for (i = 0; i < res.length; i++) {
-    //     let li = document.createElement('li');
-    //     li.textContent = res[i];
-    //     ul.append(li);
-    // }
+    // console.log('res', res);
 
     for (let el of res) {
         let li = document.createElement('li');
         li.textContent = el;
         ul.append(li);
-    }
 
-    console.log(res);
+        li.addEventListener('click', function () {
+            input.value = this.textContent;
+            deleteList();
+            // ul.textContent = '';
+        });
+    }
 });
