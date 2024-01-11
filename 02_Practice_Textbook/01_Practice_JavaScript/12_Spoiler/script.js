@@ -62,25 +62,25 @@
 let links = document.querySelectorAll('.toggle');
 
 // 1 вариант
-for (let link of links) {
-    link.setAttribute('href', '#');
-    link.addEventListener('click', function () {
-        let spoiler = this.parentElement.nextElementSibling;
-        if (spoiler.matches('.spoiler')) {
-            spoiler.classList.toggle('active');
-        }
-    });
-}
-
-// 2 вариант
-// links.forEach(function (link) {
-//     link.addEventListener('click', function (event) {
-//         event.preventDefault();
-//
+// for (let link of links) {
+//     link.setAttribute('href', '#');
+//     link.addEventListener('click', function () {
 //         let spoiler = this.parentElement.nextElementSibling;
-//         if (spoiler.classList.contains('spoiler')) {
+//         if (spoiler.matches('.spoiler')) {
 //             spoiler.classList.toggle('active');
 //         }
 //     });
-// });
+// }
+
+// 2 вариант
+links.forEach(function (link) {
+    link.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        let spoiler = this.parentElement.nextElementSibling;
+        if (spoiler.classList.contains('spoiler')) {
+            spoiler.classList.toggle('active');
+        }
+    });
+});
 
