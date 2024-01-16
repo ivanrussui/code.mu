@@ -65,31 +65,168 @@
 
 // 1 Реализуйте игру в соответствии с описанным алгоритмом.
 
+// let field = document.querySelector('#field');
+// let message = document.querySelector('#message');
+//
+// let cities = [];
+// let notCorrectLetters = ['ь', 'ъ', 'ы', 'ё'];
+//
+// field.addEventListener('keypress', function (event) {
+//     if (event.code === 'Enter') {
+//         if (cities.length) {
+//             let firstLetter = this.value.slice(0, 1).toLowerCase();
+//             let lastLetter = cities.slice(-1).join('').slice(-1); // получаю последний элемент из массива, разбиваю элемент на строки, получаю последний символ строки
+//
+//             let notCorrectLetter = notCorrectLetters.some(el => el === lastLetter);
+//             notCorrectLetter && (lastLetter = cities.slice(-1).join('').slice(-2, -1)); // если последняя буква не корректна, то присваиваю предпоследнюю
+//
+//             let res = cities.some(el => el === this.value);
+//             (firstLetter === lastLetter) && !res ? cities.push(this.value.toLowerCase()) : message.textContent = 'Ошибка';
+//
+//             this.value = '';
+//         } else {
+//             cities.push(this.value.toLowerCase());
+//             this.value = '';
+//         }
+//         console.log(cities);
+//     }
+// });
+//
+// field.addEventListener('input', () => message.textContent = '');
+
+
+// 17 Против робота / Игра в города против робота на JavaScript
+
+// Давайте теперь модифицируем нашу игру так, чтобы игра велась против робота, то есть программы, а не другого человека.
+//
+// Пусть у нашего робота будет массив всех разрешенных городов:
+//
+// let allCities = [];
+// Когда человек будет вбивать в инпут свой город, робот должен будет проверять наличие этого города в своем массиве.
+//
+// В таком случае в каждом ходе игрока возможны следующие проблемные ситуации:
+// игрок ввел город, который уже был;
+// игрок ввел город не на ту букву, на которую заканчивается предыдущий город;
+// игрок ввел город, которого нет в списке робота.
+//
+// В свой ход робот должен брать один из разрешенных городов так, чтобы этого города еще не было в игре.
+// При этом выбранный город должен начинаться с буквы, на которую закончился предыдущий город.
+
+
+// 2 Реализуйте игру человека против робота.
+
+
 let field = document.querySelector('#field');
 let message = document.querySelector('#message');
 
+let allCities = [
+    'москва', 'санкт-петербург', 'новосибирск', 'екатеринбург', 'казань', 'нижний новгород', 'красноярск', 'челябинск',
+    'самара', 'уфа', 'ростов-на-дону', 'краснодар', 'омск', 'воронеж', 'пермь', 'волгоград', 'саратов', 'тюмень',
+    'тольятти', 'барнаул', 'махачкала', 'ижевск', 'хабаровск', 'ульяновск', 'иркутск', 'владивосток', 'ярославль',
+    'севастополь', 'томск', 'ставрополь', 'кемерово', 'набережные челны', 'оренбург', 'новокузнецк', 'балашиха',
+    'рязань', 'чебоксары', 'пенза', 'липецк', 'калининград', 'киров', 'астрахань', 'тула', 'сочи', 'улан-удэ', 'курск',
+    'тверь', 'магнитогорск', 'сургут', 'брянск', 'якутск', 'иваново', 'владимир', 'симферополь', 'нижний тагил',
+    'калуга', 'белгород', 'чита', 'грозный', 'волжский', 'смоленск', 'подольск', 'саранск', 'вологда', 'курган',
+    'череповец', 'архангельск', 'орёл', 'владикавказ', 'нижневартовск', 'йошкар-ола', 'стерлитамак', 'мурманск',
+    'мытищи', 'кострома', 'новороссийск', 'тамбов', 'химки', 'нальчик', 'таганрог', 'нижнекамск', 'благовещенск',
+    'комсомольск-на-амуре', 'петрозаводск', 'люберцы', 'королёв', 'энгельс', 'великий новгород', 'шахты', 'братск',
+    'сыктывкар', 'ангарск', 'старый оскол', 'дзержинск', 'псков', 'красногорск', 'орск', 'одинцово', 'абакан', 'армавир',
+    'балаково', 'бийск', 'южно-сахалинск', 'уссурийск', 'прокопьевск', 'норильск', 'рыбинск', 'волгодонск',
+    'альметьевск', 'сызрань', 'петропавловск-камчатский', 'каменск-уральский', 'новочеркасск', 'златоуст', 'хасавюрт',
+    'северодвинск', 'домодедово', 'керчь', 'миасс', 'салават', 'копейск', 'пятигорск', 'электросталь', 'майкоп',
+    'находка', 'березники', 'щёлково', 'серпухов', 'нефтекамск', 'коломна', 'ковров', 'обнинск', 'кызыл', 'кисловодск',
+    'петрово-камчатский', 'батайск', 'нефтеюганск', 'рубцовск', 'назрань', 'ессентуки', 'новочебоксарск', 'долгопрудный',
+    'новомосковск', 'октябрьский', 'невинномысск', 'раменское', 'реутов', 'первоуральск', 'михайловск', 'черкесск',
+    'пушкино', 'жуковский', 'ханты-мансийск', 'димитровград', 'артем', 'новый уренгой', 'евпатория', 'муром', 'северск',
+    'орехово-зуево', 'камышин', 'мурино', 'арзамас', 'видное', 'бердск', 'элиста', 'ногинск', 'новошахтинск', 'ноябрьск'
+];
+
 let cities = [];
-let notCorrectLetters = ['ь', 'ъ', 'ы', 'ё'];
+let isRobot = false;
+let notCorrectLetters = ['ь', 'ъ', 'ы', 'ё', 'ц'];
 
 field.addEventListener('keypress', function (event) {
     if (event.code === 'Enter') {
-        if (cities.length) {
-            let firstLetter = this.value.slice(0, 1).toLowerCase();
-            let lastLetter = cities.slice(-1).join('').slice(-1); // получаю последний элемент из массива, разбиваю элемент на строки, получаю последний символ строки
+        let presenceOfACity = allCities.some(el => el === this.value.toLowerCase());
 
-            let notCorrectLetter = notCorrectLetters.some(el => el === lastLetter);
-            notCorrectLetter && (lastLetter = cities.slice(-1).join('').slice(-2, -1)); // если последняя буква не корректна, то присваиваю предпоследнюю
-
-            let res = cities.some(el => el === this.value);
-            (firstLetter === lastLetter) && !res ? cities.push(this.value.toLowerCase()) : message.textContent = 'Ошибка';
-
-            this.value = '';
+        if (!presenceOfACity) {
+            message.textContent = 'Вы ввели город, которого нет в списке робота';
         } else {
-            cities.push(this.value.toLowerCase());
-            this.value = '';
+            if (cities.length) {
+                playingHuman();
+            } else {
+                addCity(this.value);
+                this.value = '';
+                isRobot = true;
+                playingRobot();
+            }
         }
-        console.log(cities);
     }
 });
+
+function playingHuman() {
+    let firstLetter = field.value.slice(0, 1).toLowerCase();
+    let lastLetter = getLastLetter();
+    let notCorrectLetter = getNotCorrectLetter(lastLetter);
+    notCorrectLetter && (lastLetter = checkNotCorrectLetter());
+
+    let res = cities.some(el => el === field.value.toLowerCase());
+    if (res) {
+        message.textContent = 'Вы ввели город, который уже был';
+    } else if (firstLetter !== lastLetter) {
+        message.textContent = 'Вы ввели город не на ту букву, на которую заканчивается предыдущий город';
+    } else {
+        addCity(field.value);
+        field.value = '';
+        isRobot = true;
+        playingRobot();
+    }
+}
+
+function playingRobot() {
+    if (!isRobot) {
+        return;
+    }
+    let lastLetter = getLastLetter();
+    let notCorrectLetter = getNotCorrectLetter(lastLetter);
+    notCorrectLetter && (lastLetter = checkNotCorrectLetter());
+
+    let randomCity = getRandomInt(1, allCities.length - 1); // -1 обязательно иначе может быть ошибка
+
+    let firstLetter = allCities[randomCity].slice(0, 1); // 1й вариант
+    // let firstLetter = allCities[randomCity][0]; // 2й вариант
+
+    if (firstLetter === lastLetter) {
+        let city = allCities[randomCity].slice(0, 1).toUpperCase() + allCities[randomCity].slice(1);
+        message.textContent = `Робот ввел город: ${city}`;
+        field.value = city;
+        addCity(city);
+    } else {
+        playingRobot();
+    }
+
+    isRobot = false;
+}
+
+function getLastLetter() {
+    return cities.slice(-1).join('').slice(-1); // получаю последний элемент из массива, разбиваю элемент на строки, получаю последний символ строки
+}
+
+function getNotCorrectLetter(lastLetter) {
+    return notCorrectLetters.some(el => el === lastLetter);
+}
+
+function checkNotCorrectLetter() {
+    return cities.slice(-1).join('').slice(-2, -1); // если последняя буква не корректна, то присваиваю предпоследнюю
+}
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function addCity(city) {
+    cities.push(city.toLowerCase());
+    console.log(cities);
+}
 
 field.addEventListener('input', () => message.textContent = '');
