@@ -170,8 +170,9 @@ function playingHuman() {
     let notCorrectLetter = getNotCorrectLetter(lastLetter);
     notCorrectLetter && (lastLetter = checkNotCorrectLetter());
 
-    let res = cities.some(el => el === field.value.toLowerCase());
-    if (res) {
+    let cityRepeated = cities.some(el => el === field.value.toLowerCase());
+
+    if (cityRepeated) {
         message.textContent = 'Вы ввели город, который уже был';
     } else if (firstLetter !== lastLetter) {
         message.textContent = 'Вы ввели город не на ту букву, на которую заканчивается предыдущий город';
@@ -196,7 +197,9 @@ function playingRobot() {
     let firstLetter = allCities[randomCity].slice(0, 1); // 1й вариант
     // let firstLetter = allCities[randomCity][0]; // 2й вариант
 
-    if (firstLetter === lastLetter) {
+    let cityRepeated = cities.some(el => el === allCities[randomCity].toLowerCase());
+
+    if (firstLetter === lastLetter && !cityRepeated) {
         let city = allCities[randomCity].slice(0, 1).toUpperCase() + allCities[randomCity].slice(1);
         message.textContent = `Робот ввел город: ${city}`;
         field.value = city;
