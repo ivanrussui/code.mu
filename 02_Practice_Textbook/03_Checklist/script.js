@@ -34,7 +34,8 @@
 // }
 // Как обычно, разобьем сложную задачу на простые этапы.
 //
-// В качестве первого этапа сделаем так, чтобы в инпут можно было ввести текст, нажать Enter - и в конец ul добавилась li с введенным текстом.
+// В качестве первого этапа сделаем так, чтобы в инпут можно было ввести текст,
+// нажать Enter - и в конец ul добавилась li с введенным текстом.
 //
 // Вот заготовка кода, реализующая описанное:
 //
@@ -82,7 +83,8 @@
 // 		this.value = '';
 // 	}
 // });
-// Давайте теперь добавим кнопочки 'удалить' и 'сделано'. Выполним эти кнопочки в виде тегов span. Также в теге span разместим и текст дела:
+// Давайте теперь добавим кнопочки 'удалить' и 'сделано'. Выполним эти кнопочки в виде тегов span.
+// Также в теге span разместим и текст дела:
 //
 // input.addEventListener('keypress', function(event) {
 // 	if (event.key == 'Enter') {
@@ -105,7 +107,8 @@
 // 		this.value = '';
 // 	}
 // });
-// Давайте также навесим CSS классы на каждый из тегов span, чтобы к ним можно было обратиться через CSS и навести нужную нам красоту:
+// Давайте также навесим CSS классы на каждый из тегов span, чтобы к ним можно было обратиться через CSS
+// и навести нужную нам красоту:
 //
 // let input = document.querySelector('#input');
 // let list = document.querySelector('#list');
@@ -238,6 +241,199 @@
 
 
 // 1 Допишите недостающую часть кода для решения описанной задачи.
+//
+// let input = document.querySelector('#input');
+// let list = document.querySelector('#list');
+//
+// input.addEventListener('keypress', function (event) {
+//     if (event.key === 'Enter') {
+//         let li = document.createElement('li');
+//         let task = document.createElement('span');
+//         let remove = document.createElement('span');
+//         let mark = document.createElement('span');
+//
+//         task.textContent = this.value;
+//         remove.textContent = 'удалить';
+//         mark.textContent = 'сделано';
+//
+//         remove.classList.add('remove');
+//         mark.classList.add('mark');
+//
+//         list.append(li);
+//         li.append(task, remove, mark);
+//
+//         remove.addEventListener('click', function () {
+//             this.parentElement.remove();
+//         });
+//
+//         mark.addEventListener('click', function () {
+//             // this.previousElementSibling.previousElementSibling.classList.add('done'); // 1 вариант
+//             this.parentElement.contains(task) && task.classList.add('done'); // 2 вариант
+//         });
+//
+//         this.value = '';
+//     }
+// });
+
+
+// 22 Редактирование дела в чеклисте на JavaScript
+
+// Давайте теперь реализуем редактирование. Для этого на span с текстом навесим двойной клик:
+//
+// let task = document.createElement('span');
+// task.classList.add('task');
+// task.textContent = this.value;
+// task.addEventListener('dblclick', function() {
+// 	// здесь будет код, реализующий редактирование
+// });
+// li.appendChild(task);
+// По двойному клику на указанный span мы должны создать в нем инпут с текстом этого span.
+// Затем после нажатия клавиши Enter в этом инпуте мы должны текст этого инпута записать обратно в наш спен,
+// а сам инпут убрать.
+
+
+// 1 Допишите недостающую часть кода для решения описанной задачи.
+//
+// let input = document.querySelector('#input');
+// let list = document.querySelector('#list');
+//
+// input.addEventListener('keypress', function (event) {
+//     if (event.key === 'Enter') {
+//         let li = document.createElement('li');
+//         let task = document.createElement('span');
+//         let remove = document.createElement('span');
+//         let mark = document.createElement('span');
+//
+//         task.textContent = this.value;
+//         remove.textContent = 'удалить';
+//         mark.textContent = 'сделано';
+//
+//         remove.classList.add('remove');
+//         mark.classList.add('mark');
+//
+//         list.append(li);
+//         li.append(task, remove, mark);
+//
+//         remove.addEventListener('click', function () {
+//             this.parentElement.remove();
+//         });
+//
+//         mark.addEventListener('click', function () {
+//             // this.previousElementSibling.previousElementSibling.classList.add('done'); // 1 вариант
+//             this.parentElement.contains(task) && task.classList.add('done'); // 2 вариант
+//         });
+//
+//         task.addEventListener('dblclick', function changeText() {
+//             let input = document.createElement('input');
+//             input.value = this.textContent;
+//             this.textContent = '';
+//             this.append(input);
+//
+//             this.removeEventListener('dblclick', changeText); // не обязательно отвязывать, но решил так
+//
+//             input.addEventListener('keypress', function (event) {
+//                 if (event.key === 'Enter') {
+//                     task.textContent = input.value; // ругается на this хотя с this все работает
+//                     input.value = '';
+//
+//                     task.addEventListener('dblclick', changeText);
+//                 }
+//             });
+//         });
+//
+//         this.value = '';
+//     }
+// });
+
+
+// 23 Окончательный код / Окончательный код на JavaScript
+
+// Вот окончательный вариант того, что у нас должно получится:
+//
+// body {
+// 	text-align: center;
+// }
+//
+// #input, #list {
+// 	display: inline-block;
+// }
+//
+// #list {
+// 	padding: 0;
+// 	list-style-type: none;
+// }
+// #list span {
+// 	margin-right: 5px;
+// }
+// #list .remove, #list .mark {
+// 	color: blue;
+// 	cursor: pointer;
+// }
+// #list .remove:hover, #list .mark:hover {
+// 	text-decoration: underline;
+// }
+//
+// #list .done .task {
+// 	text-decoration: line-through;
+// }
+// <div id="wrapper">
+// 	<input id="input"><br>
+// 	<ul id="list"></ul>
+// </div>
+// let input = document.querySelector('#input');
+// let list = document.querySelector('#list');
+//
+// input.addEventListener('keypress', function(event) {
+// 	if (event.key == 'Enter') {
+// 		let li = document.createElement('li');
+//
+// 		let task = document.createElement('span');
+// 		task.classList.add('task');
+// 		task.textContent = this.value;
+// 		task.addEventListener('dblclick', function() {
+// 			let text = this.textContent;
+// 			this.textContent = '';
+//
+// 			let edit = document.createElement('input');
+// 			edit.value = text;
+// 			this.appendChild(edit);
+//
+// 			let self = this;
+// 			edit.addEventListener('keypress', function(event) {
+// 				if (event.key == 'Enter') {
+// 					self.textContent = this.value; // а вот это прикольно сделано
+// 				}
+// 			});
+// 		});
+// 		li.appendChild(task);
+//
+// 		let remove = document.createElement('span');
+// 		remove.textContent = 'удалить';
+// 		remove.classList.add('remove');
+// 		remove.addEventListener('click', function() {
+// 			this.parentElement.remove();
+// 		});
+// 		li.appendChild(remove);
+//
+// 		let mark = document.createElement('span');
+// 		mark.textContent = 'сделано';
+// 		mark.classList.add('mark');
+// 		mark.addEventListener('click', function() {
+// 			this.parentElement.classList.add('done');
+// 		});
+// 		li.appendChild(mark);
+//
+// 		list.appendChild(li);
+//
+// 		this.value = '';
+// 	}
+// });
+// Результат выполнения кода:
+
+
+// у меня практически так же разница в том что класс выполнено он вешает на li а я на span
+// так как я в 18 не копировал а писал сам я упустил что он вешает класс task на span этот)
+// пожалуй вешать класс done на li более логично
 
 let input = document.querySelector('#input');
 let list = document.querySelector('#list');
@@ -253,6 +449,7 @@ input.addEventListener('keypress', function (event) {
         remove.textContent = 'удалить';
         mark.textContent = 'сделано';
 
+        task.classList.add('task');
         remove.classList.add('remove');
         mark.classList.add('mark');
 
@@ -264,8 +461,25 @@ input.addEventListener('keypress', function (event) {
         });
 
         mark.addEventListener('click', function () {
-            // this.previousElementSibling.previousElementSibling.classList.add('done'); // 1 вариант
-            this.parentElement.contains(task) && task.classList.add('done'); // 2 вариант
+            this.parentElement.classList.add('done');
+        });
+
+        task.addEventListener('dblclick', function changeText() {
+            let input = document.createElement('input');
+            input.value = this.textContent;
+            this.textContent = '';
+            this.append(input);
+
+            this.removeEventListener('dblclick', changeText); // не обязательно отвязывать, но решил так
+
+            let self = this;
+            input.addEventListener('keypress', function (event) {
+                if (event.key === 'Enter') {
+                    self.textContent = this.value; // ругается на this хотя с this все работает
+
+                    task.addEventListener('dblclick', changeText);
+                }
+            });
         });
 
         this.value = '';

@@ -24,6 +24,12 @@ body {
     text-decoration: underline;
 }
 
-#list .done {
+/* класс done на span */
+/*#list .done {*/
+/*    text-decoration: line-through;*/
+/*}*/
+
+/* это как сделано в задаче, тут на li класс done вешается */
+#list .done .task {
     text-decoration: line-through;
 }
