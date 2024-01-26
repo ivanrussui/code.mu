@@ -494,6 +494,81 @@
 // }
 
 
+// 1 Допишите недостающую часть кода так, чтобы при изменении ячейки с ценой или ячейки с количеством изменялась
+// стоимость покупки в колонке cost, а также выполнялся перерасчет общей суммы.
+
+// let name = document.querySelector('#name');
+// let price = document.querySelector('#price');
+// let amount = document.querySelector('#amount');
+// let add = document.querySelector('#add');
+// let table = document.querySelector('#table');
+// let total = document.querySelector('#total');
+//
+// add.addEventListener('click', function () {
+//     let tr = document.createElement('tr');
+//
+//     allowEdit(createCell(tr, name.value, 'name'));
+//     allowEdit(createCell(tr, price.value, 'price'));
+//     allowEdit(createCell(tr, amount.value, 'amount'));
+//     createCell(tr, price.value * amount.value, 'cost');
+//     createCell(tr, 'удалить', 'remove').addEventListener('click', function () {
+//         this.parentElement.remove();
+//         recountTotal();
+//     });
+//
+//     table.appendChild(tr);
+//     recountTotal();
+// });
+//
+// function allowEdit(td) {
+//     td.addEventListener('dblclick', function () {
+//         let text = td.textContent;
+//         td.textContent = '';
+//
+//         let input = document.createElement('input');
+//         input.value = text;
+//         td.appendChild(input);
+//         input.focus(); // фокус надо писать после appendChild чтобы работал)
+//
+//         input.addEventListener('keydown', function (event) {
+//             if (event.key === 'Enter') {
+//                 td.textContent = this.value;
+//
+//                 if (td.classList.contains('price') || td.classList.contains('amount')) {
+//                     let cost = td.parentElement.querySelector('.cost');
+//                     let price = td.parentElement.querySelector('.price');
+//                     let amount = td.parentElement.querySelector('.amount');
+//                     cost.textContent = price.textContent * amount.textContent;
+//                     recountTotal();
+//                 }
+//             }
+//         });
+//     });
+// }
+//
+// function createCell(tr, value, name) {
+//     let td = document.createElement('td');
+//     td.textContent = value;
+//     td.classList.add(name);
+//
+//     tr.appendChild(td);
+//     return td;
+// }
+//
+// function recountTotal() {
+//     let costs = table.querySelectorAll('.cost');
+//
+//     if (costs) {
+//         total.textContent = '0';
+//         for (let cost of costs) {
+//             total.textContent = +total.textContent + +cost.textContent;
+//         }
+//     }
+// }
+
+
+// пишу доп функционал
+
 let name = document.querySelector('#name');
 let price = document.querySelector('#price');
 let amount = document.querySelector('#amount');
@@ -501,23 +576,36 @@ let add = document.querySelector('#add');
 let table = document.querySelector('#table');
 let total = document.querySelector('#total');
 
-add.addEventListener('click', function () {
+add.addEventListener('click', createRow);
+
+function createRow() {
     let tr = document.createElement('tr');
 
     allowEdit(createCell(tr, name.value, 'name'));
-    allowEdit(createCell(tr, price.value, 'price'));
-    allowEdit(createCell(tr, amount.value, 'amount'));
+
+    let tdPrice = createCell(tr, price.value, 'price');
+    let tdAmount = createCell(tr, amount.value, 'amount');
+    allowEdit(tdPrice);
+    allowEdit(tdAmount);
+
     createCell(tr, price.value * amount.value, 'cost');
     createCell(tr, 'удалить', 'remove').addEventListener('click', function () {
         this.parentElement.remove();
         recountTotal();
     });
 
-    table.appendChild(tr);
+    if (tdPrice && tdAmount) {
+        table.appendChild(tr);
+    }
+
     recountTotal();
-});
+}
 
 function allowEdit(td) {
+    if (!td) {
+        return;
+    }
+
     td.addEventListener('dblclick', function () {
         let text = td.textContent;
         td.textContent = '';
@@ -529,12 +617,19 @@ function allowEdit(td) {
 
         input.addEventListener('keydown', function (event) {
             if (event.key === 'Enter') {
+                if (checkClasses(td, 'price', 'amount')) {
+                    let res = checkIsNumber(this.value);
+                    if (res) {  // если функция возвр true то c return выхожу из функции
+                        return;
+                    }
+                }
                 td.textContent = this.value;
 
-                if (td.classList.contains('price') || td.classList.contains('amount')) {
+                if (checkClasses(td, 'price', 'amount')) {
                     let cost = td.parentElement.querySelector('.cost');
                     let price = td.parentElement.querySelector('.price');
                     let amount = td.parentElement.querySelector('.amount');
+
                     cost.textContent = price.textContent * amount.textContent;
                     recountTotal();
                 }
@@ -548,6 +643,14 @@ function createCell(tr, value, name) {
     td.textContent = value;
     td.classList.add(name);
 
+    if (td.classList.contains('price') || td.classList.contains('amount')) {
+        if (checkClasses(td, 'price', 'amount')) {
+            let res = checkIsNumber(td.textContent);
+            if (res) {
+                return;
+            }
+        }
+    }
     tr.appendChild(td);
     return td;
 }
@@ -561,4 +664,15 @@ function recountTotal() {
             total.textContent = +total.textContent + +cost.textContent;
         }
     }
+}
+
+function checkIsNumber(number) {
+    if (isNaN(number)) {
+        alert('Введите число');
+        return true;
+    }
+}
+
+function checkClasses(selector, classOne, classTwo) {
+    return selector.classList.contains(classOne) || selector.classList.contains(classTwo);
 }
