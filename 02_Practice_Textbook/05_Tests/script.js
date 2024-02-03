@@ -427,3 +427,43 @@
 
 
 // 1 Сделайте так, чтобы при выборе одного из ответов вопроса этот ответ сразу проверялся на правильность.
+
+// const inputs = document.querySelectorAll('input');
+// const labels = document.querySelectorAll('label');
+//
+// for (let i = 0; i < inputs.length; i++) {
+//     inputs[i].addEventListener('click', (event) => {
+//         if (event.target.tagName === 'INPUT' && inputs[i].checked) { // inputs[i].checked не обязательно
+//             if (inputs[i].dataset.right === '') {
+//                 labels[i].classList.add('right');
+//             } else {
+//                 labels[i].classList.add('wrong');
+//             }
+//         }
+//     });
+// }
+
+
+// 2 Модифицируйте ваш код так, чтобы проверка ответов выполнялась по нажатию на кнопку.
+
+// const inputs = document.querySelectorAll('input');
+// const labels = document.querySelectorAll('label');
+// const test = document.querySelector('#test');
+// const btn = document.createElement('button');
+//
+// btn.textContent = 'Проверить ответы';
+// btn.style.marginTop = '10px';
+//
+// test.append(btn);
+//
+// btn.addEventListener('click', () => {
+//     for (let i = 0; i < inputs.length; i++) {
+//         if (inputs[i].checked) {
+//             if (inputs[i].dataset.right === '') {
+//                 labels[i].classList.add('right');
+//             } else {
+//                 labels[i].classList.add('wrong');
+//             }
+//         }
+//     }
+// });
