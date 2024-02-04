@@ -457,13 +457,86 @@
 // test.append(btn);
 //
 // btn.addEventListener('click', () => {
+//     // for i
 //     for (let i = 0; i < inputs.length; i++) {
 //         if (inputs[i].checked) {
-//             if (inputs[i].dataset.right === '') {
+//             if (inputs[i].dataset.right !== undefined) {
 //                 labels[i].classList.add('right');
 //             } else {
 //                 labels[i].classList.add('wrong');
 //             }
 //         }
 //     }
+//
+//     // forEach
+//     // inputs.forEach((el, i) => {
+//     //     if (el.checked) {
+//     //         if (el.dataset.right === '') {
+//     //             labels[i].classList.add('right');
+//     //         } else {
+//     //             labels[i].classList.add('wrong');
+//     //         }
+//     //     }
+//     // });
+//
+//     // for of
+//     // let i = 0;
+//     // for (const input of inputs) {
+//     //     if (input.checked) {
+//     //         if (input.dataset.right === '') {
+//     //             labels[i].classList.add('right');
+//     //         } else {
+//     //             labels[i].classList.add('wrong');
+//     //         }
+//     //     }
+//     //     i++;
+//     // }
 // });
+
+
+// 35 Варианты ответов в массиве / Тест с вариантами ответов в массиве на JavaScript
+
+// Пусть теперь у нас есть массив, в котором написаны номера правильных ответов для каждого вопроса:
+//
+// let answers = [0, 1, 2];
+// То есть в первом элементе этого массива лежит номер правильного ответа первого вопроса,
+// во втором элементе - для второго вопроса и так далее.
+
+// 1 Модифицируйте код предыдущего урока с учетом описанного.
+
+let answers = [0, 1, 2];
+
+const inputs = document.querySelectorAll('input[type="radio"]');
+const labels = document.querySelectorAll('label');
+const test = document.querySelector('#test');
+const btn = document.createElement('button');
+const divs = test.querySelectorAll('div');
+
+btn.textContent = 'Проверить ответы';
+btn.style.marginTop = '10px';
+
+test.append(btn);
+
+// добавляю инпутам value
+for (let i = 0; i < divs.length; i++) {
+    const inputsInsideDiv = divs[i].querySelectorAll('input');
+    inputsInsideDiv.forEach((el, index) => {
+        el.setAttribute('value', `${index}`);
+    });
+}
+
+btn.addEventListener('click', () => {
+    for (let i = 0; i < inputs.length; i++) {
+        if (inputs[i].checked) {
+            // вариант рабочий но вот эту часть заколебался... гпт помог
+            const questionNumber = inputs[i].getAttribute('name');
+            const selectedAnswer = parseInt(inputs[i].value);
+
+            if (selectedAnswer === answers[parseInt(questionNumber) - 1]) {
+                labels[i].classList.add('right');
+            } else {
+                labels[i].classList.add('wrong');
+            }
+        }
+    }
+});
