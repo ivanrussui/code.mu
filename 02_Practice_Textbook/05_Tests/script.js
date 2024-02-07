@@ -503,40 +503,254 @@
 // во втором элементе - для второго вопроса и так далее.
 
 // 1 Модифицируйте код предыдущего урока с учетом описанного.
+//
+// let answers = [0, 1, 2];
+//
+// const inputs = document.querySelectorAll('input[type="radio"]');
+// const labels = document.querySelectorAll('label');
+// const test = document.querySelector('#test');
+// const btn = document.createElement('button');
+// const divs = test.querySelectorAll('div');
+//
+// btn.textContent = 'Проверить ответы';
+// btn.style.marginTop = '10px';
+//
+// test.append(btn);
+//
+// // добавляю инпутам value
+// for (let i = 0; i < divs.length; i++) {
+//     const inputsInsideDiv = divs[i].querySelectorAll('input');
+//     inputsInsideDiv.forEach((el, index) => {
+//         el.setAttribute('value', `${index}`);
+//     });
+// }
+//
+// btn.addEventListener('click', () => {
+//     for (let i = 0; i < inputs.length; i++) {
+//         if (inputs[i].checked) {
+//             // вариант рабочий но вот эту часть заколебался... гпт помог
+//             const questionNumber = inputs[i].getAttribute('name');
+//             const selectedAnswer = parseInt(inputs[i].value);
+//
+//             if (selectedAnswer === answers[parseInt(questionNumber) - 1]) {
+//                 labels[i].classList.add('right');
+//             } else {
+//                 labels[i].classList.add('wrong');
+//             }
+//         }
+//     }
+// });
 
-let answers = [0, 1, 2];
 
-const inputs = document.querySelectorAll('input[type="radio"]');
-const labels = document.querySelectorAll('label');
+// 36 Вопросы и варианты ответов в объекте / Тест с вопросами и вариантами ответов в объекте на JavaScript
+
+// Пусть теперь вопросы, варианты ответов и номера правильных ответов хранятся в одном объекте:
+//
+// let questions = [
+// 	{
+// 		text: 'вопрос 1?',
+// 		right: 0,
+// 		variants: [
+// 			'вариант 1',
+// 			'вариант 2',
+// 			'вариант 3'
+// 		]
+// 	},
+// 	{
+// 		text: 'вопрос 2?',
+// 		right: 1,
+// 		variants: [
+// 			'вариант 1',
+// 			'вариант 2',
+// 			'вариант 3'
+// 		]
+// 	},
+// 	{
+// 		text: 'вопрос 3?',
+// 		right: 2,
+// 		variants: [
+// 			'вариант 1',
+// 			'вариант 2',
+// 			'вариант 3'
+// 		]
+// 	},
+// ];
+// Наш HTML код при этом сократится до следующего:
+//
+// <div id="test"></div>
+// <button id="button">проверить ответы</button>
+// Теперь по заходу на страницу вам придется перебрать циклом наш объект и сформировать HTML код вопросов.
+
+// 1 Реализуйте поставленную задачу.
+
+let questions = [
+    {
+        text: 'вопрос 1?',
+        right: 0,
+        variants: [
+            'вариант 1',
+            'вариант 2',
+            'вариант 3'
+        ]
+    },
+    {
+        text: 'вопрос 2?',
+        right: 1,
+        variants: [
+            'вариант 1',
+            'вариант 2',
+            'вариант 3'
+        ]
+    },
+    {
+        text: 'вопрос 3?',
+        right: 2,
+        variants: [
+            'вариант 1',
+            'вариант 2',
+            'вариант 3'
+        ]
+    },
+];
+
 const test = document.querySelector('#test');
-const btn = document.createElement('button');
-const divs = test.querySelectorAll('div');
+const button = document.querySelector('#button');
+button.style.marginTop = '10px';
 
-btn.textContent = 'Проверить ответы';
-btn.style.marginTop = '10px';
-
-test.append(btn);
-
-// добавляю инпутам value
-for (let i = 0; i < divs.length; i++) {
-    const inputsInsideDiv = divs[i].querySelectorAll('input');
-    inputsInsideDiv.forEach((el, index) => {
-        el.setAttribute('value', `${index}`);
-    });
+for (let i = 0; i < questions.length; i++) {
+    const div = document.createElement('div');
+    test.append(div);
 }
 
-btn.addEventListener('click', () => {
-    for (let i = 0; i < inputs.length; i++) {
-        if (inputs[i].checked) {
-            // вариант рабочий но вот эту часть заколебался... гпт помог
-            const questionNumber = inputs[i].getAttribute('name');
-            const selectedAnswer = parseInt(inputs[i].value);
 
-            if (selectedAnswer === answers[parseInt(questionNumber) - 1]) {
-                labels[i].classList.add('right');
-            } else {
-                labels[i].classList.add('wrong');
-            }
-        }
+const divs = test.querySelectorAll('div');
+
+for (let i = 0; i < divs.length; i++) {
+    const p = document.createElement('p');
+    p.textContent = questions[i].text;
+    divs[i].append(p);
+
+    for (let j = 0; j < divs.length; j++) {
+        const label = document.createElement('label');
+        divs[i].append(label);
     }
+}
+
+
+const labels = test.querySelectorAll('label');
+
+for (let i = 0; i < labels.length; i++) {
+    const input = document.createElement('input');
+    labels[i].append(input);
+}
+
+const inputs = test.querySelectorAll('input');
+
+for (let i = 0; i < inputs.length; i++) {
+    inputs[i].setAttribute('type', 'radio');
+}
+
+divs.forEach((div, divIndex) => {
+    const inputs = div.querySelectorAll('input[type="radio"]');
+
+    inputs.forEach((input, inputIndex) => {
+        input.setAttribute('name', Math.floor(inputIndex / 3) + divIndex);
+        input.setAttribute('value', inputIndex);
+    });
 });
+
+button.addEventListener('click', () => {
+
+        // const inputs = test.querySelectorAll('input[type="radio"]');
+        // console.log(inputs);
+
+        inputs.forEach((input, inputIndex) => {
+            if (input.checked) {
+                const selectedAnswer = parseInt(input.value);
+                const questionIndex = Math.floor(inputIndex / 3); // Получаем индекс вопроса, к которому относится текущий выбранный ответ
+                const question = questions[questionIndex];
+
+                if (selectedAnswer === question.right) {
+                    console.log('right');
+                    // Правильный ответ
+                } else {
+                    console.log('wrong');
+                    // Неправильный ответ
+                }
+            }
+
+            // if (input.checked) {
+            //
+            // const selectedAnswer = parseInt(inputs.value);
+            // if (selectedAnswer === questions[inputIndex].right) {
+            //     // labels[i].classList.add('right');
+            //     console.log('right');
+            // } else {
+            //     console.log('wrong');
+            //     // labels[i].classList.add('wrong');
+            // }
+            //     questions.forEach((question, questionIndex) => {
+            //
+            //     });
+            // }
+        });
+
+            // if (input.checked) {
+            //
+            // }
+
+
+            // console.log(questions[index]);
+
+//         // if (inputs[i].checked) {
+//             const selectedAnswer = parseInt(inputs[i].value);
+//                 console.log(input);
+                // if (input.checked) {
+
+
+//             if (selectedAnswer === questions[i].right) {
+//                 // labels[i].classList.add('right');
+//                 console.log('right');
+//             } else {
+//                 console.log('wrong');
+//                 // labels[i].classList.add('wrong');
+//             }
+
+            //     const selectedAnswer = parseInt(input[i].value);
+            //     console.log(selectedAnswer);
+            // }
+
+
+});
+
+
+// button.addEventListener('click', () => {
+//
+//     for (let i = 0; i < inputs.length; i++) {
+//         // if (inputs[i].checked) {
+//             const selectedAnswer = parseInt(inputs[i].value);
+// //
+// //             if (selectedAnswer === answers[parseInt(questionNumber) - 1]) {
+// //                 labels[i].classList.add('right');
+// //             } else {
+// //                 labels[i].classList.add('wrong');
+// //             }
+// //             console.log(questionNumber);
+// //             console.log(selectedAnswer);
+//             console.log('questions', questions);
+//             if (selectedAnswer === questions[i].right) {
+//                 // labels[i].classList.add('right');
+//                 console.log('right');
+//             } else {
+//                 console.log('wrong');
+//                 // labels[i].classList.add('wrong');
+//             }
+//             // }
+//             // if (selectedAnswer === questions[i].variants[parseInt(questionNumber)]) {
+//             //     console.log('rig');
+//             // }
+//         // }
+//     }
+// });
+
+
