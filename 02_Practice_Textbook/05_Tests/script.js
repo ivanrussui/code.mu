@@ -617,140 +617,114 @@ const test = document.querySelector('#test');
 const button = document.querySelector('#button');
 button.style.marginTop = '10px';
 
-for (let i = 0; i < questions.length; i++) {
+
+// один вариант
+questions.forEach(() => {
     const div = document.createElement('div');
     test.append(div);
-}
-
+});
 
 const divs = test.querySelectorAll('div');
 
-for (let i = 0; i < divs.length; i++) {
+divs.forEach((div, indexDiv) => {
     const p = document.createElement('p');
-    p.textContent = questions[i].text;
-    divs[i].append(p);
+    p.textContent = questions[indexDiv].text;
+    div.append(p);
 
-    for (let j = 0; j < divs.length; j++) {
+    for (let i = 0; i < 3; i++) {
         const label = document.createElement('label');
-        divs[i].append(label);
-    }
-}
+        label.textContent = questions[i].variants[i];
+        div.append(label);
 
+        const input = document.createElement('input');
+        input.setAttribute('type', 'radio');
+        label.prepend(input);
 
-const labels = test.querySelectorAll('label');
+        const inputs = div.querySelectorAll('input[type="radio"]');
 
-for (let i = 0; i < labels.length; i++) {
-    const input = document.createElement('input');
-    labels[i].append(input);
-}
-
-const inputs = test.querySelectorAll('input');
-
-for (let i = 0; i < inputs.length; i++) {
-    inputs[i].setAttribute('type', 'radio');
-}
-
-divs.forEach((div, divIndex) => {
-    const inputs = div.querySelectorAll('input[type="radio"]');
-
-    inputs.forEach((input, inputIndex) => {
-        input.setAttribute('name', Math.floor(inputIndex / 3) + divIndex);
-        input.setAttribute('value', inputIndex);
-    });
-});
-
-button.addEventListener('click', () => {
-
-        // const inputs = test.querySelectorAll('input[type="radio"]');
-        // console.log(inputs);
-
-        inputs.forEach((input, inputIndex) => {
-            if (input.checked) {
-                const selectedAnswer = parseInt(input.value);
-                const questionIndex = Math.floor(inputIndex / 3); // Получаем индекс вопроса, к которому относится текущий выбранный ответ
-                const question = questions[questionIndex];
-
-                if (selectedAnswer === question.right) {
-                    console.log('right');
-                    // Правильный ответ
-                } else {
-                    console.log('wrong');
-                    // Неправильный ответ
-                }
-            }
-
-            // if (input.checked) {
-            //
-            // const selectedAnswer = parseInt(inputs.value);
-            // if (selectedAnswer === questions[inputIndex].right) {
-            //     // labels[i].classList.add('right');
-            //     console.log('right');
-            // } else {
-            //     console.log('wrong');
-            //     // labels[i].classList.add('wrong');
-            // }
-            //     questions.forEach((question, questionIndex) => {
-            //
-            //     });
-            // }
+        inputs.forEach((input, indexInput) => {
+            input.setAttribute('name', `${Math.floor(indexInput / 3 + 1) + indexDiv}`);
+            input.setAttribute('value', `${indexInput}`);
         });
 
-            // if (input.checked) {
-            //
-            // }
+        const labels = div.querySelectorAll('label');
 
-
-            // console.log(questions[index]);
-
-//         // if (inputs[i].checked) {
-//             const selectedAnswer = parseInt(inputs[i].value);
-//                 console.log(input);
-                // if (input.checked) {
-
-
-//             if (selectedAnswer === questions[i].right) {
-//                 // labels[i].classList.add('right');
-//                 console.log('right');
-//             } else {
-//                 console.log('wrong');
-//                 // labels[i].classList.add('wrong');
-//             }
-
-            //     const selectedAnswer = parseInt(input[i].value);
-            //     console.log(selectedAnswer);
-            // }
-
-
+        button.addEventListener('click', () => {
+            if (input.checked) {
+                if (parseInt(input.value) === questions[indexDiv].right) {
+                    labels[i].classList.add('right');
+                } else {
+                    labels[i].classList.add('wrong');
+                }
+            }
+        });
+    }
 });
 
 
-// button.addEventListener('click', () => {
+// другой вариант как по мне логика усложнена (замудрено слишком). писал сначала этот вариант
 //
-//     for (let i = 0; i < inputs.length; i++) {
-//         // if (inputs[i].checked) {
-//             const selectedAnswer = parseInt(inputs[i].value);
-// //
-// //             if (selectedAnswer === answers[parseInt(questionNumber) - 1]) {
-// //                 labels[i].classList.add('right');
-// //             } else {
-// //                 labels[i].classList.add('wrong');
-// //             }
-// //             console.log(questionNumber);
-// //             console.log(selectedAnswer);
-//             console.log('questions', questions);
-//             if (selectedAnswer === questions[i].right) {
-//                 // labels[i].classList.add('right');
-//                 console.log('right');
-//             } else {
-//                 console.log('wrong');
-//                 // labels[i].classList.add('wrong');
-//             }
-//             // }
-//             // if (selectedAnswer === questions[i].variants[parseInt(questionNumber)]) {
-//             //     console.log('rig');
-//             // }
-//         // }
+// for (let i = 0; i < questions.length; i++) {
+//     const div = document.createElement('div');
+//     test.append(div);
+// }
+//
+//
+// const divs = test.querySelectorAll('div');
+//
+// for (let i = 0; i < divs.length; i++) {
+//     const p = document.createElement('p');
+//     p.textContent = questions[i].text;
+//     divs[i].append(p);
+//
+//     for (let j = 0; j < divs.length; j++) {
+//         const label = document.createElement('label');
+//         divs[i].append(label);
 //     }
+//
+//     const labels = divs[i].querySelectorAll('label');
+//
+//     labels.forEach((label, index) => {
+//         label.textContent = questions[index].variants[index];
+//     });
+// }
+//
+//
+// const labels = test.querySelectorAll('label');
+//
+// for (let i = 0; i < labels.length; i++) {
+//     const input = document.createElement('input');
+//     labels[i].prepend(input);
+// }
+//
+//
+// divs.forEach((div, divIndex) => {
+//     const inputs = div.querySelectorAll('input');
+//
+//     inputs.forEach((input, inputIndex) => {
+//         input.setAttribute('type', 'radio');
+//         input.setAttribute('name', Math.floor(inputIndex / 3) + divIndex + 1); // чутка гпт
+//         input.setAttribute('value', inputIndex);
+//     });
 // });
-
+//
+//
+// button.addEventListener('click', () => {
+//     const inputs = test.querySelectorAll('input');
+//
+//     inputs.forEach((input, inputIndex) => {
+//         if (input.checked) {
+//             // тут мне гпт подсказал логику
+//             const selectedAnswer = parseInt(input.value);
+//             const questionIndex = Math.floor(inputIndex / 3); // Получаем индекс вопроса, к которому относится текущий выбранный ответ
+//             const question = questions[questionIndex];
+//
+//             if (selectedAnswer === question.right) {
+//                 labels[inputIndex].classList.add('right');
+//             } else {
+//                 labels[inputIndex].classList.add('wrong');
+//             }
+//         }
+//     });
+// });
 
