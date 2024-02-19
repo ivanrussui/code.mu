@@ -258,9 +258,137 @@
 // 2 Модифицируйте предыдущую задачу так, чтобы над картинкой также появились стрелки вперед и назад.
 // То есть слайдер будет сам проматываться таймером, но при желании юзер также сможет промотать его ссылками.
 //
-const texts = ['1.png', '2.png', '3.png'];
+// const texts = ['1.png', '2.png', '3.png'];
+//
+// const slider = document.getElementById('slider');
+// const left = document.createElement('a');
+// const right = document.createElement('a');
+// const div = document.createElement('div');
+//
+// slider.before(div);
+// div.append(left, right);
+//
+// // left.textContent = '←';
+// // right.textContent = '→';
+// //
+// // left.classList.add('left');
+// // right.classList.add('right');
+// //
+// // left.setAttribute('href', '');
+// // right.setAttribute('href', '');
+//
+// // вместо настроек выше сделал функцию с параметрами
+// function setParameters(selector, arrow, className) {
+//     if (arrow) {
+//         selector.textContent = arrow;
+//         selector.setAttribute('href', '');
+//     }
+//     selector.classList.add(`${className}`);
+// }
+//
+// setParameters(left, '←', 'left');
+// setParameters(right, '→', 'right');
+// setParameters(div, '', 'parent');
+//
+//
+// let counter = 0;
+//
+// const setCount = () => slider.src = texts[counter];
+//
+// setCount();
+//
+// slider.setAttribute('alt', 'technologies');
+//
+// // функция выполняющая логику при увеличении или уменьшении счетчика
+// const setCounterCondition = increase => {
+//     if (increase) {
+//         counter++;
+//         (counter === texts.length) && (counter = 0);
+//     } else {
+//         counter--;
+//         (counter < 0) && (counter = texts.length - 1);
+//     }
+// };
+//
+// // left.addEventListener('click', e => {
+// //     e.preventDefault();
+// //     setCounterCondition(false);
+// //     setCount();
+// // });
+// //
+// // right.addEventListener('click', e => {
+// //     e.preventDefault();
+// //     setCounterCondition(true);
+// //     setCount();
+// // });
+//
+// // вместо 2х обработчиков выше 1н)
+// const universalHandler = (...rest) => {
+//     const [e, increase] = rest;
+//
+//     e.preventDefault();
+//     setCounterCondition(increase);
+//     setCount();
+// };
+//
+// left.addEventListener('click', e => universalHandler(e, false));
+// right.addEventListener('click', e => universalHandler(e, true));
+//
+// setInterval(() => {
+//     setCounterCondition(true);
+//     setCount();
+// }, 1000);
 
+
+// 40 Слайдер картинок через HTML / Слайдер картинок через HTML на JavaScript
+//
+// Пусть теперь в HTML коде у нас есть все картинки, которые мы планируем показывать в нашем слайдере:
+//
+// <div id="slider">
+// 	<img src="1.png">
+// 	<img src="2.png">
+// 	<img src="3.png">
+// </div>
+// Давайте сделаем так, чтобы по заходу на страницу показывалась первая картинка,
+// затем через секунду - вторая, и так далее по кругу.
+
+
+// 1 Реализуйте описанный слайдер.
+//
 const slider = document.getElementById('slider');
+const images = document.querySelectorAll('img');
+
+for (let image of images) {
+    image.setAttribute('alt', 'technologies');
+    image.classList.add('image');
+}
+
+slider.style.border = 'none';
+
+let counter = 0;
+
+const setSlider = () => {
+    // forEach
+    images.forEach((el, index) => {
+        index === counter ? el.classList.add('active') : el.classList.remove('active');
+    });
+    // for i
+    // for (let i = 0; i < images.length; i++) {
+    //     i === counter ? images[i].classList.add('active') : images[i].classList.remove('active');
+    // }
+};
+
+setSlider();
+
+setInterval(() => {
+    setCounterCondition(true); // юзаю функ вместо 2х строк ниже
+    // counter++;
+    // (counter === images.length) && (counter = 0);
+    setSlider();
+}, 1000);
+
+
+// добавлю стрелки
 const left = document.createElement('a');
 const right = document.createElement('a');
 const div = document.createElement('div');
@@ -268,19 +396,9 @@ const div = document.createElement('div');
 slider.before(div);
 div.append(left, right);
 
-// left.textContent = '←';
-// right.textContent = '→';
-//
-// left.classList.add('left');
-// right.classList.add('right');
-//
-// left.setAttribute('href', '');
-// right.setAttribute('href', '');
-
-// вместо настроек выше сделал функцию с параметрами
-function setParameters(selector, img, className) {
-    if (img) {
-        selector.textContent = img;
+function setParameters(selector, arrow, className) {
+    if (arrow) {
+        selector.textContent = arrow;
         selector.setAttribute('href', '');
     }
     selector.classList.add(`${className}`);
@@ -290,51 +408,23 @@ setParameters(left, '←', 'left');
 setParameters(right, '→', 'right');
 setParameters(div, '', 'parent');
 
-
-let counter = 0;
-
-const setCount = () => slider.src = texts[counter];
-
-setCount();
-
-slider.setAttribute('alt', 'technologies');
-
-// функция выполняющая логику при увеличении или уменьшении счетчика
 const setCounterCondition = increase => {
     if (increase) {
         counter++;
-        (counter === texts.length) && (counter = 0);
+        (counter === images.length) && (counter = 0);
     } else {
         counter--;
-        (counter < 0) && (counter = texts.length - 1);
+        (counter < 0) && (counter = images.length - 1);
     }
 };
 
-// left.addEventListener('click', e => {
-//     e.preventDefault();
-//     setCounterCondition(false);
-//     setCount();
-// });
-//
-// right.addEventListener('click', e => {
-//     e.preventDefault();
-//     setCounterCondition(true);
-//     setCount();
-// });
-
-// вместо 2х обработчиков выше 1н)
 const universalHandler = (...rest) => {
     const [e, increase] = rest;
 
     e.preventDefault();
     setCounterCondition(increase);
-    setCount();
+    setSlider();
 };
 
 left.addEventListener('click', e => universalHandler(e, false));
 right.addEventListener('click', e => universalHandler(e, true));
-
-setInterval(() => {
-    setCounterCondition(true);
-    setCount();
-}, 1000);

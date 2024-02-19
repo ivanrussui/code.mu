@@ -16,3 +16,14 @@
     border: 4px solid darkslateblue;
     border-radius: 15%;
 }
+
+.image {
+    border: 5px solid darkviolet;
+    background-color: slateblue;
+    border-radius: 10%;
+}
+
+.image:not(.active) {
+    display: none;
+}
+
