@@ -1,0 +1,31 @@
+/*#elem {*/
+/*    font-size: 2em;*/
+/*}*/
+
+/*.success {*/
+/*    border-color: green;*/
+/*}*/
+
+/*.error {*/
+/*    border-color: red;*/
+/*}*/
+
+/*p.active {*/
+/*    color: red;*/
+/*}*/
+
+/*p:not(active) {*/
+/*    color: black;*/
+/*}*/
+
+[data-type="success"] {
+    border-color: green;
+}
+
+[data-type="warning"] {
+    border-color: yellow;
+}
+
+[data-type="error"] {
+    border-color: red;
+}
