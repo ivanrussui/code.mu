@@ -243,6 +243,7 @@ let map = new Map;
 // 2 Даны инпуты. В каждый инпут можно ввести число. Пусть по нажатию на Enter инпут запоминает введенное число.
 // Сделайте так, чтобы по потери фокуса в инпуте в консоль выводился массив всех введенных ранее в инпут чисел.
 
+// my version
 // for (let input of inputs) {
 //     input.addEventListener('keydown', function (event) {
 //         if (event.code === 'Enter') {
@@ -255,7 +256,7 @@ let map = new Map;
 //     });
 // }
 
-
+// gpt version
 for (let input of inputs) {
     map.set(input, []);
 
@@ -263,7 +264,7 @@ for (let input of inputs) {
         if (event.code === 'Enter') {
             let currentValues = map.get(this);
             currentValues.push(this.value);
-            map.set(this, currentValues);
+            // map.set(this, currentValues); // не обязательно, все работает и без обновления значения в Map для ключа this
         }
     });
 
