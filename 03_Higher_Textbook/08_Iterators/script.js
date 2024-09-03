@@ -163,3 +163,180 @@
 // console.log(iterHTMLCollection.next());
 // console.log(iterHTMLCollection.next());
 
+
+// 63 Генераторы / Генераторы в JavaScript
+//
+// Существуют специальные функции, с помощью которых можно создавать свои итераторы.
+// Такие функции называются генераторы. Имена таких функций должны начинаться со звездочки:
+// function *func() {
+//
+// }
+//
+// Внутри генераторов используется ключевое слово yield, указывающее то, что должен вернуть итератор на следующем вызове.
+// Для примера давайте сделаем так, чтобы первый вызов возвращал 1, второй - 2, а третий - 3:
+// function *func() {
+// 	yield 1;
+// 	yield 2;
+// 	yield 3;
+// }
+//
+// Генератор своим результатом возвращает итератор:
+// let iter = func();
+//
+// Давайте проверим работу нашего итератора:
+// console.log(iter.next()); // {value: 1, done: false}
+// console.log(iter.next()); // {value: 2, done: false}
+// console.log(iter.next()); // {value: 3, done: false}
+// console.log(iter.next()); // {value: undefined, done: true}
+
+
+// 1 Создайте итератор, каждый вызов которого будет возвращать числа от 5 до 1.
+//
+// function *func() {
+//     yield 5;
+//     yield 4;
+//     yield 3;
+//     yield 2;
+//     yield 1;
+// }
+
+// альтернативный синтаксис
+// const iter = (function* func() {
+//     yield 5;
+//     yield 4;
+//     yield 3;
+//     yield 2;
+//     yield 1;
+// })();
+//
+// console.log(iter.next());
+// console.log(iter.next());
+// console.log(iter.next());
+// console.log(iter.next());
+// console.log(iter.next());
+// console.log(iter.next());
+
+
+// 64) Циклы в генераторах / Циклы в генераторах в JavaScript
+//
+// Внутри генераторов можно использовать циклы. При этом мы можем ставить циклы на паузу с помощью yield.
+// Давайте посмотрим на примере. Будем ставить цикл на паузу каждую итерацию:
+//
+// function *func() {
+// 	for (let i = 1; i <= 3; i++) {
+// 		yield i;
+// 	}
+// }
+//
+// Получим итератор:
+// let iter = func();
+//
+// Проверим работу нашего итератора:
+// console.log(iter.next()); // {value: 1, done: false}
+// console.log(iter.next()); // {value: 2, done: false}
+// console.log(iter.next()); // {value: 3, done: false}
+// console.log(iter.next()); // {value: undefined, done: true}
+
+
+// 1 Создайте итератор, каждый вызов которого будет возвращать числа от 10 до нуля.
+//
+// function* func() {
+//     for (let i = 10; i >= 0; i--) {
+//         yield i;
+//     }
+// }
+//
+// const iter = func();
+//
+// console.log(iter.next());
+// console.log(iter.next());
+// console.log(iter.next());
+// console.log(iter.next());
+// console.log(iter.next());
+// console.log(iter.next());
+// console.log(iter.next());
+// console.log(iter.next());
+// console.log(iter.next());
+// console.log(iter.next());
+// console.log(iter.next());
+
+
+// 2 Сделайте генератор, который параметром будет принимать число.
+// Пусть каждый вызов итератора уменьшает число на единицу, пока не будет достигнут ноль.
+//
+// function *func(num) {
+//     for (let i = 0; i <= num; num--) {
+//         yield num
+//     }
+// }
+//
+// const iter = func(3);
+//
+// console.log(iter.next());
+// console.log(iter.next());
+// console.log(iter.next());
+// console.log(iter.next());
+// console.log(iter.next());
+
+
+// 3 Сделайте генератор, который параметром будет принимать число. Пусть каждый вызов итератора
+// уменьшает число в два раза и возвращает результат. И так, пока число не станет меньше единицы.
+//
+// function* reduceTheNumberBy2Times(number) {
+//     while (number > 1) {
+//         yield number;
+//         number /= 2;
+//     }
+// }
+//
+// const iterFunc = reduceTheNumberBy2Times(10);
+//
+// console.log(iterFunc.next());
+// console.log(iterFunc.next());
+// console.log(iterFunc.next());
+// console.log(iterFunc.next());
+// console.log(iterFunc.next());
+
+
+// 4 Сделайте итератор, каждый вызов которого будет возвращать следующую степень двойки.
+//
+// function* getTheNextDegree(num) {
+//     let degree = 0;
+//
+//     while (true) {
+//         yield Math.pow(num, degree);
+//         degree++;
+//     }
+// }
+//
+// const iterFunc = getTheNextDegree(2);
+//
+// console.log(iterFunc.next());
+// console.log(iterFunc.next());
+// console.log(iterFunc.next());
+// console.log(iterFunc.next());
+// console.log(iterFunc.next());
+
+
+// 5 Сделайте итератор, каждый вызов которого будет возвращать следующее число Фибоначчи.
+
+// gpt помог
+// function *getTheNextNumberFibonacci() {
+//     let a = 0, b = 1;
+//
+//     while (true) {
+//         yield a;
+//         [a, b] = [b, a + b]
+//     }
+// }
+//
+// const iterFunc = getTheNextNumberFibonacci();
+//
+// console.log(iterFunc.next());
+// console.log(iterFunc.next());
+// console.log(iterFunc.next());
+// console.log(iterFunc.next());
+// console.log(iterFunc.next());
+
+
+// 65)
