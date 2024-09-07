@@ -339,4 +339,392 @@
 // console.log(iterFunc.next());
 
 
-// 65)
+// 65) Однократная работа итераторов / Однократная работа итераторов в JavaScript
+//
+// Каждый итератор может участвовать в цикле лишь один раз. Это немного неожиданно,
+// но логично - ведь пройденный итератор устанавливает свое done в false, а значит не может больше перебираться.
+//
+// Давайте убедимся в этом. Пусть у нас есть следующий генератор:
+// function *func() {
+// 	yield 1;
+// 	yield 2;
+// 	yield 3;
+// }
+//
+// Сделаем итератор:
+// let iter = func();
+//
+// Переберем итератор одним циклом:
+// for (let elem of iter) {
+// 	console.log(elem); // 1, 2, 3
+// }
+//
+// А теперь переберем итератор двумя циклами:
+// for (let elem of iter) {
+// 	console.log(elem); // 1, 2, 3
+// }
+// for (let elem of iter) {
+// 	console.log(elem); // не работает
+// }
+//
+// Для решения проблемы нужно для каждого нового цикла создавать свой итератор:
+// let iter1 = func();
+// for (let elem of iter1) {
+// 	console.log(elem); // 1, 2, 3
+// }
+//
+// let iter2 = func();
+// for (let elem of iter2) {
+// 	console.log(elem); // 1, 2, 3
+// }
+//
+// Можем упростить:
+// for (let elem of func()) {
+// 	console.log(elem); // 1, 2, 3
+// }
+//
+// for (let elem of func()) {
+// 	console.log(elem); // 1, 2, 3
+// }
+
+
+// 1 Исправьте ошибку, допущенную в следующем коде:
+//
+// function *func() {
+// 	for (let i = 1; i <= 3; i++) {
+// 		yield i;
+// 	}
+// }
+//
+// let elems = func();
+// let elems2 = func();
+//
+// for (let elem of elems) {
+// 	console.log(elem);
+// }
+// for (let elem of elems2) {
+// 	console.log(elem);
+// }
+
+
+// 66) Итератор объекта / Итератор объекта в JavaScript
+//
+// Давайте создадим итератор, с помощью которого можно будет перебрать обьект.
+// Для начала сделаем генератор, параметром принимающий объект и перебирающий его:
+// function *func(obj) {
+// 	for (let key in obj) {
+// 		yield obj[key];
+// 	}
+// }
+//
+// Создадим теперь итератор:
+// let iter = func({a: 1, b: 2, c: 3});
+//
+// Переберем итератор циклом:
+// for (let elem of iter) {
+// 	console.log(elem); // 1, 2, 3
+// }
+
+
+// 1 Сделайте итератор, который будет перебирать объект и каждым вызовом возвращать массив,
+// в нулевом элементе которого будет лежать ключ, а в первом элементе - значение элемента объекта. Пример:
+//
+// function* func(obj) {
+//     for (const objKey in obj) {
+//         yield [objKey, obj[objKey]];
+//     }
+// }
+//
+// let iter = func({a: 1, b: 2, c: 3});
+//
+// for (let elem of iter) {
+//     console.log(elem); // ['a', 1], ['b', 2], ['c', 3]
+// }
+
+
+// 67) Создание итерируемого объекта / Создание итерируемого объекта в JavaScript
+//
+// Давайте создадим настоящий итерируемый объект, который можно будет перебрать через цикл for-of.
+// Для этого объекту нужно добавить соответствующую функцию в Symbol.iterator.
+//
+// Давайте реализуем. Пусть у нас есть следующий объект:
+// let obj = {
+// 	a: 1,
+// 	b: 2,
+// 	c: 3,
+// };
+//
+// Добавим функцию в Symbol.iterator:
+// obj[Symbol.iterator] = function() {
+//
+// }
+//
+// Превратим эту функцию в генератор:
+// obj[Symbol.iterator] = function *() {
+//
+// }
+//
+// Внутри нашей функции this будет ссылаться на сам объект:
+// obj[Symbol.iterator] = function *() {
+// 	console.log(this); // сам объект
+// }
+//
+// Запустим в итераторе перебор объекта:
+// obj[Symbol.iterator] = function *() {
+// 	for (let key in this) {
+// 		yield obj[key];
+// 	}
+// }
+//
+// Все, объект можно перебирать циклом for-of:
+// for (let elem of obj) {
+// 	console.log(elem); // 1, 2, 3
+// }
+
+
+// 1 Сделайте объект, который можно перебрать циклом for-of. Пусть в элемент цикла попадает объект,
+// в ключе key которого будет ключ перебираемого объекта, а в ключе val - значение. Пример:
+//
+// let obj = {a: 1, b: 2, c: 3};
+//
+// obj[Symbol.iterator] = function* () {
+//     for (const objKey in obj) {
+//         yield {key: objKey, val: obj[objKey]};
+//     }
+// };
+//
+// for (let elem of obj) {
+//     console.log(elem);
+// }
+//
+// Выведет:
+// {key: 'a', val: 1}
+// {key: 'b', val: 2}
+// {key: 'c', val: 3}
+
+
+// 68) Генератор через вычисляемое свойство / Генератор через вычисляемое свойство в JavaScript
+//
+// В предыдущем уроке мы генератор для объекта присваивали отдельной командой. Таким был наш объект:
+// let obj = {
+// 	a: 1,
+// 	b: 2,
+// 	c: 3,
+// };
+//
+// Так мы задавали генератор:
+// obj[Symbol.iterator] = function *() {
+// 	for (let key in this) {
+// 		yield obj[key];
+// 	}
+// }
+//
+// На самом деле можно переписать наш код по-другому через вычисляемое свойство:
+// let obj = {
+// 	a: 1,
+// 	b: 2,
+// 	c: 3,
+// 	[Symbol.iterator]: function *(){
+// 		for (let key in this){
+// 			yield this[key];
+// 		}
+// 	}
+// };
+//
+// Проверим перебор:
+// for (let elem of obj) {
+// 	console.log(elem); // 1, 2, 3
+// }
+
+
+// 1 Перепишите решение задачи из предыдущего урока через вычисляемое свойство.
+//
+// let obj = {
+//     a: 1,
+//     b: 2,
+//     c: 3,
+//     [Symbol.iterator]: function* () {
+//         for (const objKey in this) {
+//             yield {key: objKey, val: this[objKey]};
+//         }
+//     }
+// };
+//
+// for (let elem of obj) {
+//     console.log(elem);
+// }
+
+
+// 69) Встроенный итератор values / Встроенный итератор values в JavaScript
+//
+// Все итерируемые объекты имеют встроенный итератор values, позволяющий перебирать значения.
+// Давайте проверим его на коллекции Map:
+// let map = new Map;
+//
+// map.set('a', 1);
+// map.set('b', 2);
+// map.set('c', 3);
+//
+// Получим итератор:
+// let iter = map.values();
+//
+// Переберем его циклом:
+// for (let elem of iter) {
+//     console.log(elem); // 1, 2, 3
+// }
+
+
+// 1 Проверьте работу данного итератора на массиве.
+//
+// const arr = [1, 2, 3];
+//
+// const iterArr = arr.values();
+//
+// for (const number of iterArr) {
+//     console.log(number);
+// }
+
+
+// 2 Проверьте работу данного итератора на коллекции Set.
+//
+// const set = new Set([1, 2, 3]);
+//
+// const iterSet = set.values();
+//
+// for (const number of iterSet) {
+//     console.log(number);
+// }
+
+
+// 70) Встроенный итератор keys / Встроенный итератор keys в JavaScript
+//
+// Все итерируемые объекты имеют встроенный итератор keys, позволяющий перебирать ключи.
+// Давайте проверим его на массиве:
+// let arr = ['a', 'b', 'c'];
+//
+// Получим итератор:
+// let iter = arr.keys();
+//
+// Переберем его циклом:
+// for (let elem of iter) {
+// 	console.log(elem); // 0, 1, 2
+// }
+
+
+// 1 Проверьте работу данного итератора на коллекции Map.
+//
+// const map = new Map();
+//
+// map.set(0, 'a');
+// map.set(1, 'b');
+// map.set(2, 'c');
+//
+// const iterMap = map.keys();
+//
+// for (const el of iterMap) {
+//     console.log(el);
+// }
+
+
+// 2 Проверьте работу данного итератора на коллекции Set.
+//
+// const set = new Set([0, 1, 2]);
+//
+// const iterSet = set.keys();
+//
+// for (const string of iterSet) {
+//     console.log(string);
+// }
+
+
+// 71) Встроенный итератор entries / Встроенный итератор entries в JavaScript
+//
+// Все итерируемые объекты имеют встроенный итератор entries, позволяющий перебирать пары ключ-значение.
+// Давайте проверим его на массиве:
+// let arr = ['a', 'b', 'c'];
+//
+// Получим итератор:
+// let iter = arr.entries();
+//
+// Переберем его циклом:
+// for (let entry of iter) {
+// 	console.log(entry); // [0, 'a'], [1, 'b'], [2, 'c']
+// }
+//
+// Выполним деструктуризацию при переборе:
+// for (let [key, value] of iter) {
+// 	console.log(key);   // 0, 1, 2
+// 	console.log(value); // 'a', 'b', 'c'
+// }
+
+
+// 1 Проверьте работу данного итератора на коллекции Map.
+//
+// const map = new Map();
+//
+// map.set(0, 'a');
+// map.set(1, 'b');
+// map.set(2, 'c');
+//
+// const iterMap = map.entries();
+//
+// for (const el of iterMap) {
+//     console.log(el);
+// }
+//
+// for (const [key, value] of iterMap) {
+//     console.log(key);
+//     console.log(value);
+// }
+
+
+// 2 Проверьте работу данного итератора на коллекции Set.
+//
+// const set = new Set(['a', 'b', 'c']);
+// const set = new Set([0, 1, 2]);
+//
+// const iterSet = set.entries();
+//
+// for (const el of iterSet) {
+//     console.log(el);
+// }
+//
+// for (const [key, value] of iterSet) {
+//     console.log(key);
+//     console.log(value);
+// }
+
+
+// 3 Проверьте работу данного итератора на коллекции NodeList.
+
+// const elems = document.querySelectorAll('.p');
+
+// const iterElems = elems.entries();
+//
+// for (const el of iterElems) {
+//     console.log(el);
+// }
+//
+// for (const [key, value] of iterElems) {
+//     console.log(key);
+//     console.log(value);
+// }
+
+
+// HTMLCollection
+// const elems = document.getElementsByClassName('p');
+//
+// // для HTMLCollection надо сначала преобразовать в массив
+// const iterElems = Array.from(elems).entries();
+//
+// for (const el of iterElems) {
+//     console.log(el);
+// }
+
+// for (const [key, value] of iterElems) {
+//     console.log(key);
+//     console.log(value);
+// }
+
+
+// 72)
