@@ -727,4 +727,220 @@
 // }
 
 
-// 72)
+// 72) Три встроенных итератора / Три встроенных итератора в JavaScript
+//
+// На самом деле каждый итерируемый объект содержит не один итератор, а три: values, keys и entries.
+// Для каждого типа объектов по умолчанию применяется свой итератор.
+// Для массивов - это values, а, например, для коллекции Map, это entries.
+//
+// Обладая этими знаниями, мы теперь можем применить этот принцип к любой коллекции.
+// Например, пусть у нас есть коллекция Map:
+// let map = new Map();
+// map.set('a', 1);
+// map.set('b', 2);
+// map.set('c', 3);
+//
+// По умолчанию для этой коллекции применяется итератор entries:
+// for (let elem of map) {
+// 	console.log(elem); // ['a', 1], ['b', 2], ['c', 3]
+// }
+//
+// Но мы легко можем получить ключи нашей коллекции:
+// for (let elem of map.keys()) {
+// 	console.log(elem); // 'a', 'b', 'c'
+// }
+//
+// Также можем получить и значения:
+// for (let elem of map.values()) {
+// 	console.log(elem); // 1, 2, 3
+// }
+
+
+// 1 Какой итератор по умолчанию действует в коллекции Set?
+//
+// values
+// const set = new Set([11, 2, 3]);
+//
+// for (const number of set.values()) {
+//     console.log(number);
+// }
+
+
+// 73) Оператор spread и итераторы / Оператор spread и итераторы в JavaScript
+//
+// Оператор spread разлагает любой объект, у которого есть итератор. При этом будет браться итератор по умолчанию.
+// Давайте посмотрим на примере. Пусть у нас есть следующая коллекция Map:
+// let map = new Map();
+// map.set('a', 1);
+// map.set('b', 2);
+// map.set('c', 3);
+//
+// По умолчанию при разложении получится двухмерный массив:
+// let arr = [...map];
+// console.log(arr); // [['a', 1], ['b', 2], ['c', 3]]
+//
+// Для получения массива ключей разложим соответствующий итератор:
+// let arr = [...map.keys()];
+// console.log(arr); // ['a', 'b', 'c']
+//
+// Аналогично поступим для получения массива значений:
+// let arr = [...map.values()];
+// console.log(arr); // [1, 2, 3]
+
+
+// 1 Разложите спредом следующий объект:
+//
+// let obj = {
+// 	a: 1,
+// 	b: 2,
+// 	c: 3,
+// 	[Symbol.iterator]: function *(){
+// 		for (let key in this){
+// 			yield this[key];
+// 		}
+// 	}
+// };
+//
+// console.log({...obj});
+
+
+// 74) Встроенные итераторы строк / Встроенные итераторы строк в JavaScript
+//
+// Строки также имеют встроенный итератор. Давайте для примера переберем символы строки циклом:
+// for (let elem of 'abc') {
+// 	console.log(elem); // 'a', 'b', 'c'
+// }
+//
+// А теперь разложим строку через оператор spread:
+// console.log([...'abc']); // ['a', 'b', 'c']
+
+
+// 1 Дана строка с цифрами:
+// let str = '12345';
+// // Перебирите циклом цифры этого числа и найдите их сумму.
+//
+// let sum = 0;
+//
+// for (const strElement of str) {
+//     sum += +strElement;
+// }
+//
+// console.log(sum);
+
+
+// 75) Массив цифр числа / Массив цифр числа в JavaScript
+//
+// Давайте получим массив цифр числа. Пусть дано следующее число:
+// let num = 12345;
+//
+// Попытка разложить число через spread приведет к ошибке, так как числа не итерируемы:
+// let num = 12345;
+// let arr = [...num]; // ошибка
+// console.log(arr);
+//
+// Для решения проблемы преобразуем число в строку:
+// let num = 12345;
+// let arr = [...String(num)];
+// console.log(arr); // ['1', '2', '3', '4', '5']
+//
+// У нас, однако, получился массив строк, а не чисел. Исправим проблему с помощью хитрого приема, используя метод map:
+// let num = 12345;
+// let arr = [...String(num)].map(Number);
+// console.log(arr); // [1, 2, 3, 4, 5]
+
+
+// 1 Дано число. Найдите сумму его цифр.
+//
+// const num = 125;
+
+// cycle
+// const arr = [...String(125)].map(Number);
+// const arr = [...String(125)].map(elem => +elem); // альтернатива
+
+// let res = 0
+//
+// for (const number of arr) {
+//     res += number
+// }
+
+// reduce
+// const arr = [...String(125)].reduce((acc, el) => acc + +el, 0);
+
+// console.log(arr);
+
+
+// 76) Нумерация DOM элементов / Нумерация DOM элементов в JavaScript
+//
+// Понимания итераторов позволяет легко добавить номера DOM элементам. Пусть, к примеру, у нас есть абзацы:
+// <p>text</p>
+// <p>text</p>
+// <p>text</p>
+//
+// Давайте получим коллекцию этих абзацев в переменную:
+// let elems = document.querySelectorAll('p');
+//
+// Воспользуемся для перебора встроенным итератором entries:
+// for (let entry of elems.entries()) {
+// 	console.log(entry);
+// }
+//
+// Воспользуемся деструктуризацией, чтобы отделить номера от элементов:
+// for (let [num, elem] of elems.entries()) {
+// 	console.log(num, elem);
+// }
+//
+// Добавим каждому абзацу в конец его порядковый номер:
+// for (let [num, elem] of elems.entries()) {
+// 	elem.textContent += num;
+// }
+
+
+// 1 Дана HTML таблица. Пронумеруйте каждую ячейку этой таблицы.
+//
+// const tds = document.querySelectorAll('td');
+//
+// for (const [key, value] of tds.entries()) {
+//     value.textContent += key;
+// }
+
+
+// 77) Получение данных DOM элементов / Получение данных DOM элементов в JavaScript
+//
+// Деструктуризация позволяет нам получать текст и значения атрибутов DOM прямо в цикле.
+// Давайте разберемся, как это работает. Пусть у нас есть следующие абзацы:
+// <p id="id1">text1</p>
+// <p id="id2">text2</p>
+// <p id="id3">text3</p>
+//
+// Давайте получим коллекцию этих абзацев в переменную:
+// let elems = document.querySelectorAll('p');
+//
+// Переберем элементы циклом, отделив номера и сами элементы:
+// for (let [key, elem] of elems.entries()) {
+// 	console.log(key, elem);
+// }
+//
+// А теперь давайте выполним деструктуризацию элементов, получив из них их id и тексты:
+// for (let [key, {id, textContent}] of elems.entries()){
+// 	console.log(key, id, textContent);
+// }
+
+
+// 1 Дан следующий код:
+//
+// <input id="id1" value="111">
+// <input id="id2" value="222">
+// <input id="id3" value="333">
+//
+// Получите номера, id и value инпутов.
+
+const inputs = document.querySelectorAll('input');
+
+// for (const [key, {id, value}] of inputs.entries()) {
+//     console.log(id, value);
+// }
+
+// можно сразу только values получив
+for (const {id, value} of inputs.values()) {
+    console.log(id, value);
+}
