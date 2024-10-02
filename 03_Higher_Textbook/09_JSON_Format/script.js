@@ -321,3 +321,115 @@
 // </table>
 //
 // Получите представленные данные в формате JSON в виде объекта с ключами surname, name, patronymic.
+
+// Эту задачу не правильно понял, заколебался и с помощью гпт сделал
+//
+// Получаем все строки таблицы
+// const rows = document.querySelectorAll('tr');
+//
+// // Инициализируем массив для хранения данных
+// let arr = [];
+//
+// // Пропускаем первую строку (заголовки) и перебираем остальные
+// for (let i = 1; i < rows.length; i++) {
+//     const cells = rows[i].querySelectorAll('td');
+//
+//     // Создаем объект для каждого работника и добавляем его в массив
+//     arr.push({
+//         surname: cells [0].textContent,
+//         name: cells [1].textContent,
+//         patronymic: cells [2].textContent
+//     });
+// }
+//
+// console.log(arr);
+//
+// // Преобразуем массив объектов в JSON
+// const json = JSON.stringify(arr, null, 2); // Форматируем с отступами для удобства чтения
+//
+// console.log(json);
+
+
+// 81) Изменение данных в JSON / Изменение данных в JSON на JavaScript
+//
+// Пусть у нас есть строка, содержащая массив в формате JSON:
+// let json = '[1, 2, 3, 4, 5]';
+//
+// Давайте добавим в конец этого массива еще один элемент. Для этого нам нужно проделать ряд шагов.
+//
+// Для начала распакуем JSON в массив JavaScript:
+// let arr = JSON.parse(json);
+//
+// Добавим в массив новый элемент:
+// arr.push(6);
+//
+// Преобразуем измененный массив обратно в JSON:
+// let res = JSON.stringify(arr);
+//
+// Итоговый код будет выглядеть следующим образом:
+// let json = '[1, 2, 3, 4, 5]';
+//
+// let arr  = JSON.parse(json);
+// arr.push(6);
+//
+// let res = JSON.stringify(arr);
+// console.log(res);
+
+
+// 1 Дан следующий JSON:
+// let json = '["user1","user2","user3","user4","user5"]';
+// //
+// // Добавьте в конец строки еще одного юзера.
+//
+// const arr = JSON.parse(json);
+// arr.push('user6');
+//
+// const res = JSON.stringify(arr);
+// console.log(res);
+
+
+// 2 Дан следующий JSON:
+// let json = '["user1","user2","user3","user4","user5"]';
+// //
+// // Поменяйте имя второго юзера.
+//
+// const arr = JSON.parse(json);
+// arr[1] = 'user22';
+//
+// const res = JSON.stringify(arr, null);
+// console.log(res);
+
+
+// 3 Дан следующий JSON:
+let json = `[
+	{
+		"name": "user1",
+		"age": 25,
+		"salary": 1000
+	},
+	{
+		"name": "user2",
+		"age": 26,
+		"salary": 2000
+	},
+	{
+		"name": "user3",
+		"age": 27,
+		"salary": 3000
+	}
+]`;
+//
+// Добавьте в эту строку еще одного работника.
+
+const newWorker = {
+    "name": "user4",
+    "age": 28,
+    "salary": 4000
+}
+
+const arr = JSON.parse(json);
+arr.push(newWorker)
+console.log(arr);
+
+const res = JSON.stringify(arr, null, 4)
+console.log(res);
