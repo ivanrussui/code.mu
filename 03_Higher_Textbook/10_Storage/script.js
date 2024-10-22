@@ -314,14 +314,184 @@
 // }
 
 // 1 По нажатию на кнопку выведите циклом все записи из локального хранилища.
+// const btn = document.querySelector('button');
+// const div = document.querySelector('div');
+//
+// btn.addEventListener('click', () => {
+//     div.innerHTML = '';
+//     for (let i = 0; i < localStorage.length; i++) {
+//         const key = localStorage.key(i);
+//         const value = localStorage.getItem(key);
+//         div.innerHTML += `<p>${key}: ${value}</p>`;
+//     }
+// });
+
+
+// 92) Массивы ключей и значений хранилища / Массивы ключей и значений хранилища в JavaScript
+//
+// Можно получить массив ключей всех записей из локального хранилища:
+// let keys = Object.keys(localStorage);
+//
+// Можно также получить массив значений всех записей из локального хранилища:
+// let values = Object.values(localStorage);
+
+
+// 1 По нажатию на кнопку выведите циклом ключи всех записей из локального хранилища.
+
+// const btn = document.querySelector('button');
+// const div = document.querySelector('div');
+
+// btn.addEventListener('click', () => {
+//     div.innerHTML = '';
+//     const keys = Object.keys(localStorage);
+//
+//     keys.forEach(el => div.innerHTML += `<p>${el}</p>`); // forEach
+// });
+
+// btn.addEventListener('click', () => {
+//     div.textContent = '';
+//     const keys = Object.keys(localStorage);
+//     div.textContent +=  keys;
+// });
+
+
+// 2 По нажатию на кнопку выведите циклом значения всех записей из локального хранилища.
+
+// btn.addEventListener('click', () => {
+//     div.innerHTML = '';
+//     const values = Object.values(localStorage);
+//
+//     // for (const value of values) { // for of
+//     //     div.innerHTML += `<p>${value}</p>`
+//     // }
+//
+//     return values.map(el => div.innerHTML += `<p>${el}</p>`); // map
+// });
+
+// btn.addEventListener('click', () => {
+//     div.textContent = '';
+//     const values = Object.values(localStorage);
+//     div.textContent +=  values;
+// });
+
+
+// 93) Хранение структур / Хранение структур в localStorage в JavaScript
+//
+// В локальном хранилище можно хранить только строки.
+// Однако, есть возможность хранить массивы и объекты - для этого просто можно использовать формат JSON.
+//
+// Давайте сохраним массив:
+// let arr = [1, 2, 3, 4, 5];
+// localStorage.setItem('arr', JSON.stringify(arr));
+//
+// А теперь получим его обратно:
+// let str = localStorage.getItem('arr');
+// let res = JSON.parse(str);
+//
+// console.log(res);
+
+
+// // 1 Даны инпуты и кнопка.
+// // По нажатию на кнопку получите тексты всех инпутов в виде массива и сохраните этот массив в локальное хранилище.
+//
+// const btn = document.querySelector('button');
+// const inputOne = document.querySelector('#inputOne');
+// const inputTwo = document.querySelector('#inputTwo');
+// const inputs = document.querySelectorAll('input');
+
+
+// btn.addEventListener('click', () => {
+//     // inputOne & inputTwo
+//     // const arrInput = [inputOne.value, inputTwo.value];
+//     // localStorage.setItem('arrInput', JSON.stringify(arrInput));
+//
+//     // inputs
+//     const arrInputs = Array.from(inputs).map(el => el.value);
+//     localStorage.setItem('arrInputs', JSON.stringify(arrInputs));
+// });
+
+
+// 2 Модифицируйте предыдущую задачу.
+// Сделайте так, чтобы при следующем заходе на страницу в инпутах стояли сохраненные в локальном хранилище значения.
+
+// inputOne & inputTwo
+// const resArrInput = JSON.parse(localStorage.getItem('arrInput'));
+// if (resArrInput) {
+//     inputOne.value = resArrInput[0];
+//     inputTwo.value = resArrInput[1];
+// }
+
+// inputs
+// const resArrInputs = JSON.parse(localStorage.getItem('arrInputs'));
+// if (resArrInputs) {
+//     resArrInputs.forEach((el, index) => inputs[index].value = el);
+// }
+
+
+// 94) Модификация хранимых структур / Модификация хранимых структур в localStorage в JavaScript
+//
+// Пусть в локальном хранилище хранится некоторый массив:
+// let arr = [1, 2, 3, 4, 5];
+// localStorage.setItem('data', JSON.stringify(arr));
+//
+// Пусть теперь нам понадобилось как-то модифицировать этот массив, например,
+// добавить ему в конец еще один элемент или изменить уже существующий.
+//
+// Для решения задачи получим хранящуюся в хранилище строку с массивом, преобразуем эту строку в массив,
+// проделаем с этим массивом необходимые манипуляции, преобразуем этот массив обратно в строку и запишем назад в хранилище:
+// let json = localStorage.getItem('data');
+// let data = JSON.parse(json);
+//
+// data.push(6);
+// data[0] = '!';
+//
+// localStorage.setItem('data', JSON.stringify(data));
+
+
+// 1 Дан следующий массив с юзерами:
+let users = [
+    {
+        surn: 'surn1',
+        name: 'name1',
+        age: 31,
+    },
+    {
+        surn: 'surn2',
+        name: 'name2',
+        age: 32,
+    },
+    {
+        surn: 'surn',
+        name: 'name3',
+        age: 33,
+    },
+];
+// Сохраните его в локальное хранилище. Затем сделайте 3 инпута и кнопку. Пусть в инпуты вводятся фамилия, имя и возраст.
+// По нажатию на кнопку запишите нового юзера в конец сохраненного в хранилище массива.
+
+localStorage.setItem('data', JSON.stringify(users));
+
 const btn = document.querySelector('button');
-const div = document.querySelector('div');
+const inputs = document.querySelectorAll('input');
 
 btn.addEventListener('click', () => {
-    div.innerHTML = '';
-    for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        const value = localStorage.getItem(key);
-        div.innerHTML += `<p>${key}: ${value}</p>`;
+    const user = {
+        surn: '',
+        name: '',
+        age: ''
+    };
+
+    let i = 0;
+
+    for (const userKey in user) {
+        user[userKey] = inputs[i].value;
+        if (userKey === 'age') {
+            user[userKey] = +inputs[i].value;
+        }
+        i++;
     }
+
+    const data = JSON.parse(localStorage.getItem('data'));
+    const users = [...data, user];
+    localStorage.setItem('data', JSON.stringify(users));
 });
