@@ -1,0 +1,22 @@
+body {
+    text-align: center;
+    margin: 2rem auto;
+}
+
+label {
+    display: block;
+}
+
+input {
+    display: inline-block;
+    margin: 1em auto;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+
+}
